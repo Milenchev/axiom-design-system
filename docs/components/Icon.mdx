@@ -1,0 +1,109 @@
+---
+title: Icon
+description: Scalable vector icons from the Tabler icon library with configurable size, color, and stroke width.
+links:
+  figma: true
+  storybook: themed-icon--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { IconHeart, IconSearch, IconSettings } from '@tabler/icons-react';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-icon--primary', label: 'Default' },
+    { id: 'themed-icon--common-icons', label: 'Common Icons' },
+    { id: 'themed-icon--colors', label: 'Colors' },
+    { id: 'themed-icon--sizes', label: 'Sizes' },
+  ]}
+/>
+
+## When To Use
+
+- **Visual signifiers:** Reinforce meaning alongside text labels (e.g., a trash icon next to "Delete").
+- **Space-constrained UI:** Icon-only buttons, toolbar actions, or status indicators.
+- **Navigation:** Menu items, tabs, or sidebar links with recognizable symbols.
+- **Status indicators:** Checkmarks, warnings, errors, or info symbols.
+
+**Don't use for:** Decoration without meaning, replacing text labels entirely (unless very well-known like ✕ for close), or complex illustrations.
+
+## Anatomy
+
+- **SVG container** — Sized square (default 24×24) with configurable dimensions.
+- **Paths** — Vector strokes forming the icon shape.
+- **Color** — Inherits from `currentColor` by default, or set explicitly.
+
+## Examples
+
+### Basic usage
+
+```tsx
+import { IconSearch, IconHeart, IconSettings } from '@tabler/icons-react';
+
+<IconSearch size={24} />
+<IconHeart size={24} color="red" />
+<IconSettings size={24} stroke={1.5} />
+```
+
+### Icon with text
+
+```tsx
+import { IconAlertCircle } from '@tabler/icons-react';
+import { Text } from 'axiom-ui';
+
+<div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+  <IconAlertCircle size={16} color="var(--axiom-text-warning)" />
+  <Text size="sm">This action cannot be undone.</Text>
+</div>
+```
+
+## Guidelines
+
+### Do's
+- **Pair icons with labels.** Except for universally recognized icons (close, search, menu).
+- **Use consistent sizes.** Stick to 16, 20, or 24px within the same context.
+- **Match stroke width.** Keep `stroke={1.5}` (Axiom default) across the app.
+- **Use `currentColor`.** Let icons inherit text color for automatic theme support.
+
+### Don'ts
+- **Don't use icons as the only indicator.** Color-blind users may miss color-coded icons.
+- **Don't mix icon libraries.** Stick to Tabler Icons for consistency.
+- **Don't scale beyond 32px.** Large icons look thin — use illustrations instead.
+- **Don't use filled icons where outlined is the standard.** Be consistent.
+
+## Accessibility
+
+- Decorative icons: `aria-hidden="true"` (default for Tabler icons).
+- Meaningful icons: Add `aria-label` or wrap in a visually hidden span.
+- Icon-only buttons must have `aria-label` on the button itself.
+- Never rely on icon color alone to convey meaning.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    size: {
+      description: 'Icon width and height in pixels.',
+      type: 'number | string',
+      default: '24',
+    },
+    color: {
+      description: 'Icon color. Defaults to currentColor.',
+      type: 'string',
+      default: "'currentColor'",
+    },
+    stroke: {
+      description: 'Stroke width of icon paths.',
+      type: 'number',
+      default: '1.5',
+    },
+  }}
+/>

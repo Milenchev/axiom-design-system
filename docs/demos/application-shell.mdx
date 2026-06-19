@@ -1,0 +1,62 @@
+---
+title: Application Shell
+description: A full enterprise application shell with header, top navigation, a resizable sidebar, contextual tool panels and a data-rich dashboard.
+---
+
+A complete, production-style application frame. This is the pattern most Axiom
+apps start from: a persistent header, top-level view switching, a navigable
+sidebar, and a content area that swaps between dashboard, data grid and detail
+views — all orchestrated by the `AppLayout` component.
+
+<StorybookEmbed id="demos-demo-1--default" height="640px" />
+
+## What's inside
+
+| Region | Component | Role |
+| --- | --- | --- |
+| Top bar | `HeaderBar` | Global search, product switcher and user menu |
+| View switcher | `NavigationBar` | Switches between Dashboard, Data and Settings views |
+| Left rail | `Sidebar` | Nested navigation with a footer status block |
+| Metrics | `MetricCard` / `StatsGrid` | Revenue, profit and customer KPIs with trends |
+| Charts | `GridLayout` | Responsive arrangement of content surfaces |
+| Quick actions | `Drawer` | Contextual settings panel that slides in from the side |
+
+## Key patterns
+
+- **One layout, many views.** `AppLayout` owns the header, navigation, sidebar
+  and content slots. The main area reacts to the active view from a small store,
+  so switching tabs never re-mounts the shell.
+- **Resizable, nested navigation.** The `Sidebar` supports grouped items with
+  `children`, default-open sections, footer items and a live status indicator.
+- **Trend-aware metrics.** Each `MetricCard` shows a value plus a positive or
+  negative delta, giving an at-a-glance read on performance.
+
+## Build it
+
+```tsx
+import {
+  AppLayout,
+  Sidebar,
+  HeaderBar,
+  NavigationBar,
+  MetricCard,
+} from 'axiom-ui';
+
+export default function Shell() {
+  return (
+    <AppLayout
+      header={<HeaderBar /* search, user menu */ />}
+      navigation={<NavigationBar /* Dashboard | Data | Settings */ />}
+      sidebar={<Sidebar items={navItems} defaultActiveItemId="home" />}
+    >
+      {/* Active-view content: metrics, grids, tables… */}
+    </AppLayout>
+  );
+}
+```
+
+## When to reach for this
+
+Use the application shell whenever you are building a multi-section product:
+admin consoles, analytics platforms, content managers or any tool where users
+move between several top-level areas while keeping a stable global frame.

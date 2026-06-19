@@ -1,0 +1,161 @@
+---
+title: DatePicker
+description: Calendar-based input for selecting single dates, date ranges, or multiple dates.
+links:
+  figma: true
+  storybook: themed-datepicker--overview
+  mantine: https://mantine.dev/dates/date-picker-input/
+  source: 'datePicker/datePicker.tsx'
+---
+
+## Import
+
+```tsx
+import { DatePickerInput } from '@mantine/dates';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-datepicker--primary', label: 'Default' },
+    { id: 'themed-datepicker--clearable', label: 'Clearable' },
+    { id: 'themed-datepicker--with-date-range', label: 'Date Range' },
+  ]}
+/>
+
+## When To Use
+
+- **Single date selection:** Birth dates, appointment scheduling, due dates.
+- **Date ranges:** Check-in/check-out, reporting periods, filter ranges.
+- **Relative to today:** When context of "today" matters (e.g., scheduling future events).
+
+**Don't use for:** Known dates users can type quickly (use TextInput with date format), time-only input (use TimeInput), or selecting months/years only (use MonthPickerInput).
+
+## Anatomy
+
+- **Input trigger** — Text field showing the selected date(s). Clicking opens the calendar.
+- **Calendar popover** — The dropdown calendar grid showing days of a month.
+- **Navigation** — Month/year arrows and header to navigate between months.
+- **Day cells** — Individual date buttons. Today is highlighted, selected dates are filled.
+- **Clear button** — Optional × to reset the selection.
+
+## Examples
+
+### Basic date picker
+
+```tsx
+import { DatePickerInput } from '@mantine/dates';
+
+<DatePickerInput label="Start date" placeholder="Pick a date" />
+```
+
+### Date range
+
+```tsx
+import { DatePickerInput } from '@mantine/dates';
+
+<DatePickerInput
+  type="range"
+  label="Reporting period"
+  placeholder="Pick start and end dates"
+/>
+```
+
+### With min/max dates
+
+```tsx
+import { DatePickerInput } from '@mantine/dates';
+
+<DatePickerInput
+  label="Appointment"
+  placeholder="Pick a future date"
+  minDate={new Date()}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Show the expected format.** Use placeholder or description to indicate format (e.g., "MM/DD/YYYY").
+- **Set reasonable boundaries.** Use `minDate` and `maxDate` to prevent impossible selections.
+- **Pre-fill with sensible defaults.** If "today" is a logical default, set it.
+- **Use `clearable` for optional dates.** Let users reset without extra effort.
+
+### Don'ts
+- **Don't block past dates without reason.** Only restrict dates when the context demands it.
+- **Don't use for date ranges longer than a few months.** Calendar navigation becomes tedious — offer presets instead.
+- **Don't hide the typed format.** Users should be able to type a date directly if they know it.
+- **Don't use a date picker for time.** Separate date and time inputs.
+
+## Accessibility
+
+- Calendar has `role="grid"` with proper row/column structure.
+- Arrow keys navigate between days, months, and years.
+- Selected dates are announced via `aria-selected`.
+- Today's date is marked with `aria-current="date"`.
+- Input is labeled and error messages are linked via `aria-describedby`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    type: {
+      description: 'Selection mode.',
+      type: "'default' | 'range' | 'multiple'",
+      default: "'default'",
+    },
+    value: {
+      description: 'Controlled selected date(s).',
+      type: 'Date | [Date, Date] | Date[] | null',
+      default: '-',
+    },
+    defaultValue: {
+      description: 'Default value (uncontrolled).',
+      type: 'Date | [Date, Date] | Date[] | null',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback when date selection changes.',
+      type: '(value: Date | [Date, Date] | Date[] | null) => void',
+      default: '-',
+    },
+    label: {
+      description: 'Field label.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    placeholder: {
+      description: 'Placeholder text.',
+      type: 'string',
+      default: '-',
+    },
+    minDate: {
+      description: 'Earliest selectable date.',
+      type: 'Date',
+      default: '-',
+    },
+    maxDate: {
+      description: 'Latest selectable date.',
+      type: 'Date',
+      default: '-',
+    },
+    clearable: {
+      description: 'Show a clear button.',
+      type: 'boolean',
+      default: 'false',
+    },
+    disabled: {
+      description: 'Disables the input.',
+      type: 'boolean',
+      default: 'false',
+    },
+    error: {
+      description: 'Error message.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

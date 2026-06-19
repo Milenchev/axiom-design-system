@@ -1,0 +1,7 @@
+.tab {
+  color: var(--axiom-text-secondary);
+}
+
+.tab:where([data-active]) {
+  color: var(--axiom-text);
+}

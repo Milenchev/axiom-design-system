@@ -1,0 +1,15 @@
+/* Axiom Badge — overrides on top of Mantine Badge.
+   All values use Axiom / Mantine tokens. Dark & light mode
+   are handled automatically via the CSS-variables resolver.
+
+   NOTE: Mantine sets --badge-bg/--badge-color as inline CSS variables
+   per variant+color. Semantic color overrides for the `light` variant
+   are handled in the component via the `vars` function. */
+
+.root {
+  font-weight: var(--axiom-font-weight-medium);
+  font-size: var(--axiom-font-size-xs);
+  line-height: var(--axiom-line-height-snug);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

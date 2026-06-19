@@ -1,0 +1,63 @@
+---
+title: Analytics Dashboard
+description: A data-rich analytics view with KPI metric cards, a searchable orders table, traffic-source breakdowns and semantic status badges.
+---
+
+A read-first analytics dashboard: the screen executives open to understand how
+the business is doing at a glance. It leans on `MetricCard`, `Table`, `Badge`
+and `Progress` to turn raw numbers into a story.
+
+<StorybookEmbed id="demos-demo-4-analytics-dashboard--default" height="720px" />
+
+## What's inside
+
+| Region | Component | Role |
+| --- | --- | --- |
+| KPI row | `MetricCard` | Revenue, active users, page views, conversions |
+| Title | `PageHeading` | Dashboard heading and context |
+| Orders | `Table` + `SearchInput` | Striped, searchable recent-orders list |
+| Status | `Badge` | Semantic states: approved, pending, rejected, needs review |
+| Traffic | `Progress` | Visual share of each traffic source |
+| Layout | `GridLayout`, `Card` | Responsive arrangement of dashboard panels |
+| Alerts | `Banner` | Success and informational notifications |
+
+## Key patterns
+
+- **Lead with KPIs.** Four `MetricCard`s sit at the top, each pairing a value
+  with a trend delta and an icon. Positive and negative movements are colour-
+  coded so the read is instant.
+- **Semantic status with `Badge`.** Order states map to a fixed vocabulary of
+  badge types, so "approved" always looks the same everywhere in the product.
+- **Proportions with `Progress`.** Traffic sources use coloured progress bars to
+  show relative share without a heavyweight chart library.
+
+## Build it
+
+```tsx
+import { MetricCard, Card, Badge, SearchInput } from 'axiom-ui';
+import { Table, Progress, SimpleGrid } from 'axiom-ui';
+
+export default function Dashboard() {
+  return (
+    <>
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
+        <MetricCard label="Total Revenue" value="$48,290" trend={12.5} />
+        <MetricCard label="Active Users" value="2,847" trend={8.2} />
+        <MetricCard label="Page Views" value="184,392" trend={-3.1} />
+        <MetricCard label="Conversions" value="1,249" trend={23.7} />
+      </SimpleGrid>
+
+      <Card withBorder>
+        <SearchInput placeholder="Search orders…" />
+        <Table striped highlightOnHover>{/* rows */}</Table>
+      </Card>
+    </>
+  );
+}
+```
+
+## When to reach for this
+
+Reporting, monitoring and executive overview screens. Pair the KPI row with one
+or two detail tables and a breakdown panel, and you have a dashboard that reads
+cleanly on any screen size.

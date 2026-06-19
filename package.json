@@ -1,0 +1,30 @@
+{
+  "name": "axiom-design-system",
+  "private": true,
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "build": "turbo run build",
+    "build:docs": "turbo run build --filter docs",
+    "dev:docs": "turbo run dev --filter docs",
+    "storybook": "turbo run storybook --filter axiom-ui",
+    "lint": "turbo run lint",
+    "fix": "turbo run fix",
+    "fix:unsafe": "turbo run fix:unsafe",
+    "types:check": "turbo run types:check",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.10",
+    "turbo": "^2.5.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@mantine/core": "^9.0.0",
+      "@mantine/hooks": "^9.0.0"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

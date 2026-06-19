@@ -1,0 +1,112 @@
+---
+title: Accessibility
+description: Core principles of a11y, contrast, and keyboard navigation
+---
+
+Accessibility (often shortened to *a11y*) is the practice of building products that work for **everyone**, including people who navigate by keyboard, rely on screen readers, have low vision or limited motor control, or simply prefer larger text. In Axiom, accessibility is a baseline requirement — every component is built to meet **WCAG 2.1 Level AA** out of the box.
+
+## Principles
+
+We follow the four pillars of WCAG, summarised as **POUR**:
+
+| Principle | What it means |
+|---|---|
+| **Perceivable** | Information and UI are presented in ways users can sense — visual, auditory, or assistive-tech readable. |
+| **Operable** | Every interaction can be performed with keyboard, mouse, touch, or switch input. |
+| **Understandable** | Content and behaviour are predictable; errors are explained clearly. |
+| **Robust** | Markup works with current and future assistive technologies. |
+
+## Colour and contrast
+
+Axiom tokens already meet WCAG AA when used as intended. Always pair text tokens with their matching surface tokens:
+
+| Foreground token | Background token | Minimum ratio |
+|---|---|---|
+| `--axiom-text-primary` | `--axiom-surface-primary` | 4.5:1 |
+| `--axiom-text-secondary` | `--axiom-surface-primary` | 4.5:1 |
+| `--axiom-text-on-dark` | `--axiom-categorical-1` | 4.5:1 |
+
+Rules:
+
+- **Normal text** (< 18 pt): contrast ratio at least **4.5:1**.
+- **Large text** (≥ 18 pt or 14 pt bold): contrast ratio at least **3:1**.
+- **Non-text** (icons, borders, focus rings, form input edges): at least **3:1**.
+- **Never use colour alone** to convey meaning. Pair red errors with an icon, success ticks with a label, status pills with text.
+
+Use a contrast checker (axe DevTools, Stark, or browser DevTools) on every new screen.
+
+## Keyboard navigation
+
+Every interactive element must be reachable and operable from the keyboard.
+
+| Key | Expected behaviour |
+|---|---|
+| `Tab` / `Shift+Tab` | Move focus forward / backward through interactive elements. |
+| `Enter` | Activate links, primary buttons, submit forms. |
+| `Space` | Activate buttons, toggle checkboxes/switches. |
+| `Esc` | Close modals, drawers, popovers, dropdowns. |
+| Arrow keys | Move within composite widgets (menus, tabs, sliders, radio groups, date pickers). |
+| `Home` / `End` | Jump to first / last item in a list, menu, or grid row. |
+
+Implementation rules:
+
+- **Tab order follows visual order.** Don't reorder with `tabindex` greater than `0`.
+- **Visible focus ring** must be present on every focusable element. Axiom wrappers include this — don't override `outline: none` without a replacement.
+- **Don't trap focus** anywhere except inside open modals and drawers. `Esc` must always release focus.
+- **Skip links** ("Skip to main content") help keyboard users bypass navigation. Add one on long page layouts.
+
+## Screen readers
+
+Axiom components ship with the correct ARIA roles and relationships. When composing your own UI:
+
+- Prefer **native HTML** elements (`<button>`, `<a>`, `<label>`, `<input>`) over `div` with click handlers.
+- Use **semantic landmarks**: `<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`.
+- Provide a **single `<h1>`** per page and don't skip heading levels.
+- Give every image a **meaningful `alt`** — or `alt=""` if it's purely decorative.
+- Give every icon-only button an **`aria-label`** that describes the action ("Close", "Sort by date"), not the icon ("X", "Arrow").
+
+### ARIA cheat sheet
+
+| Pattern | Roles & attributes |
+|---|---|
+| Modal | `role="dialog"`, `aria-modal="true"`, `aria-labelledby` |
+| Tabs | `role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls` |
+| Disclosure (Accordion) | `aria-expanded`, `aria-controls` |
+| Live region | `aria-live="polite"` or `"assertive"`, `role="status"` for non-critical updates |
+| Error message on field | `aria-invalid="true"`, `aria-describedby` pointing to the error text |
+
+## Forms
+
+- Pair every input with a `<label>`. Axiom inputs do this automatically when given a `label` prop.
+- Mark required fields with both an asterisk **and** `required` on the input.
+- Surface validation errors inline with `aria-describedby`. See [Forms](../patterns/forms).
+- Group related controls in `<fieldset>` with a `<legend>`.
+
+## Motion
+
+- Respect the `prefers-reduced-motion` media query. Axiom animations downgrade to opacity-only when the user has reduced motion enabled.
+- Never auto-play long animations or carousels without a pause control.
+- Avoid parallax and large parallax-style transitions in core flows.
+
+## Zoom and reflow
+
+- Layouts must remain usable up to **400% zoom** without horizontal scrolling (WCAG 1.4.10).
+- Don't fix font sizes in `px` for body copy — use the Axiom font tokens (`--axiom-font-size-*`) which scale with the user's preferences.
+- Don't disable browser zoom with `user-scalable=no`.
+
+## Testing your work
+
+- **Tab through the page** without using a mouse. Can you reach and use everything?
+- **Run an automated check** with axe DevTools, Lighthouse, or `pnpm lint` integrated checks.
+- **Listen to a screen reader.** macOS VoiceOver (`Cmd+F5`), Windows NVDA (free), or iOS VoiceOver.
+- **Zoom to 200%** — does anything overflow, overlap, or get cropped?
+- **Disable colour** with browser DevTools — does the UI still make sense in greyscale?
+
+Automated tests catch ~30% of accessibility issues. Manual testing is required to catch the rest.
+
+## Related
+
+- [Voice & Tone](../guidelines/voice-and-tone) — clear copy is part of accessibility.
+- [Forms](../patterns/forms) — accessible form patterns.
+- [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/) — the full standard.
+

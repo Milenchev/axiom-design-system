@@ -1,0 +1,156 @@
+---
+title: Button
+description: Buttons allow users to take actions, and make choices, with a single tap. They immediately initiate the action described in their label when clicked..
+links:
+  figma: true
+  storybook: components-button--overview
+  mantine: https://mantine.dev/core/button/
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { Button } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-button--primary', label: 'Primary' },
+    { id: 'components-button--secondary', label: 'Secondary' },
+    { id: 'components-button--disabled', label: 'Disabled' }
+  ]} 
+/>
+
+## When To Use
+
+- **Primary actions:** To indicate the most important action on a page (e.g., Save, Submit).
+- **Secondary actions:** For alternative actions that are less critical (e.g., Cancel, Go Back).
+- **Form submission:** Submitting or resetting forms.
+- **Dialogs & Modals:** Confirming or dismissing actions within floating UI.
+
+## Anatomy
+
+- **Label:** Should be clear, concise, and accurately represent the action. Start with a verb ("Manage", "New") or a noun ("Options"). Avoid ellipses or punctuation. Use title case.
+- **Icon (Optional):** Used to visually reinforce the button's action. Can be placed before or after the label.
+- **Variants:** Primary (filled), Secondary (outline or subtle), Ghost/Text (for less prominent actions).
+
+## Examples
+
+### Primary Button
+The primary button indicates the main action of a view or form. It should be the most prominent button on the screen.
+
+```tsx
+import { Button } from 'axiom-ui';
+
+export default function App() {
+  return <Button variant="filled" color="blue">Save Changes</Button>;
+}
+```
+
+### Secondary Button
+Used for less important actions, often paired with a primary button.
+
+```tsx
+import { Button } from 'axiom-ui';
+
+export default function App() {
+  return <Button variant="outline">Cancel</Button>;
+}
+```
+
+### Button States
+Buttons can have different states to communicate interactivity and status to the user.
+
+```tsx
+import { Button, Group } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <Group>
+      <Button disabled>Disabled</Button>
+      <Button loading>Loading...</Button>
+    </Group>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Clear labeling:** Keep labels concise. Use “Save Changes” or “Save” instead of "Save the Actions".
+- **Consistency:** Place buttons in consistent locations and order of importance (usually primary action on the right or left depending on platform convention).
+- **Interaction:** On hover, the cursor should change to a pointer hand to indicate clickability.
+- **State visibility:** Ensure all states (active, hover, disabled) are visually distinct. If using an icon and a label, both should be visible in the disabled state.
+
+### Don'ts
+- **No punctuation:** Do not include periods or punctuation at the end of button labels.
+- **Inconsistent heights:** Do not use buttons with different heights in the same toolbar or inline group.
+- **Navigation misuse:** Do not use buttons for pure navigation between pages; use Links or Anchor tags instead.
+- **State toggling:** Do not use a button to turn states on or off. Use a Switch or Toggle instead.
+
+## Accessibility
+
+To ensure buttons are accessible to all users, including those using screen readers and keyboard navigation:
+- Under the hood, always render an HTML `<button>` element. If a native button cannot be used, ensure `role="button"` and `tabIndex={0}` are applied.
+- Ensure the button can be triggered using both the `Enter` and `Space` keys.
+- Provide `aria-label` or `aria-labelledby` if the button contains only an icon without visible text.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `Button` component accepts all native `<button>` attributes alongside Mantine-specific props.
+
+<TypeTable
+  type={{
+    variant: {
+      description: 'Controls the visual style of the button.',
+      type: "'filled' | 'light' | 'outline' | 'subtle' | 'transparent' | 'white' | 'default'",
+      default: "'filled'",
+    },
+    color: {
+      description: 'The main color of the button from the theme.',
+      type: 'MantineColor',
+      default: 'theme.primaryColor',
+    },
+    size: {
+      description: "Controls the button's height, padding, and font size.",
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+    disabled: {
+      description: 'If true, the button is disabled and cannot be interacted with.',
+      type: 'boolean',
+      default: 'false',
+    },
+    loading: {
+      description: 'Shows a loading spinner and disables the button.',
+      type: 'boolean',
+      default: 'false',
+    },
+    leftSection: {
+      description: 'Content rendered on the left side of the label (usually an icon).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    rightSection: {
+      description: 'Content rendered on the right side of the label (usually an icon).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    fullWidth: {
+      description: 'Sets button width to 100% of its parent container.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onClick: {
+      description: 'Callback fired when the button is clicked.',
+      type: '(event: React.MouseEvent<HTMLButtonElement>) => void',
+      default: '-',
+    },
+  }}
+/>
+

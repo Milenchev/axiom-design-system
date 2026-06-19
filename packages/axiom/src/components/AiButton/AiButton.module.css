@@ -1,0 +1,9 @@
+.root {
+  border-color: var(--axiom-ai-border);
+  color: var(--axiom-ai-color);
+  background: var(--axiom-ai-bg);
+}
+
+.root:hover {
+  background: var(--axiom-ai-bg-hover);
+}

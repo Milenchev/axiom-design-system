@@ -1,0 +1,149 @@
+---
+title: NotificationsMenu
+description: A bell-triggered dropdown that surfaces recent notifications with unread state and a mark-all-as-read action.
+links:
+  storybook: components-notificationsmenu--default
+  source: 'NotificationsMenu/NotificationsMenu.tsx'
+---
+
+## Import
+
+```tsx
+import { NotificationsMenu } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-notificationsmenu--default', label: 'Default' },
+    { id: 'components-notificationsmenu--empty', label: 'Empty' },
+    { id: 'components-notificationsmenu--without-icons', label: 'Without icons' },
+  ]}
+/>
+
+## When To Use
+
+- **Global alerts:** Place it in the `HeaderBar` so users can review activity from anywhere in the app.
+- **Activity feeds:** Surface comments, mentions, system events, and status changes in one place.
+- **Unread tracking:** Show an unread count badge and let users clear it with a single action.
+
+**Don't use for:** Transient feedback after an action (use a toast `Notification`), blocking confirmations (use a `Modal` or `Dialog`), or full-page activity history (link to a dedicated page).
+
+## Anatomy
+
+- **Trigger** — A bell button with an unread-count `Indicator`. Pass `children` to customise it.
+- **Header** — The `title` plus a "Mark all as read" action shown when there are unread items.
+- **List** — A scrollable list of notification items, newest first.
+- **Item** — An optional icon tile, title, description, relative time, and an unread dot.
+- **Empty state** — A friendly message (`emptyLabel`) shown when the list is empty.
+
+## Examples
+
+### Basic notifications menu
+
+```tsx
+import { NotificationsMenu } from 'axiom-ui';
+import { IconMessageCircle } from '@tabler/icons-react';
+
+const notifications = [
+  {
+    id: '1',
+    title: 'New comment on your post',
+    description: 'Jane Doe replied to your update.',
+    time: '2m ago',
+    icon: <IconMessageCircle size={18} />,
+    color: '#0f6eef',
+  },
+];
+
+<NotificationsMenu
+  notifications={notifications}
+  onMarkAllRead={() => markAllRead()}
+  onSelect={(id) => openNotification(id)}
+/>
+```
+
+### Empty state
+
+```tsx
+<NotificationsMenu notifications={[]} emptyLabel="No new notifications" />
+```
+
+## Guidelines
+
+### Do's
+- **Order newest first.** Users expect the most recent activity at the top.
+- **Keep titles short.** Lead with the action, put context in the description.
+- **Provide a clear empty state.** Reassure users when there's nothing to review.
+- **Offer "Mark all as read".** Let users quickly clear the unread count.
+
+### Don'ts
+- **Don't use it for ephemeral toasts.** Toasts disappear; this is a persistent inbox.
+- **Don't paginate inside the dropdown.** Cap the list and link to a full page for history.
+- **Don't rely on colour alone** to convey unread state — the unread dot and background reinforce it.
+
+## Accessibility
+
+- The default trigger exposes the unread count through an `aria-label`.
+- Each notification is a focusable button; selecting it marks it read and closes the menu.
+- The list is keyboard-scrollable via `ScrollArea`.
+- Focus returns to the trigger when the menu closes.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    notifications: {
+      description: 'Notifications to display, newest first.',
+      type: 'NotificationItem[]',
+      default: '-',
+    },
+    title: {
+      description: 'Header label.',
+      type: 'string',
+      default: "'Notifications'",
+    },
+    emptyLabel: {
+      description: 'Message shown when there are no notifications.',
+      type: 'string',
+      default: "'You\\'re all caught up'",
+    },
+    maxHeight: {
+      description: 'Max height of the scrollable list, in pixels.',
+      type: 'number',
+      default: '360',
+    },
+    children: {
+      description: 'Custom trigger element. Defaults to a bell button with an unread badge.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    onMarkAllRead: {
+      description: 'Called when "Mark all as read" is clicked.',
+      type: '() => void',
+      default: '-',
+    },
+    onSelect: {
+      description: 'Called with the notification id when an item is selected.',
+      type: '(id: string) => void',
+      default: '-',
+    },
+  }}
+/>
+
+### NotificationItem
+
+<TypeTable
+  type={{
+    id: { description: 'Unique identifier for the notification.', type: 'string', default: '-' },
+    title: { description: 'Notification title.', type: 'string', default: '-' },
+    description: { description: 'Supporting description text.', type: 'string', default: '-' },
+    time: { description: 'Relative time label (e.g. "2m ago").', type: 'string', default: '-' },
+    read: { description: 'Whether the notification has been read.', type: 'boolean', default: 'false' },
+    icon: { description: 'Optional leading icon.', type: 'React.ReactNode', default: '-' },
+    color: { description: 'Optional accent colour for the icon tile.', type: 'string', default: '-' },
+  }}
+/>

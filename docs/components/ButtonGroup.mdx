@@ -1,0 +1,109 @@
+---
+title: ButtonGroup
+description: Groups related buttons together in a single row with shared borders and connected styling.
+links:
+  figma: true
+  storybook: themed-buttongroup--overview
+  mantine: https://mantine.dev/core/button/#buttongroup
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { Button } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-buttongroup--primary', label: 'Default' },
+    { id: 'themed-buttongroup--filled', label: 'Filled' },
+    { id: 'themed-buttongroup--outline', label: 'Outline' },
+  ]}
+/>
+
+## When To Use
+
+- **Related actions:** Group actions that operate on the same item (Edit, Delete, Archive).
+- **View toggles:** Switch between views (List, Grid, Calendar).
+- **Segmented options:** When only one or a few options can be selected (alignment, sort direction).
+
+**Don't use for:** Navigation links (use Tabs or NavLinks), unrelated actions, or more than 4–5 buttons.
+
+## Anatomy
+
+- **Button.Group** — Wrapper that connects child buttons visually.
+- **Button** — Individual actions within the group. Share borders with adjacent siblings.
+
+## Examples
+
+### Outline group
+
+```tsx
+import { Button } from '@mantine/core';
+
+<Button.Group>
+  <Button variant="outline">Left</Button>
+  <Button variant="outline">Center</Button>
+  <Button variant="outline">Right</Button>
+</Button.Group>
+```
+
+### Filled group
+
+```tsx
+import { Button } from '@mantine/core';
+
+<Button.Group>
+  <Button variant="filled">Copy</Button>
+  <Button variant="filled">Paste</Button>
+  <Button variant="filled">Cut</Button>
+</Button.Group>
+```
+
+## Guidelines
+
+### Do's
+- **Use the same variant for all buttons.** Mixing filled and outline in one group looks broken.
+- **Keep groups small.** 2–4 buttons is ideal. More than 5 becomes overwhelming.
+- **Order logically.** Most common action first, or follow spatial convention (left/center/right).
+- **Use consistent sizing.** All buttons in a group should be the same size.
+
+### Don'ts
+- **Don't mix icon-only and text buttons.** Choose one style per group.
+- **Don't use for primary + secondary pairing.** A standalone primary button + secondary button is better.
+- **Don't nest groups.** Keep the hierarchy flat.
+- **Don't space buttons apart.** The connected styling requires adjacent children.
+
+## Accessibility
+
+- Group has `role="group"` with an `aria-label` describing the set.
+- Each button remains independently focusable.
+- Arrow keys move focus between buttons when using toolbar pattern.
+- Active/selected state uses `aria-pressed` for toggle groups.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    orientation: {
+      description: 'Stack direction of the grouped buttons.',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+    },
+    borderWidth: {
+      description: 'Border width between buttons in px.',
+      type: 'number | string',
+      default: '1',
+    },
+    children: {
+      description: 'Button elements to group together.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

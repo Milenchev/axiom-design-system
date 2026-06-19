@@ -1,0 +1,49 @@
+---
+title: Component Library
+description: Browse, understand, and use the Axiom UI component library in your applications.
+---
+
+The Axiom component library provides a curated set of React components designed for building applications. Each component is documented with interactive examples, usage guidelines, and API references.
+
+## Getting Started
+
+Before using any component, make sure Axiom is installed in your project. See the [installation guide](/docs/developers) for setup instructions.
+
+Axiom-wrapped components are imported from the `axiom-ui` package. Mantine components that Axiom themes without wrapping (e.g., `Modal`, `Tabs`, `TextInput`) are imported directly from `@mantine/core` and styled automatically via `ThemeProvider`.
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Modal, Tabs } from '@mantine/core';
+```
+
+## Reading a Component Page
+
+Every component page follows a consistent structure to help you find the information you need quickly.
+
+### Quick Links Bar
+
+At the top of each component page you will find a row of icon links that connect you to related resources:
+
+- **Figma** — Opens the component's design spec in Figma, so designers and developers can review spacing, colors, and visual states.
+- **Storybook** — Launches the live, interactive playground where you can test variants, change props, and see the component in isolation.
+- **Source** — Links to the component's source code on GitHub.
+- **External docs** — When a component wraps an external library (for example, a charting engine or a base UI library), this link takes you to the original documentation for extended API details.
+
+Not every component will show all four links. For instance, a fully custom component may only have Figma, Storybook, and Source.
+
+### Page Sections
+
+| Section | What You Will Find |
+|---|---|
+| **Import** | The exact import statement to copy into your code. |
+| **Usage** | An embedded, interactive Storybook demo that lets you try the component immediately. |
+| **When To Use** | Guidance on scenarios where this component is the right choice. |
+| **Anatomy** | A breakdown of the component's visual parts — label, icon, slots, variants, etc. |
+| **Examples** | Code snippets showing common configurations and patterns. |
+| **Guidelines** | Do's and Don'ts for correct and consistent usage. |
+| **Accessibility** | Keyboard navigation, ARIA attributes, and screen reader considerations. |
+| **API Reference** | A prop table with types, defaults, and descriptions. |
+
+## Explore
+
+Browse the sidebar to find a specific component, or use the search bar to jump directly to what you need.

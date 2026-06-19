@@ -1,0 +1,106 @@
+---
+title: Realm
+description: A compact button displaying the current region and environment, typically used in the application header as a realm selector trigger.
+links:
+  figma: true
+  storybook: components-realm--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { Realm } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-realm--primary', label: 'Production' },
+    { id: 'components-realm--staging', label: 'Staging' },
+    { id: 'components-realm--dev', label: 'Dev' },
+  ]} 
+/>
+
+## When To Use
+
+- **Environment indicator:** Show the currently active region and environment in the application header.
+- **Realm selector trigger:** Use as the trigger element for a `RealmMenu` dropdown.
+- **Multi-tenant applications:** Help users identify which environment (production, staging, dev) they are working in.
+
+## Anatomy
+
+- **Dot Indicator:** A color-coded dot indicating the environment — green for production, yellow for staging, gray for dev.
+- **Region Label:** Bold text showing the region code (e.g., "AMER", "EMER", "APAC").
+- **Environment Label:** Regular text showing the environment name.
+- **Chevron:** A small down arrow indicating the button opens a dropdown.
+
+## Examples
+
+### Basic Realm Button
+
+```tsx
+import { Realm } from 'axiom-ui';
+
+export default function App() {
+  return <Realm region="AMER" environment="production" />;
+}
+```
+
+### With RealmMenu
+
+Typically used as the trigger for a `RealmMenu`.
+
+```tsx
+import { Realm, RealmMenu } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <RealmMenu
+      items={[
+        { region: 'AMER', environments: ['production', 'staging', 'dev'] },
+        { region: 'EMER', environments: ['production', 'staging'] },
+      ]}
+      onChange={(selection) => console.log(selection)}
+    >
+      <Realm region="AMER" environment="production" />
+    </RealmMenu>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Place in the header:** Position the Realm indicator in the application header bar for consistent visibility.
+- **Pair with RealmMenu:** Use together with `RealmMenu` to allow environment switching.
+- **Use standard region codes:** Stick to recognizable abbreviations (AMER, EMER, APAC).
+
+### Don'ts
+- **Don't use outside navigation context:** This component is designed for the application header.
+- **Don't omit the environment:** Always provide both region and environment for clarity.
+
+## Accessibility
+
+- Renders as an `<UnstyledButton>` with full keyboard support.
+- The color-coded dot is supplemented by the environment text label, so information is not conveyed by color alone.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    region: {
+      description: 'Region name (e.g., "AMER", "EMER", "APAC").',
+      type: 'string',
+      default: '-',
+    },
+    environment: {
+      description: 'Environment identifier.',
+      type: '"production" | "staging" | "dev"',
+      default: '-',
+    },
+  }}
+/>

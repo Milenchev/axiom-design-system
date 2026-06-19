@@ -1,0 +1,142 @@
+---
+title: AvatarGroup
+description: A compact, overlapping stack of avatars that represents a set of people with a tidy overflow count.
+links:
+  storybook: components-avatargroup--default
+  source: 'AvatarGroup/AvatarGroup.tsx'
+---
+
+## Import
+
+```tsx
+import { AvatarGroup } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-avatargroup--default', label: 'Default' },
+    { id: 'components-avatargroup--with-overflow', label: 'With overflow' },
+    { id: 'components-avatargroup--initials', label: 'Initials' },
+  ]}
+/>
+
+## When To Use
+
+- **Shared ownership:** Show the people assigned to a task, project, or document.
+- **Collaborators:** Represent participants in a thread, meeting, or workspace.
+- **Compact summaries:** Convey "who" in a list row or card without taking much space.
+
+**Don't use for:** A single person (use an `Avatar`), or a full member list (use a `Table` or `KeyValueList`).
+
+## Anatomy
+
+- **Avatars** — Overlapping circles, each showing a photo or initials fallback.
+- **Overflow** — A `+N` tile when the number of avatars exceeds `max`.
+- **Tooltip** — Each avatar can reveal the person's name on hover.
+
+## Examples
+
+### Basic group
+
+```tsx
+import { AvatarGroup } from 'axiom-ui';
+
+<AvatarGroup
+  avatars={[
+    { name: 'Jane Doe', src: '/avatars/jane.png' },
+    { name: 'John Smith', src: '/avatars/john.png' },
+    { name: 'Mia Wong' },
+  ]}
+/>
+```
+
+### With overflow
+
+```tsx
+<AvatarGroup
+  max={3}
+  avatars={[
+    { name: 'Jane Doe' },
+    { name: 'John Smith' },
+    { name: 'Mia Wong' },
+    { name: 'Ravi Patel' },
+    { name: 'Lena Park' },
+  ]}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Cap the visible count.** Use `max` so the group stays compact and the overflow tile stays meaningful.
+- **Provide names.** Names power the initials fallback and the hover tooltip.
+- **Keep sizes consistent.** Match the avatar `size` to the surrounding row or card.
+
+### Don'ts
+- **Don't show too many.** Beyond a handful, a list is clearer than a stack.
+- **Don't rely on colour alone.** Pair colours with names for identification.
+- **Don't use it as a control.** It summarises people; it is not a menu or button.
+
+## Accessibility
+
+- Each avatar exposes its name via an accessible tooltip when `withTooltip` is enabled.
+- Initials fallbacks are derived from the person's `name`.
+- The overflow tile communicates the number of hidden people.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    avatars: {
+      description: 'People to display in the group.',
+      type: 'AvatarGroupItem[]',
+      default: '-',
+    },
+    max: {
+      description: 'Maximum number of avatars before an overflow tile is shown.',
+      type: 'number',
+      default: '4',
+    },
+    size: {
+      description: 'Diameter of each avatar in pixels.',
+      type: 'number',
+      default: '32',
+    },
+    radius: {
+      description: 'Avatar corner radius.',
+      type: 'MantineRadius',
+      default: "'xl'",
+    },
+    withTooltip: {
+      description: 'Show the person name on hover.',
+      type: 'boolean',
+      default: 'true',
+    },
+  }}
+/>
+
+### AvatarGroupItem
+
+<TypeTable
+  type={{
+    name: {
+      description: 'Person name, used for the tooltip and initials.',
+      type: 'string',
+      default: '-',
+    },
+    src: {
+      description: 'Avatar image URL.',
+      type: 'string',
+      default: '-',
+    },
+    color: {
+      description: 'Background colour for the initials fallback.',
+      type: 'string',
+      default: '-',
+    },
+  }}
+/>

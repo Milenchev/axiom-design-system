@@ -1,0 +1,118 @@
+---
+title: AiButton
+description: A compact button styled for AI-powered actions, with a sparkle icon and distinctive AI-themed styling.
+links:
+  figma: true
+  storybook: components-aibutton--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { AiButton } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-aibutton--primary', label: 'Default' },
+    { id: 'components-aibutton--custom-label', label: 'Custom Label' },
+    { id: 'components-aibutton--disabled', label: 'Disabled' },
+  ]} 
+/>
+
+## When To Use
+
+- **AI-assisted features:** Trigger AI-powered actions like text generation, summarization, or suggestions.
+- **Inline AI prompts:** Place next to input fields or content areas where users can invoke AI assistance.
+- **Feature discovery:** Draw attention to AI capabilities with the distinctive sparkle icon and styling.
+
+## Anatomy
+
+- **Icon:** A sparkle icon displayed on the left by default. Can be customized via `leftSection`.
+- **Label:** Defaults to "Ask AI". Should be short and action-oriented (e.g., "Generate", "Suggest").
+- **Styling:** Uses dedicated AI color tokens (`--axiom-ai-*`) for a distinct visual identity separate from standard buttons.
+
+## Examples
+
+### Default AI Button
+
+The default AiButton renders with a sparkle icon and "Ask AI" label.
+
+```tsx
+import { AiButton } from 'axiom-ui';
+
+export default function App() {
+  return <AiButton />;
+}
+```
+
+### Custom Label
+
+Override the default label to match your specific AI action.
+
+```tsx
+import { AiButton } from 'axiom-ui';
+
+export default function App() {
+  return <AiButton>Generate Summary</AiButton>;
+}
+```
+
+### Custom Icon
+
+Replace the default sparkle icon with a different icon.
+
+```tsx
+import { AiButton } from 'axiom-ui';
+import { IconWand } from '@tabler/icons-react';
+
+export default function App() {
+  return <AiButton leftSection={<IconWand size={14} />}>Auto-fill</AiButton>;
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use for AI-specific actions:** Reserve this button for features powered by AI or machine learning.
+- **Keep labels concise:** Use short, action-oriented labels like "Generate", "Suggest", or "Ask AI".
+- **Place contextually:** Position near the content area the AI action will affect.
+
+### Don'ts
+- **Don't use for non-AI actions:** Use standard `Button` for regular actions.
+- **Don't overuse:** Limit the number of AI buttons visible at once to avoid overwhelming users.
+
+## Accessibility
+
+- The button renders as a standard `<button>` element with full keyboard support.
+- The sparkle icon is decorative; the button label provides the accessible name.
+- Supports the `disabled` state for non-interactive scenarios.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `AiButton` component accepts the following props in addition to standard button HTML attributes.
+
+<TypeTable
+  type={{
+    children: {
+      description: 'Button label text.',
+      type: 'React.ReactNode',
+      default: '"Ask AI"',
+    },
+    leftSection: {
+      description: 'Icon or element displayed before the label.',
+      type: 'React.ReactNode',
+      default: '<IconSparkles />',
+    },
+    disabled: {
+      description: 'Disables the button.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

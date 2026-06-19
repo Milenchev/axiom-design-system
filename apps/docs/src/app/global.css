@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+@theme {
+  --color-fd-primary: hsl(262 83% 58%);
+  --color-fd-background: hsl(0 0% 100%);
+  --color-fd-muted: hsl(240 5% 96%);
+  --color-fd-accent: hsl(262 30% 96%);
+  --color-fd-border: hsl(240 6% 90%);
+}
+
+/* Smooth scrolling — only for in-page anchor jumps triggered by the user,
+   not for every scroll, which makes wheel/trackpad scrolling feel laggy. */
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Better selection color */
+::selection {
+  background: hsl(262 83% 58% / 0.15);
+}
+
+/* Subtle gradient on sidebar active item */
+[data-active="true"] {
+  background: linear-gradient(
+    135deg,
+    hsl(262 83% 58% / 0.08),
+    hsl(262 83% 58% / 0.04)
+  );
+}

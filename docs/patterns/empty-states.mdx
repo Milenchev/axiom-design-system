@@ -1,0 +1,116 @@
+---
+title: Empty States
+description: How to design screens with no data
+---
+
+Empty states appear whenever a view has no content to render. They are not errors — they are opportunities to onboard, guide, or reassure the user. A well-designed empty state turns a dead end into a clear next step.
+
+## Anatomy
+
+Every empty state should answer three questions for the user, in order:
+
+1. **What is this view?** A short title that names the missing thing.
+2. **Why is it empty?** One sentence of supporting copy explaining the situation.
+3. **What can I do next?** A primary action button — and optionally a secondary link to documentation.
+
+```tsx
+import { Button, Text } from 'axiom-ui';
+import { Stack, Title } from '@mantine/core';
+
+<Stack align="center" gap="md" maw={420} mx="auto" ta="center">
+  <YourIllustration />
+  <Title order={3}>No projects yet</Title>
+  <Text c="dimmed">
+    Projects help you organise quotes, contracts, and reports in one place.
+  </Text>
+  <Button>Create your first project</Button>
+</Stack>
+```
+
+## Types
+
+Different empty states call for different copy and visuals. Pick the type that matches the situation.
+
+### First use (zero data)
+
+The user has opened a feature for the very first time. Use this moment to **educate** and **invite** the user in.
+
+- Tone: welcoming, instructive.
+- Visual: illustration or large icon.
+- CTA: required — start the primary "happy path" task.
+
+> **Title**: Build your first dashboard
+> **Body**: Dashboards combine charts, tables, and KPIs into a single view your team can act on.
+> **CTA**: New dashboard
+
+### User-cleared (inbox zero)
+
+The user *has* used this view, and has now finished everything in it. Celebrate, don't apologise.
+
+- Tone: positive, calm.
+- Visual: small confirmation icon or illustration.
+- CTA: optional — link to related work or to refresh.
+
+> **Title**: All caught up
+> **Body**: You've reviewed every alert from the last 7 days. Nice work.
+> **CTA (optional)**: View archived alerts
+
+### No results (filtered / searched)
+
+The data exists, but the current filter or search returned nothing.
+
+- Tone: helpful, neutral.
+- Visual: muted search icon — avoid celebratory illustrations.
+- CTA: clear the filter or change the query.
+
+> **Title**: No matches for "compressor"
+> **Body**: Try a different keyword, or remove a filter to broaden your search.
+> **CTA**: Clear filters
+
+### Permission-blocked
+
+The view *would* have content, but the user doesn't have access.
+
+- Tone: factual, never accusatory.
+- Visual: lock icon.
+- CTA: contact admin / request access.
+
+> **Title**: You don't have access to this report
+> **Body**: Ask your workspace admin to share it with you.
+> **CTA**: Request access
+
+### Error-as-empty
+
+A data fetch failed. Treat as empty state with retry, not a full error screen.
+
+- Tone: apologetic but brief.
+- Visual: small warning icon.
+- CTA: retry.
+
+## Writing the copy
+
+- Start the title with the **noun** that's missing ("No invoices", "No matches", not "Nothing here").
+- Keep the body to **one sentence** — two at most.
+- Use the **second person** ("You haven't created…", not "There are no…").
+- Never use the word "empty" in user-facing copy.
+- The CTA verb should mirror the action elsewhere in the app ("New project" if the app uses "New", "Create project" if it uses "Create").
+
+## Layout guidelines
+
+- Center the empty state within its container, not the viewport.
+- Constrain the text block to ~420px so it stays readable.
+- Pair an illustration with at most one primary and one secondary action — no link soup.
+- For tables and lists, render the empty state **inside** the same container so headers and toolbars stay visible.
+
+## Don'ts
+
+- Don't show a spinner while waiting for data; show a skeleton, then the empty state once data arrives empty.
+- Don't reuse the same illustration for every type — first-use and no-results should feel visually distinct.
+- Don't hide the navigation or chrome behind an empty state.
+- Don't apologise unless something actually went wrong.
+
+## Related
+
+- [Loading States](../patterns/loading-states) — the state *before* you know whether content exists.
+- [Voice & Tone](../guidelines/voice-and-tone) — how to write the copy.
+- [Banner](../components/Banner) — for in-page notices when content loads partially.

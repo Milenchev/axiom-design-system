@@ -1,0 +1,21 @@
+/* Axiom Text — overrides on top of Mantine Text.
+   All values use Axiom / Mantine tokens. Dark & light mode
+   are handled automatically via the CSS-variables resolver. */
+
+.root {
+  color: var(--axiom-text);
+  font-weight: var(--axiom-font-weight-regular);
+  line-height: var(--axiom-line-height-normal);
+}
+
+/* Dimmed / secondary text */
+.root[data-c="dimmed"] {
+  color: var(--axiom-text-secondary);
+}
+
+/* Truncate */
+.root[data-truncate] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,34 @@
+---
+title: Axiom Design System
+description: A personal design system — built for speed, consistency, and clarity.
+---
+
+Welcome to **Axiom** — a unified system of components, tokens, and guidelines that helps ship polished interfaces without reinventing the wheel.
+
+## Start here
+
+<Cards>
+  <Card title="For Developers" href="/docs/developers" description="Install Axiom and start building in minutes." />
+  <Card title="For Designers" href="/docs/designers" description="Access Figma libraries and design tokens." />
+  <Card title="Components" href="/docs/components" description="Browse all available UI components." />
+</Cards>
+
+## What makes Axiom different
+
+| Principle | What it means |
+|-----------|---------------|
+| **Token-first** | Every color, spacing, and sizing value comes from a token — no magic numbers. |
+| **Mantine-powered** | Built on Mantine v9 so you get a battle-tested base with Axiom opinions on top. |
+| **Themeable** | One theme object controls the entire look — swap it and everything updates. |
+| **Accessible** | WCAG AA compliance baked in. Keyboard, screen reader, and high-contrast support by default. |
+
+## Architecture at a glance
+
+```
+axiom-ui
+├── ThemeProvider      → Wraps your app, provides tokens + theme
+├── Components         → 30+ ready-to-use UI building blocks
+└── Foundations        → Colors, typography, spacing, icons
+```
+
+Every component is a thin wrapper around a Mantine primitive. Axiom controls the defaults — you control the overrides.

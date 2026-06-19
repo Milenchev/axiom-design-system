@@ -1,0 +1,150 @@
+---
+title: Slider
+description: Input control for selecting a numeric value within a defined range by dragging a thumb along a track.
+links:
+  figma: true
+  storybook: themed-slider--overview
+  mantine: https://mantine.dev/core/slider/
+  source: 'slider/slider.tsx'
+---
+
+## Import
+
+```tsx
+import { Slider } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-slider--primary', label: 'Default' },
+    { id: 'themed-slider--step', label: 'With Steps' },
+    { id: 'themed-slider--custom-marks', label: 'Custom Marks' },
+  ]}
+/>
+
+## When To Use
+
+- **Continuous ranges:** Volume, brightness, zoom level — values where exact precision is less important than relative positioning.
+- **Bounded numeric input:** When the value must stay within a min/max range (e.g., price filter between $0–$500).
+- **Visual feedback:** When users benefit from seeing their choice on a scale (e.g., risk tolerance, confidence level).
+
+**Don't use for:** Precise numeric entry (use NumberInput), date ranges (use DatePicker), or unbounded values.
+
+## Anatomy
+
+- **Track** — The horizontal line representing the full range.
+- **Thumb** — The draggable circle that indicates the current value.
+- **Fill** — The colored portion of the track from min to the current value.
+- **Marks** — Optional labeled tick marks at specific intervals.
+- **Label** — Optional floating label above the thumb showing the current value.
+
+## Examples
+
+### Basic slider
+
+```tsx
+import { Slider } from '@mantine/core';
+
+<Slider defaultValue={50} label={(value) => `${value}%`} />
+```
+
+### With marks and steps
+
+```tsx
+import { Slider } from '@mantine/core';
+
+<Slider
+  defaultValue={40}
+  step={20}
+  marks={[
+    { value: 0, label: '0%' },
+    { value: 20, label: '20%' },
+    { value: 40, label: '40%' },
+    { value: 60, label: '60%' },
+    { value: 80, label: '80%' },
+    { value: 100, label: '100%' },
+  ]}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Show the current value.** Use the `label` prop or a separate display so users know the exact number.
+- **Add marks for key values.** If certain thresholds matter (0, 50, 100), show them on the track.
+- **Use appropriate step sizes.** Don't let users pick between 1000 tiny increments if only 5 matter.
+- **Pair with a number input for precision.** When exact values are needed, show both controls.
+
+### Don'ts
+- **Don't use for small discrete sets.** If there are only 3–5 options, use Radio buttons or a Select.
+- **Don't use without visible range context.** Users need to know the min/max.
+- **Don't make the track too short.** A slider needs physical width to be usable.
+- **Don't use for non-numeric data.** Sliders imply a numeric continuum.
+
+## Accessibility
+
+- Thumb is a focusable element with `role="slider"`.
+- Arrow keys adjust the value by one step.
+- `aria-valuemin`, `aria-valuemax`, `aria-valuenow` communicate the range and current value.
+- `aria-label` or `aria-labelledby` provides the slider's purpose.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    value: {
+      description: 'Controlled current value.',
+      type: 'number',
+      default: '-',
+    },
+    defaultValue: {
+      description: 'Default value (uncontrolled).',
+      type: 'number',
+      default: '0',
+    },
+    onChange: {
+      description: 'Callback fired as the value changes (while dragging).',
+      type: '(value: number) => void',
+      default: '-',
+    },
+    onChangeEnd: {
+      description: 'Callback fired when dragging ends.',
+      type: '(value: number) => void',
+      default: '-',
+    },
+    min: {
+      description: 'Minimum value.',
+      type: 'number',
+      default: '0',
+    },
+    max: {
+      description: 'Maximum value.',
+      type: 'number',
+      default: '100',
+    },
+    step: {
+      description: 'Step increment between values.',
+      type: 'number',
+      default: '1',
+    },
+    marks: {
+      description: 'Array of mark objects with value and optional label.',
+      type: '{ value: number; label?: string }[]',
+      default: '-',
+    },
+    label: {
+      description: 'Floating label shown above thumb. Can be a function.',
+      type: 'React.ReactNode | ((value: number) => React.ReactNode)',
+      default: '-',
+    },
+    disabled: {
+      description: 'Disables the slider.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

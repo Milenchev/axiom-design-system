@@ -1,0 +1,137 @@
+---
+title: ProductMenu
+description: A product switcher that lets users jump between the apps in a suite from a compact icon grid.
+links:
+  storybook: components-productmenu--default
+  source: 'ProductMenu/ProductMenu.tsx'
+---
+
+## Import
+
+```tsx
+import { ProductMenu } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-productmenu--default', label: 'Default' },
+    { id: 'components-productmenu--four-columns', label: 'Four columns' },
+    { id: 'components-productmenu--monochrome', label: 'Monochrome' },
+  ]}
+/>
+
+## When To Use
+
+- **Multi-product suites:** Let users move between the apps of a platform (analytics, billing, CRM) without leaving the current context.
+- **Global navigation:** Place it in the `HeaderBar` next to the user menu as a persistent app launcher.
+- **Workspace switching:** Surface a small, recognisable set of destinations behind a single grid icon.
+
+**Don't use for:** Primary in-page navigation (use `NavigationBar` or `Sidebar`), long flat lists of links (use a `Menu`), or a single destination (use a `Button`).
+
+## Anatomy
+
+- **Trigger** — The element that opens the menu. Defaults to a grid icon button; pass `children` to customise it.
+- **Header** — A short label describing the grid (`title`).
+- **Grid** — Product tiles laid out in a configurable number of `columns`.
+- **Product tile** — An icon tile plus the product name. The active product is highlighted.
+
+## Examples
+
+### Basic product switcher
+
+```tsx
+import { ProductMenu } from 'axiom-ui';
+import { IconChartBar, IconUsers, IconCreditCard } from '@tabler/icons-react';
+
+const products = [
+  { id: 'analytics', name: 'Analytics', icon: <IconChartBar size={20} />, color: '#0f6eef' },
+  { id: 'crm', name: 'CRM', icon: <IconUsers size={20} />, color: '#04b000' },
+  { id: 'billing', name: 'Billing', icon: <IconCreditCard size={20} />, color: '#735920' },
+];
+
+<ProductMenu products={products} activeId="analytics" onSelect={(id) => console.log(id)} />
+```
+
+### Navigation with links
+
+```tsx
+<ProductMenu
+  products={[
+    { id: 'docs', name: 'Docs', icon: <IconBook size={20} />, href: '/docs' },
+    { id: 'app', name: 'App', icon: <IconApps size={20} />, href: '/app' },
+  ]}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Keep the set small.** A product switcher works best with a handful of recognisable destinations.
+- **Use distinct icons and colours.** Visual differentiation makes the grid scannable.
+- **Highlight the active product.** Pass `activeId` so users always know where they are.
+
+### Don'ts
+- **Don't overload it.** If you need dozens of items, use a dedicated navigation page.
+- **Don't mix unrelated actions.** This is for switching products, not for settings or sign-out.
+- **Don't hide critical navigation here exclusively.** It complements, not replaces, primary navigation.
+
+## Accessibility
+
+- The default trigger is an `ActionIcon` with an `aria-label` derived from `title`.
+- Each product tile is a focusable button (or anchor when `href` is provided).
+- The menu opens on click and closes after a selection or on outside click.
+- Focus returns to the trigger when the menu closes.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    products: {
+      description: 'Products to display in the switcher grid.',
+      type: 'ProductMenuItem[]',
+      default: '-',
+    },
+    activeId: {
+      description: 'Id of the currently active product.',
+      type: 'string',
+      default: '-',
+    },
+    title: {
+      description: 'Header label shown above the grid.',
+      type: 'string',
+      default: "'Switch product'",
+    },
+    columns: {
+      description: 'Number of columns in the grid.',
+      type: 'number',
+      default: '3',
+    },
+    children: {
+      description: 'Custom trigger element. Defaults to a grid icon button.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    onSelect: {
+      description: 'Called with the product id when an item is selected.',
+      type: '(id: string) => void',
+      default: '-',
+    },
+  }}
+/>
+
+### ProductMenuItem
+
+<TypeTable
+  type={{
+    id: { description: 'Unique identifier for the product.', type: 'string', default: '-' },
+    name: { description: 'Product name shown under the icon.', type: 'string', default: '-' },
+    icon: { description: 'Icon rendered inside the product tile.', type: 'React.ReactNode', default: '-' },
+    color: { description: 'Optional accent colour for the icon tile.', type: 'string', default: '-' },
+    href: { description: 'Navigation target — rendered as an anchor when provided.', type: 'string', default: '-' },
+    onClick: { description: 'Click handler — used when href is not provided.', type: '() => void', default: '-' },
+  }}
+/>

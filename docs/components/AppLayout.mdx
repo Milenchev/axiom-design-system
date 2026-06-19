@@ -1,0 +1,133 @@
+---
+title: AppLayout
+description: Full application shell that composes header, navigation, sidebar, and content areas into a cohesive layout.
+links:
+  figma: true
+  storybook: components-applayout--overview
+  source: 'AppLayout/AppLayout.tsx'
+---
+
+## Import
+
+```tsx
+import { AppLayout } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-applayout--primary', label: 'Full Layout' },
+    { id: 'components-applayout--navigation-only', label: 'Navigation Only' },
+    { id: 'components-applayout--with-sidebar-only', label: 'Sidebar Only' },
+    { id: 'components-applayout--header-navigation-and-tools', label: 'Header + Nav + Tools' },
+    { id: 'components-applayout--locked-panels', label: 'Locked Panels' },
+    { id: 'components-applayout--tools-hidden', label: 'Tools Hidden' },
+  ]}
+/>
+
+## When To Use
+
+- **Application shell:** The top-level layout for your entire app, composing all structural areas.
+- **Consistent structure:** Ensuring header, nav, sidebar, and content follow the same pattern across pages.
+- **Resizable panels:** When users need control over panel widths.
+
+**Don't use for:** Landing pages, marketing sites, single-page forms, or embedded widgets.
+
+## Anatomy
+
+- **Header** — Top bar with branding and global actions.
+- **Navigation** — Left-side primary navigation (NavigationBar).
+- **Sidebar** — Secondary panel for filters, tools, or sub-navigation.
+- **Content** — Main content area that fills remaining space.
+- **Tools panel** — Optional right-side panel for contextual tools.
+
+## Examples
+
+### Full application layout
+
+```tsx
+import { AppLayout } from 'axiom-ui';
+
+<AppLayout
+  header={<AppLayout.Header>My App</AppLayout.Header>}
+  navigation={<AppLayout.Navigation>{/* nav links */}</AppLayout.Navigation>}
+  sidebar={<AppLayout.Sidebar>{/* sidebar content */}</AppLayout.Sidebar>}
+>
+  <main>Page content here</main>
+</AppLayout>
+```
+
+### Navigation only (no sidebar)
+
+```tsx
+import { AppLayout } from 'axiom-ui';
+
+<AppLayout
+  header={<AppLayout.Header>My App</AppLayout.Header>}
+  navigation={<AppLayout.Navigation>{/* nav links */}</AppLayout.Navigation>}
+>
+  <main>Content area expands to fill available space</main>
+</AppLayout>
+```
+
+## Guidelines
+
+### Do's
+- **Use one AppLayout per application.** It's the outermost structural component.
+- **Make panels resizable.** Users have different screen sizes and preferences.
+- **Keep the header always visible.** It provides persistent context and actions.
+- **Use consistent panel widths.** Set sensible defaults that work for most users.
+
+### Don'ts
+- **Don't nest AppLayouts.** There should be exactly one per app.
+- **Don't put page-specific content in the header.** It's for app-level concerns.
+- **Don't force all panels open.** Let users collapse what they don't need.
+- **Don't exceed 3 visible panels.** Header + nav + content + maybe one sidebar.
+
+## Accessibility
+
+- Uses landmark roles: `<header>`, `<nav>`, `<main>`, `<aside>`.
+- Each landmark has an `aria-label` for disambiguation.
+- Panels are resizable via keyboard (arrow keys on resize handles).
+- Skip navigation link jumps directly to `<main>`.
+- Focus is managed when panels open/close.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    header: {
+      description: 'Header area content (AppLayout.Header).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    navigation: {
+      description: 'Primary navigation panel (AppLayout.Navigation).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    sidebar: {
+      description: 'Secondary sidebar panel (AppLayout.Sidebar).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    tools: {
+      description: 'Right-side tools panel.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    locked: {
+      description: 'Prevent panels from being resized.',
+      type: 'boolean',
+      default: 'false',
+    },
+    children: {
+      description: 'Main content area.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

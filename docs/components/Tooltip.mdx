@@ -1,0 +1,147 @@
+---
+title: Tooltip
+description: Small floating label that appears on hover or focus to provide additional context about an element.
+links:
+  figma: true
+  storybook: themed-tooltip--overview
+  mantine: https://mantine.dev/core/tooltip/
+  source: 'tooltip/tooltip.tsx'
+---
+
+## Import
+
+```tsx
+import { Tooltip } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-tooltip--primary', label: 'Default' },
+    { id: 'themed-tooltip--floating', label: 'Floating' },
+  ]}
+/>
+
+## When To Use
+
+- **Icon-only buttons:** Explain what an icon button does (e.g., hovering a trash icon shows "Delete").
+- **Truncated text:** Show the full content when text is cut off with ellipsis.
+- **Supplementary info:** Brief extra context that helps but isn't essential (e.g., keyboard shortcut hints).
+- **Disabled elements:** Explain why something is disabled without cluttering the UI.
+
+**Don't use for:** Critical information users must see (it's hidden until hover), interactive content (use Popover), or long descriptions (use an inline message or help panel).
+
+## Anatomy
+
+- **Trigger** — The element that activates the tooltip (button, icon, text). Must be a single focusable child.
+- **Content** — The tooltip label text. Keep it under 80 characters.
+- **Arrow** — Optional pointer connecting the tooltip to its trigger.
+
+## Examples
+
+### Basic tooltip
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Tooltip } from '@mantine/core';
+
+<Tooltip label="Save your changes">
+  <Button>Save</Button>
+</Tooltip>
+```
+
+### On icon button
+
+```tsx
+import { Tooltip, ActionIcon } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
+
+<Tooltip label="Delete item">
+  <ActionIcon color="red" aria-label="Delete item">
+    <IconTrash size={16} />
+  </ActionIcon>
+</Tooltip>
+```
+
+### With shortcut hint
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Tooltip } from '@mantine/core';
+
+<Tooltip label="Search (⌘K)">
+  <Button variant="subtle">Search</Button>
+</Tooltip>
+```
+
+## Guidelines
+
+### Do's
+- **Keep it short.** One line, no more than 80 characters. Tooltips are glanceable.
+- **Use for non-essential context.** The UI should work without the tooltip — it's bonus info.
+- **Add to icon-only actions.** Every icon button without visible text needs a tooltip.
+- **Show on focus too.** Keyboard users need access to tooltip content.
+
+### Don'ts
+- **Don't put critical info in tooltips.** Users on touch devices can't hover.
+- **Don't use for error messages.** Use inline error states instead.
+- **Don't add interactive content.** No links, buttons, or forms inside tooltips.
+- **Don't tooltip everything.** If a button already has a clear text label, a tooltip is redundant.
+
+## Accessibility
+
+- Tooltip content is linked via `aria-describedby` to the trigger element.
+- Appears on focus (not just hover) for keyboard accessibility.
+- Dismisses on Escape key press.
+- Has `role="tooltip"` for screen readers.
+- Touch devices: tooltip is not available (ensure content is accessible without it).
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Tooltip content text.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    position: {
+      description: 'Tooltip placement relative to the trigger.',
+      type: "'top' | 'bottom' | 'left' | 'right'",
+      default: "'top'",
+    },
+    withArrow: {
+      description: 'Show an arrow pointing to the trigger.',
+      type: 'boolean',
+      default: 'false',
+    },
+    opened: {
+      description: 'Controlled open state.',
+      type: 'boolean',
+      default: '-',
+    },
+    openDelay: {
+      description: 'Delay in ms before showing the tooltip.',
+      type: 'number',
+      default: '0',
+    },
+    closeDelay: {
+      description: 'Delay in ms before hiding the tooltip.',
+      type: 'number',
+      default: '0',
+    },
+    multiline: {
+      description: 'Allow tooltip to wrap to multiple lines.',
+      type: 'boolean',
+      default: 'false',
+    },
+    children: {
+      description: 'Trigger element (must be a single element that accepts ref).',
+      type: 'React.ReactElement',
+      default: '-',
+    },
+  }}
+/>

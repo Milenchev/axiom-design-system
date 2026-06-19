@@ -1,0 +1,143 @@
+---
+title: Menu
+description: Dropdown list of actions or options triggered by a button click.
+links:
+  figma: true
+  storybook: themed-menu--overview
+  mantine: https://mantine.dev/core/menu/
+  source: 'menu/menu.tsx'
+---
+
+## Import
+
+```tsx
+import { Menu } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-menu--primary', label: 'Default' },
+  ]}
+/>
+
+## When To Use
+
+- **Action overflow:** When there are too many actions to show inline (e.g., "More" button with edit, duplicate, delete).
+- **Context menus:** Right-click or kebab-menu patterns showing contextual actions for an item.
+- **Navigation shortcuts:** Quick links to related pages or sections.
+- **Grouped actions:** Organizing related actions with dividers and labels.
+
+**Don't use for:** Form selection (use Select/Dropdown), navigation bars (use NavigationBar), or displaying information (use Popover).
+
+## Anatomy
+
+- **Target** — The button or element that triggers the menu to open.
+- **Dropdown** — Floating container with the list of items.
+- **Item** — A single action or link. Can include an icon and text.
+- **Label** — Optional section header grouping related items.
+- **Divider** — Visual separator between groups of items.
+
+## Examples
+
+### Basic menu
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Menu } from '@mantine/core';
+import { IconEdit, IconTrash, IconCopy } from '@tabler/icons-react';
+
+<Menu>
+  <Menu.Target>
+    <Button variant="outline">Actions</Button>
+  </Menu.Target>
+  <Menu.Dropdown>
+    <Menu.Item leftSection={<IconEdit size={14} />}>Edit</Menu.Item>
+    <Menu.Item leftSection={<IconCopy size={14} />}>Duplicate</Menu.Item>
+    <Menu.Divider />
+    <Menu.Item color="red" leftSection={<IconTrash size={14} />}>Delete</Menu.Item>
+  </Menu.Dropdown>
+</Menu>
+```
+
+### With sections
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Menu } from '@mantine/core';
+
+<Menu>
+  <Menu.Target>
+    <Button>Options</Button>
+  </Menu.Target>
+  <Menu.Dropdown>
+    <Menu.Label>Actions</Menu.Label>
+    <Menu.Item>Edit</Menu.Item>
+    <Menu.Item>Move</Menu.Item>
+    <Menu.Label>Danger zone</Menu.Label>
+    <Menu.Item color="red">Delete</Menu.Item>
+  </Menu.Dropdown>
+</Menu>
+```
+
+## Guidelines
+
+### Do's
+- **Use clear action labels.** "Edit item" is better than "Edit." Context matters.
+- **Group related items.** Use `Menu.Label` and `Menu.Divider` to organize logically.
+- **Put destructive actions last.** Color them red and separate with a divider.
+- **Add icons for scannability.** Icons help users find actions faster in longer menus.
+
+### Don'ts
+- **Don't put more than 10 items.** Long menus are hard to scan. Consider submenus or reorganizing.
+- **Don't use for form selection.** Menus trigger actions; Select/Dropdown chooses values.
+- **Don't hide the only action in a menu.** If there's one action, make it a visible button.
+- **Don't nest menus deeply.** One level of submenus max.
+
+## Accessibility
+
+- Menu uses `role="menu"` with items as `role="menuitem"`.
+- Opens with Enter/Space on the target, closes with Escape.
+- Arrow keys navigate between items.
+- Items are activated with Enter or Space.
+- Focus returns to target on close.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    opened: {
+      description: 'Controlled open state.',
+      type: 'boolean',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback when open state changes.',
+      type: '(opened: boolean) => void',
+      default: '-',
+    },
+    position: {
+      description: 'Dropdown position relative to the target.',
+      type: "'bottom' | 'top' | 'left' | 'right' | 'bottom-start' | 'bottom-end'",
+      default: "'bottom-start'",
+    },
+    trigger: {
+      description: 'How the menu is triggered.',
+      type: "'click' | 'hover'",
+      default: "'click'",
+    },
+    closeOnItemClick: {
+      description: 'Close menu when an item is clicked.',
+      type: 'boolean',
+      default: 'true',
+    },
+    children: {
+      description: 'Menu.Target and Menu.Dropdown elements.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

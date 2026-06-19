@@ -1,0 +1,142 @@
+---
+title: Banner
+description: Prominent message bar for communicating important information, warnings, or success states to users.
+links:
+  figma: true
+  storybook: components-banner--overview
+  mantine: https://mantine.dev/core/alert/
+  source: 'Banner/Banner.tsx'
+---
+
+## Import
+
+```tsx
+import { Banner } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-banner--primary', label: 'Default' },
+    { id: 'components-banner--warning', label: 'Warning' },
+  ]}
+/>
+
+## When To Use
+
+- **System-wide announcements:** Maintenance windows, new feature launches, degraded performance.
+- **Form validation summaries:** Highlight all errors at the top of a form after submission.
+- **Success confirmations:** "Your changes have been saved" messages after an action.
+- **Important warnings:** "Your subscription expires in 3 days" type alerts.
+
+**Don't use for:** Inline field validation (use the input's `error` prop), transient notifications (use Toasts), or blocking confirmations (use Modal).
+
+## Anatomy
+
+- **Container** — Colored bar with a border or background indicating severity.
+- **Icon** — Optional icon reinforcing the message type (info, warning, error, success).
+- **Title** — Optional bold heading summarizing the alert.
+- **Message** — The main content text explaining what happened or what to do.
+- **Close button** — Optional dismiss control.
+
+## Examples
+
+### Informational banner
+
+```tsx
+import { Banner } from 'axiom-ui';
+
+<Banner title="New feature available" color="blue">
+  We've added dark mode support. Try it in Settings.
+</Banner>
+```
+
+### Warning banner
+
+```tsx
+import { Banner } from 'axiom-ui';
+import { IconAlertTriangle } from '@tabler/icons-react';
+
+<Banner title="Approaching limit" color="yellow" icon={<IconAlertTriangle />}>
+  You've used 90% of your storage quota. Consider archiving old files.
+</Banner>
+```
+
+### Error banner
+
+```tsx
+import { Banner } from 'axiom-ui';
+import { IconX } from '@tabler/icons-react';
+
+<Banner title="Unable to save" color="red" icon={<IconX />}>
+  There was a network error. Please try again.
+</Banner>
+```
+
+## Guidelines
+
+### Do's
+- **Be specific.** "3 fields have errors" is better than "There was a problem."
+- **Include next steps.** Tell users what to do, not just what happened.
+- **Use appropriate colors.** Blue for info, green for success, yellow for warning, red for error.
+- **Place at the top of the relevant context.** Page-level banners go above content; form errors go above the form.
+
+### Don'ts
+- **Don't stack many banners.** More than 2 visible at once creates noise. Prioritize.
+- **Don't use for decoration.** Banners signal importance — overuse dilutes their meaning.
+- **Don't hide critical info in dismissible banners.** If it's essential, keep it visible.
+- **Don't use vague language.** "Something went wrong" helps no one.
+
+## Accessibility
+
+- Uses `role="alert"` for error/warning messages (announced immediately by screen readers).
+- Uses `role="status"` for success/info messages (announced at next pause).
+- Close button includes `aria-label="Close"`.
+- Color is always paired with an icon and/or text — never color alone.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `Banner` component wraps Mantine's `Alert` with Axiom styling.
+
+<TypeTable
+  type={{
+    title: {
+      description: 'Bold heading text.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    color: {
+      description: 'Color theme of the banner.',
+      type: 'MantineColor',
+      default: 'theme.primaryColor',
+    },
+    icon: {
+      description: 'Icon displayed before the title/content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    variant: {
+      description: 'Visual style variant.',
+      type: "'filled' | 'light' | 'outline' | 'transparent' | 'white' | 'default'",
+      default: "'light'",
+    },
+    withCloseButton: {
+      description: 'Show a dismiss button.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onClose: {
+      description: 'Callback when close button is clicked.',
+      type: '() => void',
+      default: '-',
+    },
+    children: {
+      description: 'Message content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

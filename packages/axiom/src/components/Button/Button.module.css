@@ -1,0 +1,26 @@
+/* Axiom Button — overrides on top of Mantine Button.
+   All values use Axiom / Mantine tokens. Dark & light mode
+   are handled automatically via the CSS-variables resolver.
+   Color overrides (disabled, red light variant) live in the
+   theme (themes/default/index.ts) so they apply to both
+   <Button> and raw <MantineButton>. */
+
+.root {
+  font-weight: var(--axiom-font-weight-medium);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+/* Focus ring */
+.root:focus-visible {
+  outline: 2px solid var(--axiom-state-focus-primary);
+  outline-offset: 2px;
+}
+
+/* Disabled */
+.root[data-disabled] {
+  cursor: not-allowed;
+  pointer-events: auto;
+}

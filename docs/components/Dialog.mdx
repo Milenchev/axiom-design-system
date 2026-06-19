@@ -1,0 +1,121 @@
+---
+title: Dialog
+description: Lightweight floating panel anchored to a corner of the viewport for non-blocking interactions.
+links:
+  figma: true
+  storybook: themed-dialog--overview
+  mantine: https://mantine.dev/core/dialog/
+  source: 'dialog/dialog.tsx'
+---
+
+## Import
+
+```tsx
+import { Dialog } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-dialog--primary', label: 'Default' },
+  ]}
+/>
+
+## When To Use
+
+- **Quick actions:** Confirm a simple choice without blocking the entire page (e.g., "Subscribe to updates?").
+- **Persistent prompts:** Cookie consent, feedback collection, or feature announcements.
+- **Non-blocking messages:** Information that users can interact with or dismiss at their convenience.
+
+**Don't use for:** Blocking confirmations (use Modal), long forms (use Drawer or a page), or system notifications (use Banner).
+
+## Anatomy
+
+- **Container** — Floating card anchored to a viewport corner (usually bottom-right).
+- **Content** — Flexible area for text, inputs, or buttons.
+- **Close mechanism** — Optional close button or auto-dismiss logic.
+
+## Examples
+
+### Basic dialog
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Dialog, TextInput } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+
+function Demo() {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      <Button onClick={open}>Show dialog</Button>
+      <Dialog opened={opened} onClose={close} size="lg" radius="md">
+        <TextInput placeholder="your@email.com" label="Subscribe to newsletter" />
+        <Button onClick={close} mt="sm" fullWidth>Subscribe</Button>
+      </Dialog>
+    </>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Keep content minimal.** One question or one action — this is a lightweight prompt.
+- **Position predictably.** Bottom-right is the standard — users learn to find it there.
+- **Allow dismissal.** Users should always be able to close or ignore the dialog.
+- **Use sparingly.** Only one dialog should be visible at a time.
+
+### Don'ts
+- **Don't use for critical decisions.** Dialogs don't block interaction — important choices need a Modal.
+- **Don't stack multiple dialogs.** It clutters the viewport and confuses users.
+- **Don't auto-show on every page load.** Repeating prompts become annoying fast.
+- **Don't put complex forms here.** Keep it to 1–2 inputs maximum.
+
+## Accessibility
+
+- The dialog is a non-modal panel — it does NOT trap focus.
+- Users can interact with the page behind it while the dialog is visible.
+- Escape key closes the dialog.
+- Content is announced to screen readers when it appears.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    opened: {
+      description: 'Controls visibility of the dialog.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onClose: {
+      description: 'Callback fired when the dialog should close.',
+      type: '() => void',
+      default: '-',
+    },
+    size: {
+      description: 'Width of the dialog panel.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number",
+      default: "'md'",
+    },
+    position: {
+      description: 'Viewport corner position.',
+      type: "{ top?: number; bottom?: number; left?: number; right?: number }",
+      default: '{ bottom: 20, right: 20 }',
+    },
+    radius: {
+      description: 'Border radius of the dialog card.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+    children: {
+      description: 'Dialog content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

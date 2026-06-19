@@ -1,0 +1,149 @@
+---
+title: Stepper
+description: Displays progress through a sequence of logical, numbered steps.
+links:
+  storybook: themed-stepper--primary
+  mantine: https://mantine.dev/core/stepper/
+  source: 'packages/axiom/src/themes/default/stepper.module.css'
+---
+
+## Import
+
+```tsx
+import { Stepper } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-stepper--primary', label: 'Default' },
+    { id: 'themed-stepper--vertical', label: 'Vertical' },
+    { id: 'themed-stepper--with-error', label: 'With Error' },
+    { id: 'themed-stepper--with-warning', label: 'With Warning' },
+    { id: 'themed-stepper--loading', label: 'Loading' },
+    { id: 'themed-stepper--mixed-states', label: 'Mixed States' },
+    { id: 'themed-stepper--interactive', label: 'Interactive' },
+  ]}
+/>
+
+## When To Use
+
+- **Multi-step flows:** Checkout, onboarding, account setup, complex form submissions.
+- **Wizards:** Tasks that benefit from being broken into small, focused screens.
+- **Progress visibility:** Whenever the user benefits from knowing where they are in a longer task and how much is left.
+
+**Don't use for:** Random-access navigation (use [Tabs](../components/Tabs)), single-step actions, or progress that isn't sequential.
+
+## Anatomy
+
+- **Step icon** — Circular indicator with a number, icon, or status (completed, in progress, error, warning, loading).
+- **Step label** — Short title of the step.
+- **Step description** *(optional)* — Helper text under the label.
+- **Separator** — Line connecting steps. Active separators (between completed steps) inherit the step's color.
+
+## Examples
+
+### Basic horizontal stepper
+
+```tsx
+import { Stepper } from '@mantine/core';
+
+<Stepper active={1}>
+  <Stepper.Step label="Account" description="Create your account" />
+  <Stepper.Step label="Profile" description="Add personal info" />
+  <Stepper.Step label="Review" description="Confirm and submit" />
+</Stepper>
+```
+
+### Vertical stepper
+
+```tsx
+import { Stepper } from '@mantine/core';
+
+<Stepper active={1} orientation="vertical">
+  <Stepper.Step label="Account" description="Create your account" />
+  <Stepper.Step label="Profile" description="Add personal info" />
+  <Stepper.Step label="Review" description="Confirm and submit" />
+</Stepper>
+```
+
+### Error state
+
+Mark a step as failed by passing `color="red"` and an alternative icon. The separator leading into the next step adopts the same color.
+
+```tsx
+import { Stepper } from '@mantine/core';
+import { IconX } from '@tabler/icons-react';
+
+<Stepper active={1}>
+  <Stepper.Step label="Account" />
+  <Stepper.Step
+    label="Profile"
+    color="red"
+    completedIcon={<IconX size={18} />}
+  />
+  <Stepper.Step label="Review" />
+</Stepper>
+```
+
+### Warning state
+
+Use `color="yellow"` (or `"orange"`) for non-blocking issues such as incomplete optional fields.
+
+```tsx
+import { Stepper } from '@mantine/core';
+import { IconExclamationCircle } from '@tabler/icons-react';
+
+<Stepper active={2}>
+  <Stepper.Step label="Account" />
+  <Stepper.Step
+    label="Profile"
+    color="yellow"
+    completedIcon={<IconExclamationCircle size={18} />}
+  />
+  <Stepper.Step label="Review" />
+</Stepper>
+```
+
+### Loading state
+
+A step can show an in-flight loader while async work happens.
+
+```tsx
+import { Stepper } from '@mantine/core';
+
+<Stepper active={1}>
+  <Stepper.Step label="Account" />
+  <Stepper.Step label="Profile" loading />
+  <Stepper.Step label="Review" />
+</Stepper>
+```
+
+## Guidelines
+
+### Do's
+- **Label every step.** Numbers alone don't tell the user what each step is.
+- **Keep step count low.** 3–5 steps is ideal. More than 7 is a sign you should split the flow.
+- **Allow back navigation.** Let users revisit earlier completed steps to make corrections.
+- **Preserve state between steps.** Don't lose input when the user goes back.
+- **Surface errors on the offending step**, not on a global page banner only.
+
+### Don'ts
+- **Don't skip required steps with "Skip".** If a step is optional, mark it that way; don't hide it behind a skip button.
+- **Don't change the number of steps once shown.** Adding steps mid-flow erodes trust.
+- **Don't use the Stepper as a progress bar.** Use [Progress](../components/Progress) for indeterminate work like uploads.
+- **Don't put unrelated tasks in the same Stepper.** Steps should belong to one coherent flow.
+
+## Accessibility
+
+- Each step has `role="tab"` and the container has `role="tablist"`.
+- Active step uses `aria-current="step"`.
+- Step state (completed, in progress, error) is announced via the icon's `aria-label` — keep the `completedIcon` content meaningful or wrap it in a labelled element when conveying error/warning.
+- **Keyboard:** Arrow keys move between steps when steps are clickable; `Enter` activates.
+- Pair colour with an icon shape change for error/warning so the state isn't conveyed by colour alone.
+
+## Related
+
+- [Forms](../patterns/forms) — when to use a stepper over a single long form.
+- [Tabs](../components/Tabs) — random-access alternative for non-sequential content.

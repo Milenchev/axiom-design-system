@@ -1,0 +1,14 @@
+/* Axiom Card — overrides on top of Mantine Card.
+   All values use Axiom / Mantine tokens. Dark & light mode
+   are handled automatically via the CSS-variables resolver. */
+
+.root {
+  background-color: var(--axiom-surface-primary);
+  border-color: var(--axiom-border);
+  transition: box-shadow 200ms ease;
+}
+
+/* Section dividers */
+.section {
+  border-color: var(--axiom-border);
+}

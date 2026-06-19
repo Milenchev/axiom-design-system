@@ -1,0 +1,59 @@
+/* Axiom Input base styles — applied to ALL inputs via Input.extend + Input.Wrapper.extend
+   in the theme. This covers TextInput, Textarea, NumberInput, Select, etc.
+   All values use Axiom / Mantine tokens. */
+
+/* Input field */
+.input {
+  background-color: var(--axiom-content-field);
+  border-color: var(--axiom-border);
+  color: var(--axiom-text);
+  transition: border-color 150ms ease;
+}
+
+.input::placeholder {
+  color: var(--axiom-text-placeholder);
+}
+
+.input:focus,
+.input:focus-within {
+  border-color: var(--axiom-primary);
+}
+
+/* Disabled */
+.input:disabled,
+.input[data-disabled] {
+  background-color: var(--axiom-content-field-disabled);
+  border-color: var(--axiom-border);
+  color: var(--axiom-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Error state */
+.input[data-error] {
+  color: var(--axiom-text);
+  border-color: var(--axiom-border-error);
+}
+
+.input[data-error]:focus,
+.input[data-error]:focus-within {
+  border-color: var(--axiom-border-error);
+}
+
+/* Label */
+.label {
+  color: var(--axiom-text);
+  font-weight: var(--axiom-font-weight-medium);
+  font-size: var(--axiom-font-size-sm);
+}
+
+/* Description */
+.description {
+  color: var(--axiom-text-secondary);
+  font-size: var(--axiom-font-size-xs);
+}
+
+/* Error message */
+.error {
+  color: var(--axiom-feedback-error);
+  font-size: var(--axiom-font-size-xs);
+}

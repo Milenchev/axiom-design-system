@@ -1,0 +1,67 @@
+---
+title: Demos
+description: Full-page demos showcasing how Axiom components compose into complete, production-ready interfaces.
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card';
+
+These demos show how Axiom components work together to build complete,
+production-ready user interfaces. Each one is a realistic application scenario —
+not an isolated component, but a full screen you could ship.
+
+## Try it live
+
+The analytics dashboard below is **live and interactive** — search the orders,
+sort the columns and switch themes right from the embed toolbar. Every pixel is
+rendered with real Axiom components.
+
+<StorybookEmbed id="demos-demo-4-analytics-dashboard--default" height="640px" />
+
+## Full-page demos
+
+Each demo below runs live in Storybook and has a dedicated walkthrough page.
+
+<Cards>
+  <Card
+    title="Application Shell"
+    href="/docs/demos/application-shell"
+    description="A complete enterprise frame: header, top navigation, resizable sidebar, KPI metrics and contextual drawers."
+  />
+  <Card
+    title="Campaign Management"
+    href="/docs/demos/campaign-management"
+    description="A focused data-management workspace with breadcrumbs, a content header, resizable tool panels and a data grid."
+  />
+  <Card
+    title="Settings & Forms"
+    href="/docs/demos/settings-and-forms"
+    description="A tabbed settings experience covering every form control, grouped into clear, scannable sections."
+  />
+  <Card
+    title="Analytics Dashboard"
+    href="/docs/demos/analytics-dashboard"
+    description="A data-rich overview with KPI metric cards, a searchable orders table and traffic-source breakdowns."
+  />
+</Cards>
+
+## Running the demos locally
+
+All demos are available in Storybook:
+
+```bash
+pnpm storybook
+```
+
+Navigate to the **Demos** section in the Storybook sidebar to interact with each
+one, or open the walkthrough pages above to see them embedded alongside an
+explanation of the patterns they use.
+
+## Enterprise-grade quality
+
+These demos represent patterns validated in production at enterprise scale,
+serving thousands of users daily. Every component shown here is built for:
+
+- **Accessibility** — WCAG 2.1 AA compliance and full keyboard operability.
+- **Performance** — optimized rendering with minimal re-renders.
+- **Responsiveness** — fluid layouts that adapt to every screen size.
+- **Theming** — complete light/dark mode support out of the box.

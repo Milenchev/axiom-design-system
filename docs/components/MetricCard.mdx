@@ -1,0 +1,175 @@
+---
+title: MetricCard
+description: A data display card for presenting key metrics with optional trend indicators, icons, and contextual descriptions.
+links:
+  figma: true
+  storybook: components-metriccard--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { MetricCard } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-metriccard--primary', label: 'Default' },
+    { id: 'components-metriccard--negative-trend', label: 'Negative Trend' },
+    { id: 'components-metriccard--inline-trend', label: 'Inline Trend' },
+    { id: 'components-metriccard--no-trend', label: 'No Trend' },
+  ]} 
+/>
+
+## When To Use
+
+- **Dashboard KPIs:** Display key performance indicators like revenue, user counts, or conversion rates.
+- **At-a-glance metrics:** Present important numbers with trend context so users can quickly assess performance.
+- **Comparison data:** Show how a metric has changed over time with positive/negative trend indicators.
+
+## Anatomy
+
+- **Icon (Optional):** Displayed on the left in a circular container to visually categorize the metric.
+- **Label:** Descriptive name of the metric (e.g., "Total Revenue").
+- **Action (Optional):** An interactive element (e.g., menu button) positioned top-right.
+- **Value:** The primary metric value, displayed prominently.
+- **Trend (Optional):** A percentage change indicator with directional arrow. Green for positive, red for negative.
+- **Trend Label (Optional):** Comparison context (e.g., "Since last day").
+- **Description (Optional):** Additional context displayed below the value.
+
+## Examples
+
+### Basic Metric Card
+
+Display a metric with a label, value, and trend indicator.
+
+```tsx
+import { MetricCard } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <MetricCard
+      label="Revenue"
+      value="$1.2M"
+      trend={12}
+      trendLabel="Since last month"
+    />
+  );
+}
+```
+
+### With Icon and Action
+
+Add an icon for visual categorization and an action button for additional options.
+
+```tsx
+import { MetricCard } from 'axiom-ui';
+import { IconCash, IconDotsVertical } from '@tabler/icons-react';
+import { ActionIcon } from '@mantine/core';
+
+export default function App() {
+  return (
+    <MetricCard
+      label="Gross Revenue"
+      value="$2.4M"
+      icon={<IconCash size={20} />}
+      action={<ActionIcon variant="subtle"><IconDotsVertical size={16} /></ActionIcon>}
+      trend={8.5}
+      trendLabel="vs last quarter"
+    />
+  );
+}
+```
+
+### Inline Trend Badge
+
+Display the trend as a compact badge next to the value instead of below it.
+
+```tsx
+import { MetricCard } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <MetricCard
+      label="Total Users"
+      value="8,421"
+      trend={70.5}
+      trendInline
+      description="Active users across all regions"
+    />
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use pre-formatted values:** Pass already-formatted strings (e.g., "$1.2M") as the `value` prop.
+- **Provide trend context:** Always include a `trendLabel` when showing trend data to explain the comparison period.
+- **Group related metrics:** Display multiple MetricCards in a grid layout for dashboard overviews.
+
+### Don'ts
+- **Don't overload with data:** Keep each card focused on a single metric. Use separate cards for different metrics.
+- **Don't mix inline and block trends:** Be consistent within a set of metric cards.
+
+## Accessibility
+
+- Uses semantic HTML with proper heading hierarchy for labels and values.
+- Trend colors (green/red) are accompanied by directional arrow icons, ensuring the information is not conveyed by color alone.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Descriptive label for the metric (e.g., "Total Revenue").',
+      type: 'string',
+      default: '-',
+    },
+    value: {
+      description: 'Formatted metric value (e.g., "$1.2M").',
+      type: 'string',
+      default: '-',
+    },
+    icon: {
+      description: 'Optional icon element displayed in the header.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    action: {
+      description: 'Optional action element displayed top-right (e.g., menu button).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    trend: {
+      description: 'Trend percentage (e.g., 12 for +12%).',
+      type: 'number',
+      default: '-',
+    },
+    trendDirection: {
+      description: 'Override automatic trend direction derived from the sign of `trend`.',
+      type: '"up" | "down"',
+      default: '-',
+    },
+    trendLabel: {
+      description: 'Comparison context text (e.g., "Since last day").',
+      type: 'string',
+      default: '-',
+    },
+    trendInline: {
+      description: 'Show trend as an inline badge next to the value instead of below.',
+      type: 'boolean',
+      default: 'false',
+    },
+    description: {
+      description: 'Optional description text below the value.',
+      type: 'string',
+      default: '-',
+    },
+  }}
+/>

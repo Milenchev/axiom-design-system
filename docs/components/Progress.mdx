@@ -1,0 +1,138 @@
+---
+title: Progress
+description: Visual indicator showing the completion status of a task or process.
+links:
+  figma: true
+  storybook: themed-progress--overview
+  mantine: https://mantine.dev/core/progress/
+  source: 'progress/progress.tsx'
+---
+
+## Import
+
+```tsx
+import { Progress } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-progress--primary', label: 'Default' },
+    { id: 'themed-progress--colored', label: 'Colored' },
+    { id: 'themed-progress--striped', label: 'Striped' },
+  ]}
+/>
+
+## When To Use
+
+- **Task completion:** File uploads, form progress, installation steps.
+- **Quotas and limits:** Storage usage, API rate limits, budget consumption.
+- **Multi-step processes:** Show how far through a workflow the user is.
+
+**Don't use for:** Indeterminate loading (use a Spinner/Loader), real-time data visualization (use Charts), or interactive value selection (use Slider).
+
+## Anatomy
+
+- **Track** — The background bar representing the total range (0–100%).
+- **Fill** — The colored portion representing current progress.
+- **Label** — Optional text showing percentage or status.
+- **Sections** — Multiple colored segments for stacked progress (e.g., disk usage by category).
+
+## Examples
+
+### Basic progress
+
+```tsx
+import { Progress } from '@mantine/core';
+
+<Progress value={65} />
+```
+
+### With label
+
+```tsx
+import { Progress } from '@mantine/core';
+
+<Progress value={72} size="xl">
+  <Progress.Label>72%</Progress.Label>
+</Progress>
+```
+
+### Multi-section
+
+```tsx
+import { Progress } from '@mantine/core';
+
+<Progress.Root size="xl">
+  <Progress.Section value={35} color="blue">
+    <Progress.Label>Documents</Progress.Label>
+  </Progress.Section>
+  <Progress.Section value={28} color="orange">
+    <Progress.Label>Photos</Progress.Label>
+  </Progress.Section>
+  <Progress.Section value={15} color="green">
+    <Progress.Label>Other</Progress.Label>
+  </Progress.Section>
+</Progress.Root>
+```
+
+## Guidelines
+
+### Do's
+- **Show exact values when possible.** "65% complete" is more useful than just a bar.
+- **Animate changes.** Smooth transitions give feedback that progress is happening.
+- **Use color meaningfully.** Green for on-track, yellow for warning, red for over-limit.
+- **Pair with context.** "3 of 5 steps complete" is better than just "60%".
+
+### Don'ts
+- **Don't show fake progress.** If you don't know the actual percentage, use an indeterminate loader.
+- **Don't update too frequently.** Dozens of updates per second create visual noise.
+- **Don't use for non-linear processes.** If steps vary wildly in duration, the bar will feel stuck.
+- **Don't make it too small.** Users need to actually see the progress.
+
+## Accessibility
+
+- Uses `role="progressbar"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.
+- `aria-label` describes what the progress represents.
+- Color is supplemented with text labels for color-blind users.
+- Animated versions respect `prefers-reduced-motion`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    value: {
+      description: 'Current progress value (0–100).',
+      type: 'number',
+      default: '0',
+    },
+    color: {
+      description: 'Color of the progress fill.',
+      type: 'MantineColor',
+      default: 'theme.primaryColor',
+    },
+    size: {
+      description: 'Height of the progress bar.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number",
+      default: "'md'",
+    },
+    striped: {
+      description: 'Add striped pattern to the fill.',
+      type: 'boolean',
+      default: 'false',
+    },
+    animated: {
+      description: 'Animate the stripe pattern.',
+      type: 'boolean',
+      default: 'false',
+    },
+    radius: {
+      description: 'Border radius of the bar.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'xl'",
+    },
+  }}
+/>

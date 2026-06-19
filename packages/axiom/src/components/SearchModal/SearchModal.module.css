@@ -1,0 +1,116 @@
+.modalContent {
+  overflow: hidden;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  padding: var(--axiom-padding-md) var(--axiom-padding-lg);
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.section {
+  margin-bottom: var(--axiom-spacing-md);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: var(--axiom-font-size-xs);
+  font-weight: var(--axiom-font-weight-semibold);
+  color: var(--axiom-text-secondary);
+  text-transform: uppercase;
+  margin-bottom: var(--axiom-spacing-xs);
+  padding-left: var(--axiom-spacing-xs);
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-xs);
+  padding: var(--axiom-spacing-xs);
+  border-radius: var(--axiom-radius-sm);
+  color: var(--axiom-text);
+  font-size: var(--axiom-font-size-sm);
+}
+
+.item:hover {
+  background-color: var(--axiom-state-hover);
+  border-radius: var(--axiom-spacing-xs);
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.itemLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appsGrid {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.appItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 20%;
+  padding: var(--axiom-padding-2xs);
+}
+
+.appItem:hover {
+  background-color: var(--axiom-state-hover);
+  border-radius: var(--axiom-spacing-xs);
+}
+
+.appIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--axiom-sizing-3xl);
+  height: var(--axiom-sizing-3xl);
+}
+
+.appLabel {
+  font-size: var(--axiom-font-size-xs);
+  color: var(--axiom-text);
+  text-align: center;
+  line-height: var(--axiom-line-height-tight);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--axiom-spacing-md);
+  padding: var(--axiom-padding-sm) var(--axiom-padding-lg);
+  border-top: 1px solid var(--axiom-border);
+  background-color: var(--axiom-surface-secondary);
+}
+
+.shortcut {
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-2xs);
+  font-size: var(--axiom-font-size-xs);
+  color: var(--axiom-text-secondary);
+}

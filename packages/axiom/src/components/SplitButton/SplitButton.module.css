@@ -1,0 +1,5 @@
+.toggle {
+  padding-left: var(--axiom-padding-2xs);
+  padding-right: var(--axiom-padding-2xs);
+  border-left: 1px solid color-mix(in srgb, #000 12%, transparent);
+}

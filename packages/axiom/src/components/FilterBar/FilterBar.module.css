@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-md);
+  padding: var(--axiom-padding-sm) 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--axiom-spacing-sm);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-xs);
+  margin-left: auto;
+}

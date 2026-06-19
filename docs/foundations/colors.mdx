@@ -1,0 +1,62 @@
+---
+title: Colors
+description: Brand colors, semantic tokens, and themes
+---
+
+Axiom uses a layered color system: **brand** colors establish identity, **semantic** tokens convey meaning, and **surface/text** tokens handle everyday UI.
+
+## Color architecture
+
+```
+Brand palette        →  axiom-blue, axiom-red, axiom-green, ...
+  ↓
+Semantic tokens      →  success, warning, error, info
+  ↓
+Surface/text tokens  →  surface-primary, text-secondary, border-default
+```
+
+Always use tokens — never hardcode hex values. Tokens adapt automatically to theme changes and dark mode.
+
+## Semantic colors
+
+These tokens communicate meaning regardless of the specific hue:
+
+| Token | Purpose | Example usage |
+|-------|---------|---------------|
+| `--axiom-text-primary` | Main body text | Paragraphs, headings |
+| `--axiom-text-secondary` | Supporting text | Captions, descriptions |
+| `--axiom-surface-primary` | Main background | Page background |
+| `--axiom-surface-secondary` | Elevated surfaces | Cards, popovers |
+| `--mantine-color-*` | Mantine color scale | Component-level colors |
+
+## Categorical palette
+
+Used for data visualization, badges, and status indicators. Each color has a semantic name:
+
+| Color | CSS Variable | Use case |
+|-------|-------------|----------|
+| Blue (primary) | `var(--mantine-color-axiom-blue-*)` | Primary actions, links |
+| Green (success) | `var(--mantine-color-axiom-green-*)` | Success states, approvals |
+| Yellow (warning) | `var(--mantine-color-axiom-yellow-*)` | Warnings, pending states |
+| Red (error) | `var(--mantine-color-axiom-red-*)` | Errors, destructive actions |
+
+## Using colors in code
+
+```css
+/* In CSS modules — always use tokens */
+.card {
+  background: var(--axiom-surface-primary);
+  color: var(--axiom-text-primary);
+  border: 1px solid var(--axiom-border-default);
+}
+```
+
+```tsx
+/* In components — use the color prop */
+<Button color="blue">Primary action</Button>
+<Badge type="success">Approved</Badge>
+```
+
+## Accessibility
+
+All token combinations are designed to meet **WCAG AA** contrast requirements (4.5:1 for normal text, 3:1 for large text). The system automatically selects light or dark text based on background luminance.

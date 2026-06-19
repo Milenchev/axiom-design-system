@@ -1,0 +1,65 @@
+---
+title: Getting Started
+description: Introduction to the Axiom Design System
+---
+
+Axiom is a React component library built on **Mantine v9**. It gives you pre-styled, accessible UI components out of the box.
+
+## Pick your path
+
+| Role | Guide | What you'll learn |
+|------|-------|-------------------|
+| **Developer** | [For Developers](/docs/developers) | Install, configure, and use components in code |
+| **Designer** | [For Designers](/docs/designers) | Access Figma libraries, tokens, and contribution workflow |
+
+## Production-tested
+
+Axiom has been developed and battle-tested in a **production environment at a large enterprise company**, serving thousands of daily active users across multiple B2B SaaS products. The component library has proven its reliability, performance, and accessibility compliance at scale.
+
+## How Axiom works
+
+```
+Your App
+  └── <ThemeProvider>          ← Axiom theme (tokens, overrides)
+        └── <YourPages>
+              └── <Button>     ← Axiom component (thin Mantine wrapper)
+```
+
+1. **Wrap once** — Add `<ThemeProvider>` at the root of your app.
+2. **Import and use** — Every component works immediately with consistent styling.
+3. **Override when needed** — Props, className, and style all work as expected.
+
+## Key concepts
+
+- **Tokens** — Named design values (colors, spacing, sizing) referenced via CSS variables like `var(--axiom-spacing-md)`. Never use raw pixel values.
+- **Wrappers** — Axiom components wrap Mantine components. They inherit all Mantine props plus any Axiom-specific additions.
+- **Theme** — A single object in `ThemeProvider` controls all visual defaults. Change one value, update every component.
+
+## Quick install
+
+```bash
+npm install axiom-ui
+```
+
+```tsx
+import { ThemeProvider, Button } from 'axiom-ui';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Button>Get started</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+That's it. You're using Axiom.
+
+## Live Demos
+
+Explore full-page demos that showcase how components work together in realistic scenarios:
+
+- **[Demo 1](/docs/demos)** — Full application shell with navigation, sidebar, datagrid, and dashboard views
+- **[Demo 2](/docs/demos)** — Campaign management with breadcrumbs, tool panels, and resizable sidebar
+- **[Demo 3](/docs/demos)** — Settings page with forms, tabs, expandable panels, and validation
+- **[Demo 4](/docs/demos)** — Analytics dashboard with metric cards, tables, badges, and charts

@@ -1,0 +1,77 @@
+{
+  "name": "axiom-ui",
+  "version": "0.0.0",
+  "type": "module",
+  "bin": "./dist/mcp.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/index.css"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lint": "biome check",
+    "fix": "biome check --write",
+    "fix:unsafe": "biome check --write --unsafe",
+    "types:check": "tsc --noEmit -p tsconfig.check.json",
+    "format": "biome format --write",
+    "test": "vitest run --config vitest.unit.config.ts",
+    "test:watch": "vitest --config vitest.unit.config.ts",
+    "test:coverage": "vitest run --coverage --config vitest.unit.config.ts",
+    "build": "tsup src/index.tsx --format esm,cjs --dts",
+    "build:mcp": "pnpm build:storybook && tsup --config tsup.mcp.ts && cp -r storybook-static/manifests dist/manifests",
+    "build:storybook": "storybook build",
+    "build:publish": "pnpm build && pnpm build:mcp",
+    "storybook": "storybook dev -p 6006",
+    "prepack": "pnpm build:publish"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.40.0",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.20"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
+    "@storybook/addon-mcp": "^0.4.2",
+    "@storybook/addon-themes": "^10.3.3",
+    "@storybook/addon-vitest": "^10.3.3",
+    "@storybook/mcp": "^0.6.2",
+    "@storybook/react-vite": "^10.3.3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@tmcp/adapter-valibot": "^0.1.5",
+    "@tmcp/transport-stdio": "^0.4.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/browser-playwright": "^4.1.1",
+    "@vitest/coverage-v8": "^4.1.1",
+    "jsdom": "^29.1.1",
+    "playwright": "^1.58.2",
+    "react-docgen-typescript": "^2.4.0",
+    "storybook": "^10.3.3",
+    "tmcp": "^1.19.3",
+    "tsdown": "^0.21.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.1",
+    "zustand": "^5.0.12"
+  },
+  "peerDependencies": {
+    "@mantine/core": "^9.0.0",
+    "@mantine/dates": "^9.0.0",
+    "@mantine/hooks": "^9.0.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}

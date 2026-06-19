@@ -1,0 +1,125 @@
+---
+title: ScrollArea
+description: Custom scrollable container with styled scrollbars that match the design system.
+links:
+  figma: true
+  storybook: themed-scrollarea--overview
+  mantine: https://mantine.dev/core/scroll-area/
+  source: 'scrollArea/scrollArea.tsx'
+---
+
+## Import
+
+```tsx
+import { ScrollArea } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-scrollarea--primary', label: 'Default' },
+    { id: 'themed-scrollarea--autosize', label: 'Auto Size' },
+  ]}
+/>
+
+## When To Use
+
+- **Constrained containers:** When content exceeds a fixed-height area (sidebars, panels, modals).
+- **Horizontal overflow:** Code blocks, wide tables, or image galleries that scroll horizontally.
+- **Custom scrollbar styling:** When native scrollbars clash with the UI design.
+
+**Don't use for:** Full-page scrolling (let the browser handle it), infinite scroll lists (use virtualization), or content that should be fully visible.
+
+## Anatomy
+
+- **Viewport** — The visible window showing a portion of the content.
+- **Content** — The full scrollable area (can be taller/wider than the viewport).
+- **Scrollbar** — Styled vertical and/or horizontal scrollbar with draggable thumb.
+- **Thumb** — The draggable indicator showing current scroll position.
+
+## Examples
+
+### Vertical scroll
+
+```tsx
+import { Text } from 'axiom-ui';
+import { ScrollArea } from '@mantine/core';
+
+<ScrollArea h={200}>
+  <Text>
+    {/* Long content that exceeds 200px height */}
+    Lorem ipsum dolor sit amet...
+  </Text>
+</ScrollArea>
+```
+
+### Horizontal scroll
+
+```tsx
+import { ScrollArea } from '@mantine/core';
+
+<ScrollArea w={400} type="auto">
+  <div style={{ width: 800 }}>
+    {/* Wide content */}
+  </div>
+</ScrollArea>
+```
+
+## Guidelines
+
+### Do's
+- **Set explicit height/width.** ScrollArea needs a constrained dimension to create overflow.
+- **Use `type="auto"` for conditional scrollbars.** Only shows when content actually overflows.
+- **Apply to panels, not pages.** Page-level scroll should use the browser's native behavior.
+
+### Don'ts
+- **Don't nest ScrollAreas.** Scroll inception confuses users.
+- **Don't hide important content below the fold.** If users must scroll to find key actions, reconsider the layout.
+- **Don't disable scrollbar visibility.** Users need orientation cues.
+
+## Accessibility
+
+- Scrollable region is keyboard-navigable (Tab to focus, arrow keys to scroll).
+- `role="region"` with `aria-label` when the scroll area has a purpose.
+- Scrollbar is visible on focus/hover for orientation.
+- Content inside remains accessible to screen readers regardless of scroll position.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    type: {
+      description: 'When to show scrollbars.',
+      type: "'auto' | 'always' | 'scroll' | 'hover' | 'never'",
+      default: "'hover'",
+    },
+    h: {
+      description: 'Height of the scroll area.',
+      type: 'number | string',
+      default: '-',
+    },
+    w: {
+      description: 'Width of the scroll area.',
+      type: 'number | string',
+      default: '-',
+    },
+    offsetScrollbars: {
+      description: 'Add padding for scrollbar width.',
+      type: 'boolean',
+      default: 'false',
+    },
+    scrollbarSize: {
+      description: 'Scrollbar width/height in px.',
+      type: 'number',
+      default: '10',
+    },
+    children: {
+      description: 'Scrollable content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

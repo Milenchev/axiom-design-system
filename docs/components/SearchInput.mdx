@@ -1,0 +1,157 @@
+---
+title: SearchInput
+description: A text input optimized for search with built-in debouncing, keyboard shortcuts, and a clear button.
+links:
+  figma: true
+  storybook: components-searchinput--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { SearchInput } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-searchinput--primary', label: 'Default' },
+    { id: 'components-searchinput--with-shortcut', label: 'With Shortcut' },
+    { id: 'components-searchinput--debounced', label: 'Debounced' },
+  ]} 
+/>
+
+## When To Use
+
+- **Filtering content:** Add above lists, tables, or grids to let users filter displayed items.
+- **Global search:** Place in the header bar for application-wide search with a keyboard shortcut.
+- **Typeahead search:** Combine with debouncing for search-as-you-type against an API.
+
+## Anatomy
+
+- **Search Icon:** A magnifying glass icon on the left to identify the field as a search input.
+- **Input Field:** Text input with a default "Search..." placeholder.
+- **Clear Button:** Appears when the input has a value, allowing users to quickly reset the field.
+- **Shortcut Badge (Optional):** Displays a keyboard shortcut hint (e.g., "⌘K") when the field is empty and unfocused.
+
+## Examples
+
+### Basic Search
+
+```tsx
+import { SearchInput } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <SearchInput
+      placeholder="Search items..."
+      onChange={(value) => console.log(value)}
+    />
+  );
+}
+```
+
+### With Keyboard Shortcut
+
+Register a global keyboard shortcut that focuses the search input.
+
+```tsx
+import { SearchInput } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <SearchInput
+      shortcut="⌘K"
+      enableShortcut
+      onSubmit={(value) => console.log('Search for:', value)}
+    />
+  );
+}
+```
+
+### Debounced Search
+
+Delay the `onChange` callback to avoid excessive API calls during typing.
+
+```tsx
+import { SearchInput } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <SearchInput
+      debounce={300}
+      onChange={(value) => fetchResults(value)}
+      placeholder="Type to search (300ms debounce)..."
+    />
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use debouncing for API calls:** Set a `debounce` value (200–500ms) when search triggers network requests.
+- **Provide keyboard shortcuts:** Use `shortcut` and `enableShortcut` for frequently used search inputs.
+- **Show the shortcut badge:** Helps users discover the keyboard shortcut without documentation.
+
+### Don'ts
+- **Don't use for form fields:** Use `TextInput` for standard form inputs. `SearchInput` is specifically for search/filter behavior.
+- **Don't hide the clear button:** Users expect to be able to quickly clear search inputs.
+
+## Accessibility
+
+- Uses `aria-label="Search"` by default for screen reader identification.
+- The search icon is decorative and does not interfere with the accessible name.
+- The clear button is keyboard-accessible.
+- The `Escape` key blurs the input, and `Enter` submits the current value.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    value: {
+      description: 'Controlled value of the input.',
+      type: 'string',
+      default: '-',
+    },
+    defaultValue: {
+      description: 'Default value for uncontrolled usage.',
+      type: 'string',
+      default: '-',
+    },
+    onChange: {
+      description: 'Fired on every change, or debounced if `debounce` is set.',
+      type: '(value: string) => void',
+      default: '-',
+    },
+    debounce: {
+      description: 'Debounce delay in ms for the onChange callback.',
+      type: 'number',
+      default: '0',
+    },
+    shortcut: {
+      description: 'Keyboard shortcut badge text displayed in the right section (e.g., "⌘K").',
+      type: 'string',
+      default: '-',
+    },
+    enableShortcut: {
+      description: 'Register a global keyboard listener that focuses the input when the shortcut is pressed.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onClear: {
+      description: 'Called when the clear button is clicked.',
+      type: '() => void',
+      default: '-',
+    },
+    onSubmit: {
+      description: 'Called when the user presses Enter.',
+      type: '(value: string) => void',
+      default: '-',
+    },
+  }}
+/>

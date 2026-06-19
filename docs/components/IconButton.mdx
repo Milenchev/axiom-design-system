@@ -1,0 +1,136 @@
+---
+title: IconButton
+description: Compact button displaying only an icon, used for actions where space is limited.
+links:
+  figma: true
+  storybook: themed-actionicon--overview
+  mantine: https://mantine.dev/core/action-icon/
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { ActionIcon } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-actionicon--primary', label: 'Default' },
+    { id: 'themed-actionicon--colors', label: 'Colors' },
+    { id: 'themed-actionicon--sizes', label: 'Sizes' },
+    { id: 'themed-actionicon--variants', label: 'Variants' },
+    { id: 'themed-actionicon--disabled', label: 'Disabled' },
+  ]}
+/>
+
+## When To Use
+
+- **Toolbars:** Compact action rows (bold, italic, align, etc.).
+- **Inline actions:** Close buttons, expand/collapse, copy, delete on table rows.
+- **Space-constrained UI:** Where a text label won't fit but the icon is universally recognized.
+
+**Don't use for:** Primary page actions (use Button with text), actions that need explanation (add a label), or navigation links.
+
+## Anatomy
+
+- **Container** — Square button with padding matching the icon size.
+- **Icon** — Single icon centered in the container.
+- **Tooltip** — Always pair with a Tooltip for accessibility.
+
+## Examples
+
+### Basic icon buttons
+
+```tsx
+import { ActionIcon } from '@mantine/core';
+import { IconTrash, IconEdit, IconCopy } from '@tabler/icons-react';
+
+<ActionIcon variant="subtle" aria-label="Delete">
+  <IconTrash size={16} />
+</ActionIcon>
+
+<ActionIcon variant="filled" color="blue" aria-label="Edit">
+  <IconEdit size={16} />
+</ActionIcon>
+
+<ActionIcon variant="outline" aria-label="Copy">
+  <IconCopy size={16} />
+</ActionIcon>
+```
+
+### With tooltip
+
+```tsx
+import { ActionIcon, Tooltip } from '@mantine/core';
+import { IconSettings } from '@tabler/icons-react';
+
+<Tooltip label="Settings">
+  <ActionIcon variant="subtle" aria-label="Settings">
+    <IconSettings size={16} />
+  </ActionIcon>
+</Tooltip>
+```
+
+## Guidelines
+
+### Do's
+- **Always add `aria-label`.** Icon-only buttons are invisible to screen readers without it.
+- **Pair with Tooltip.** Sighted users also need confirmation of what the icon does.
+- **Use `subtle` variant for inline actions.** Less visual weight in dense UIs.
+- **Keep sizes consistent.** Within the same toolbar or row, all icon buttons should match.
+
+### Don'ts
+- **Don't use for primary actions.** If it's the main CTA, it needs a text label.
+- **Don't use obscure icons.** If you can't describe it in one word, add a text label.
+- **Don't cluster too many together.** More than 5 icon buttons in a row becomes a guessing game.
+- **Don't skip the tooltip.** Even "obvious" icons benefit from confirmation on hover.
+
+## Accessibility
+
+- Requires `aria-label` — there is no visible text.
+- Tooltip provides supplemental context on hover/focus.
+- Keyboard: focusable with Tab, activated with Enter or Space.
+- Disabled state uses `aria-disabled` and removes from tab order.
+- Minimum touch target: 44×44px (padding adds to icon size).
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    variant: {
+      description: 'Visual style of the button.',
+      type: "'filled' | 'light' | 'outline' | 'subtle' | 'transparent' | 'default'",
+      default: "'subtle'",
+    },
+    color: {
+      description: 'Theme color.',
+      type: 'string',
+      default: "'gray'",
+    },
+    size: {
+      description: 'Button size (affects padding and icon container).',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'md'",
+    },
+    disabled: {
+      description: 'Disable the button.',
+      type: 'boolean',
+      default: 'false',
+    },
+    loading: {
+      description: 'Show loading spinner replacing the icon.',
+      type: 'boolean',
+      default: 'false',
+    },
+    children: {
+      description: 'Icon element.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

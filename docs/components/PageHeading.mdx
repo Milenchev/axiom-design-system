@@ -1,0 +1,96 @@
+---
+title: PageHeading
+description: A page-level heading with an optional subtitle for consistent page title styling across the application.
+links:
+  figma: true
+  storybook: components-pageheading--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { PageHeading } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-pageheading--primary', label: 'With Subtitle' },
+    { id: 'components-pageheading--title-only', label: 'Title Only' },
+  ]} 
+/>
+
+## When To Use
+
+- **Page titles:** Use at the top of every page to establish a clear heading hierarchy.
+- **Section identification:** Help users understand which page or section they are viewing.
+- **Contextual descriptions:** Provide additional context with an optional subtitle.
+
+## Anatomy
+
+- **Title:** The primary page heading rendered as an `<h1>`. Should be descriptive and unique per page.
+- **Subtitle (Optional):** A secondary line of text below the title for additional context or description.
+
+## Examples
+
+### With Subtitle
+
+```tsx
+import { PageHeading } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <PageHeading
+      title="Dashboard"
+      subtitle="Overview of key metrics and recent activity"
+    />
+  );
+}
+```
+
+### Title Only
+
+```tsx
+import { PageHeading } from 'axiom-ui';
+
+export default function App() {
+  return <PageHeading title="Settings" />;
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use one per page:** Each page should have exactly one `PageHeading` at the top.
+- **Be descriptive:** Titles should clearly identify the page content.
+- **Keep subtitles concise:** Use a single sentence to provide context.
+
+### Don'ts
+- **Don't nest inside other headings:** `PageHeading` renders an `<h1>` — avoid placing it inside heading containers.
+- **Don't use for section headings:** Use standard `Title` or heading elements for sub-sections.
+
+## Accessibility
+
+- Renders as an `<h1>` element, establishing proper heading hierarchy for screen readers.
+- The subtitle is rendered as a `<Text>` element associated with the heading for context.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    title: {
+      description: 'The page title text.',
+      type: 'string',
+      default: '-',
+    },
+    subtitle: {
+      description: 'Optional subtitle or description text displayed below the title.',
+      type: 'string',
+      default: '-',
+    },
+  }}
+/>

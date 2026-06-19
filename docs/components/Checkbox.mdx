@@ -1,0 +1,140 @@
+---
+title: Checkbox
+description: Form control that lets the user toggle between checked, unchecked, and optionally indeterminate states.
+links:
+  figma: true
+  storybook: themed-checkbox--overview
+  mantine: https://mantine.dev/core/checkbox/
+  source: 'checkbox/checkbox.tsx'
+---
+
+## Import
+
+```tsx
+import { Checkbox } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'themed-checkbox--primary', label: 'Default Story' },
+  ]} 
+/>
+
+## When To Use
+
+- **Multiple selections:** When users can pick zero, one, or many options from a list.
+- **Consent / agreements:** "I accept the terms" type confirmations.
+- **Bulk actions:** Select all / select individual rows in a table.
+- **Feature toggles (in forms):** Enable/disable a setting as part of a form submission.
+
+**Don't use for:** Binary on/off settings that take effect immediately (use `Switch`), mutually exclusive choices (use `Radio`), or single actions (use `Button`).
+
+## Anatomy
+
+- **Check box** — The square indicator that shows checked (✓), unchecked (empty), or indeterminate (—).
+- **Label** — Text describing what the checkbox controls. Clicking the label toggles the state.
+- **Description** — Optional helper text below the label.
+- **Error** — Validation message shown when the checkbox is required but unchecked.
+
+## Examples
+
+### Basic checkbox
+
+```tsx
+import { Checkbox } from '@mantine/core';
+
+<Checkbox label="Subscribe to newsletter" />
+```
+
+### Checkbox group
+
+```tsx
+import { Checkbox } from '@mantine/core';
+
+<Checkbox.Group label="Select your interests">
+  <Checkbox value="design" label="Design" />
+  <Checkbox value="development" label="Development" />
+  <Checkbox value="marketing" label="Marketing" />
+</Checkbox.Group>
+```
+
+### Indeterminate state
+
+```tsx
+import { Checkbox } from '@mantine/core';
+
+<Checkbox label="Select all" indeterminate />
+```
+
+## Guidelines
+
+### Do's
+- **Always include a label.** A checkbox without a label is meaningless to screen reader users.
+- **Use positive phrasing.** "Enable notifications" is clearer than "Don't disable notifications."
+- **Group related checkboxes.** Use `Checkbox.Group` with a group label for related options.
+- **Use indeterminate for "select all."** When some but not all children are checked, show the parent as indeterminate.
+
+### Don'ts
+- **Don't use for immediate actions.** Checkboxes represent intent — they need a "Save" or "Submit" button to take effect. For immediate toggles, use `Switch`.
+- **Don't pre-check optional choices.** Dark patterns erode user trust.
+- **Don't use a single checkbox as a radio.** If only one option can be selected, use radio buttons.
+- **Don't stack more than 7 options.** Beyond that, consider a multi-select dropdown.
+
+## Accessibility
+
+- The checkbox is a native `<input type="checkbox">` — full keyboard and screen reader support built-in.
+- `Space` toggles the checkbox state.
+- Label is clickable and associated via `htmlFor` / `id` pairing.
+- Indeterminate state is communicated via `aria-checked="mixed"`.
+- Error messages are linked via `aria-describedby`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Checkbox label displayed next to the indicator.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    checked: {
+      description: 'Controlled checked state.',
+      type: 'boolean',
+      default: '-',
+    },
+    defaultChecked: {
+      description: 'Default checked state (uncontrolled).',
+      type: 'boolean',
+      default: 'false',
+    },
+    indeterminate: {
+      description: 'Shows the indeterminate (mixed) state.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onChange: {
+      description: 'Callback fired when the state changes.',
+      type: '(event: React.ChangeEvent<HTMLInputElement>) => void',
+      default: '-',
+    },
+    disabled: {
+      description: 'Disables the checkbox.',
+      type: 'boolean',
+      default: 'false',
+    },
+    error: {
+      description: 'Error message. Shows error styling when set.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    size: {
+      description: 'Size of the checkbox.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+  }}
+/>

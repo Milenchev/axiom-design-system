@@ -1,0 +1,155 @@
+---
+title: TextInput
+description: Single-line text field for collecting short-form user input such as names, emails, or search queries.
+links:
+  figma: true
+  storybook: themed-textinput--overview
+  mantine: https://mantine.dev/core/textinput/
+  source: 'textInput/textInput.tsx'
+---
+
+## Import
+
+```tsx
+import { TextInput } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'themed-textinput--primary', label: 'Default Story' },
+  ]} 
+/>
+
+## When To Use
+
+- **Short text entry:** Names, emails, phone numbers, URLs — any input that fits on a single line.
+- **Form fields:** As part of a form with a visible label and optional helper text.
+- **Search (simple):** Lightweight search where a dedicated `SearchInput` is overkill.
+- **Inline editing:** Quick edits to a value without opening a separate form.
+
+**Don't use for:** Multi-line content (use `Textarea`), numeric-only input (use `NumberInput`), or date entry (use `DatePicker`).
+
+## Anatomy
+
+- **Label** — Describes what the field expects. Always visible (don't rely on placeholder alone).
+- **Input area** — The interactive field where the user types.
+- **Placeholder** — Hint text shown when empty. Disappears on focus.
+- **Left/Right section** — Optional icons or actions (search icon, clear button).
+- **Description** — Helper text below the field explaining format or constraints.
+- **Error** — Validation message shown below when input is invalid.
+
+## Examples
+
+### Basic with label
+
+```tsx
+import { TextInput } from '@mantine/core';
+
+<TextInput label="Full name" placeholder="Jane Smith" />
+```
+
+### With description and error
+
+```tsx
+import { TextInput } from '@mantine/core';
+
+<TextInput
+  label="Email"
+  placeholder="you@company.com"
+  description="We'll never share your email."
+  error="Please enter a valid email address"
+/>
+```
+
+### With icon
+
+```tsx
+import { TextInput } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
+
+<TextInput
+  leftSection={<IconSearch size={16} />}
+  placeholder="Search users..."
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Always show a label.** Placeholders vanish on focus — users forget what the field is for.
+- **Use description for format hints.** Show expected format (e.g., "MM/DD/YYYY") below the input.
+- **Validate on blur.** Show errors after the user leaves the field, not while typing.
+- **Match input width to expected content.** A zip code field should be narrower than a full name field.
+
+### Don'ts
+- **Don't use placeholder as the only label.** It disappears when users start typing.
+- **Don't validate every keystroke.** It creates a jarring experience for users mid-thought.
+- **Don't disable without explanation.** If a field is disabled, provide a tooltip or text explaining why.
+- **Don't auto-clear on error.** Let users see what they typed and correct it.
+
+## Accessibility
+
+- Always pair with a visible `label`. If a visual label isn't possible, use `aria-label`.
+- Error messages are automatically linked via `aria-describedby`.
+- Supports keyboard navigation — Tab to focus, Escape to blur.
+- Required fields should use the `required` prop (adds `aria-required`).
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `TextInput` component extends all native `<input>` attributes plus Mantine's input props.
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Field label displayed above the input.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    description: {
+      description: 'Helper text shown below the input.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    error: {
+      description: 'Error message. When set, the input shows an error state.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    placeholder: {
+      description: 'Placeholder text displayed when the field is empty.',
+      type: 'string',
+      default: '-',
+    },
+    leftSection: {
+      description: 'Content rendered on the left side of the input (usually an icon).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    rightSection: {
+      description: 'Content rendered on the right side of the input.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    size: {
+      description: 'Controls the height and font size of the input.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+    disabled: {
+      description: 'Disables the input.',
+      type: 'boolean',
+      default: 'false',
+    },
+    required: {
+      description: 'Adds required attribute and shows required indicator.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+

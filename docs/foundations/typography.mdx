@@ -1,0 +1,59 @@
+---
+title: Typography
+description: Typographic scale, fonts, weights, and line heights
+---
+
+Axiom uses **Inter** as its primary typeface — a modern sans-serif designed for screen readability at every size.
+
+## Type scale
+
+| Token | Size | Weight | Use case |
+|-------|------|--------|----------|
+| `--axiom-font-size-xs` | 12px | Regular | Captions, metadata, badges |
+| `--axiom-font-size-sm` | 14px | Regular | Secondary text, table cells |
+| `--axiom-font-size-md` | 16px | Regular | Body text, form labels |
+| `--axiom-font-size-lg` | 18px | Medium | Section headings |
+| `--axiom-font-size-xl` | 20px | Medium | Page headings |
+| `--axiom-font-size-2xl` | 24px | Bold | Hero headings |
+
+## Font weights
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--axiom-font-weight-regular` | 400 | Body text, descriptions |
+| `--axiom-font-weight-medium` | 500 | Labels, emphasis, subheadings |
+| `--axiom-font-weight-bold` | 700 | Headings, strong emphasis |
+
+## Line heights
+
+| Token | Value | Pairing |
+|-------|-------|---------|
+| `--axiom-line-height-tight` | 1.2 | Headings, single-line labels |
+| `--axiom-line-height-normal` | 1.5 | Body text, paragraphs |
+| `--axiom-line-height-relaxed` | 1.75 | Long-form content, help text |
+
+## Using typography in code
+
+```css
+/* In CSS modules */
+.heading {
+  font-size: var(--axiom-font-size-xl);
+  font-weight: var(--axiom-font-weight-medium);
+  line-height: var(--axiom-line-height-tight);
+}
+```
+
+```tsx
+/* With the Text component */
+import { Text } from 'axiom-ui';
+
+<Text size="lg" fw={500}>Section title</Text>
+<Text size="sm" c="dimmed">Supporting description</Text>
+```
+
+## Rules
+
+- Never set font sizes in raw pixels — always use tokens.
+- Body text must be at least 14px for readability.
+- Limit heading levels to 3 (h1, h2, h3) in any single view.
+- Use font weight for hierarchy before increasing font size.

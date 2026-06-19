@@ -1,0 +1,41 @@
+.list {
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  min-width: 0;
+}
+
+.row[data-layout="horizontal"] {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--axiom-spacing-sm);
+  padding: var(--axiom-padding-2xs) 0;
+  border-bottom: 1px solid var(--axiom-border);
+}
+
+.row[data-layout="vertical"] {
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--axiom-padding-2xs) 0;
+}
+
+.label {
+  font-size: var(--axiom-font-size-sm);
+  color: var(--axiom-text-secondary);
+  margin: 0;
+}
+
+.value {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-medium);
+  color: var(--axiom-text);
+  margin: 0;
+  min-width: 0;
+}
+
+.row[data-layout="horizontal"] .value {
+  text-align: right;
+}

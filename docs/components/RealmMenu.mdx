@@ -1,0 +1,114 @@
+---
+title: RealmMenu
+description: A popover menu for selecting a region and environment combination, designed to pair with the Realm trigger button.
+links:
+  figma: true
+  storybook: components-realmmenu--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { RealmMenu, Realm } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-realmmenu--primary', label: 'Default' },
+  ]} 
+/>
+
+## When To Use
+
+- **Environment switching:** Allow users to switch between regions and environments (production, staging, dev).
+- **Multi-tenant navigation:** Provide a structured picker for applications deployed across multiple regions.
+- **Header actions:** Combine with `Realm` as a compact header-bar control for environment management.
+
+## Anatomy
+
+- **Trigger:** Any child element (typically a `Realm` button) that opens the popover on click.
+- **Header:** "Select Realm & Environment" title text inside the dropdown.
+- **Region Groups:** Each region is displayed as a group with a globe icon and the region name.
+- **Environment Items:** Selectable items within each region group, with color-coded dot indicators and environment labels.
+- **Selected State:** The currently selected realm is visually highlighted.
+
+## Examples
+
+### Basic RealmMenu
+
+```tsx
+import { Realm, RealmMenu } from 'axiom-ui';
+import { useState } from 'react';
+
+export default function App() {
+  const [selected, setSelected] = useState({ region: 'AMER', environment: 'production' });
+
+  return (
+    <RealmMenu
+      items={[
+        { region: 'AMER', environments: ['production', 'staging', 'dev'] },
+        { region: 'EMER', environments: ['production', 'staging'] },
+        { region: 'APAC', environments: ['production'] },
+      ]}
+      value={selected}
+      onChange={setSelected}
+    >
+      <Realm region={selected.region} environment={selected.environment} />
+    </RealmMenu>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use with Realm trigger:** Pair with the `Realm` component for a consistent look and feel.
+- **Group by region:** Organize environments under their respective regions for clarity.
+- **Show current selection:** Always pass the `value` prop so the selected realm is visually indicated.
+
+### Don'ts
+- **Don't nest in other popovers:** Avoid placing RealmMenu inside other overlay components.
+- **Don't use for unrelated selections:** This component is purpose-built for region/environment picking.
+
+## Accessibility
+
+- Built on Mantine's `Popover` with full keyboard support.
+- Environment items are interactive buttons with clear selected state.
+- Color-coded dots are supplemented by text labels for each environment.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    items: {
+      description: 'List of realms grouped by region, each with available environments.',
+      type: 'RealmMenuItem[]',
+      default: '-',
+    },
+    value: {
+      description: 'Currently selected realm (region + environment).',
+      type: 'RealmSelection',
+      default: '-',
+    },
+    onChange: {
+      description: 'Called when a realm environment is selected.',
+      type: '(selection: RealmSelection) => void',
+      default: '-',
+    },
+    children: {
+      description: 'Trigger element that opens the menu (e.g., <Realm />).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    maxHeight: {
+      description: 'Max height for the scrollable area.',
+      type: 'number',
+      default: '-',
+    },
+  }}
+/>

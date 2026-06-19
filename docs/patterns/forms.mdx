@@ -1,0 +1,138 @@
+---
+title: Forms
+description: Best practices for designing forms, validation, and errors
+---
+
+Forms are where users hand the app data to do something on their behalf. A good form respects the user's time: it asks the right questions, in the right order, and forgives mistakes gracefully.
+
+## Form structure
+
+Group fields by topic, not by component type. Use **section headings** to break long forms into scannable blocks.
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Group, Stack, TextInput, Textarea, Title } from '@mantine/core';
+
+<form onSubmit={handleSubmit}>
+  <Stack gap="lg" maw={560}>
+    <Stack gap="xs">
+      <Title order={4}>Contact details</Title>
+      <TextInput label="Full name" required />
+      <TextInput label="Email" type="email" required />
+    </Stack>
+
+    <Stack gap="xs">
+      <Title order={4}>Message</Title>
+      <Textarea label="How can we help?" minRows={4} required />
+    </Stack>
+
+    <Group justify="flex-end">
+      <Button variant="default" type="button">Cancel</Button>
+      <Button type="submit">Send message</Button>
+    </Group>
+  </Stack>
+</form>
+```
+
+### Field order
+
+- Order fields by **importance and dependency**, not alphabetically.
+- Put short fields first, long fields (textareas) last.
+- Group address fields together — country usually first so postcode validation knows the format.
+- Put destructive or "advanced" options at the bottom in a collapsed section.
+
+### Single column vs multi column
+
+- **Default to a single column.** Eye-tracking studies consistently show it's faster to complete.
+- Use side-by-side fields only when values are obviously related (city + postcode, first + last name) and short.
+
+## Labels and placeholders
+
+- Always show a **visible label above the field**. Placeholders disappear on focus and break accessibility.
+- Use sentence case ("Full name", not "Full Name").
+- Mark **required fields** with an asterisk and explain it once at the top: *"Fields marked * are required."*
+- Mark **optional fields** explicitly only when the majority of fields are required.
+- Keep help text short and put it **below** the field, never inside the placeholder.
+
+```tsx
+<TextInput
+  label="VAT number"
+  description="Include the country prefix, e.g. GB123456789"
+  placeholder="GB123456789"
+/>
+```
+
+## Input sizing
+
+Match the visual width of the field to the **expected length of the answer**:
+
+- Postcode → narrow
+- Email → medium
+- Multi-line description → full container width
+
+A field that's far wider than its answer signals to the user that they're missing something.
+
+## Validation
+
+Validation should help, not punish. Pick the right moment to surface each kind of feedback.
+
+| When | What to validate | How |
+|---|---|---|
+| On change | Format constraints the user can fix as they type (e.g. password strength) | Inline, neutral colour |
+| On blur | Self-contained fields (email format, postcode) | Inline error below the field |
+| On submit | Server-side rules, cross-field rules | Inline errors + summary banner at the top |
+
+### Error messages
+
+- **State the problem.** "Email is invalid."
+- **Explain how to fix it.** "Use the format name@example.com."
+- **Stay on the user's side.** Avoid blaming or accusing language — never "You entered…", prefer "This email…".
+
+```tsx
+<TextInput
+  label="Email"
+  type="email"
+  error="Enter a valid email, like name@example.com"
+/>
+```
+
+### Success / progressive disclosure
+
+- Don't tick every valid field — green ticks everywhere create visual noise.
+- Reserve confirmation for **long, sensitive, or expensive** fields (password rules, unique usernames).
+
+## Submit, cancel, and progress
+
+- The **primary action** is on the right; cancel or "Back" is on the left or beside it.
+- Disable the submit button only when **at least one field has been touched and is invalid**. Disabling on first paint hides the path forward.
+- For long forms, prefer a [Stepper](../components/Stepper) over a single huge form — save progress between steps.
+- After submit:
+  - Show a [loading state](../patterns/loading-states) on the submit button.
+  - On success, navigate or show a confirmation [Banner](../components/Banner).
+  - On failure, focus the first invalid field and announce the error to screen readers.
+
+## Accessibility
+
+- Every input must have a `<label>` associated by `htmlFor`/`id` (Axiom wrappers do this automatically when you use the `label` prop).
+- Error text must be linked via `aria-describedby` (also automatic).
+- Don't rely on colour alone — use icon + text for errors.
+- Keyboard order should match visual order.
+- `aria-invalid="true"` is set automatically when the `error` prop is non-empty.
+
+See [Accessibility](../guidelines/accessibility) for full guidance.
+
+## Don'ts
+
+- Don't ask for information you won't use.
+- Don't split a field into multiple inputs when one will do (phone number, date of birth).
+- Don't clear the form on validation error — users lose their work.
+- Don't auto-focus a field on page load unless the form is the **only** thing on the page (it disrupts screen readers and scroll position).
+
+## Related
+
+- [TextInput](../components/TextInput)
+- [Textarea](../components/Textarea)
+- [Checkbox](../components/Checkbox)
+- [Dropdown](../components/Dropdown)
+- [Switch](../components/Switch)
+

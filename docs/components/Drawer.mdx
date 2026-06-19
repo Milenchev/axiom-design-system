@@ -1,0 +1,156 @@
+---
+title: Drawer
+description: Sliding panel that opens from the edge of the screen to show secondary content or navigation.
+links:
+  figma: true
+  storybook: themed-drawer--overview
+  mantine: https://mantine.dev/core/drawer/
+  source: 'drawer/drawer.tsx'
+---
+
+## Import
+
+```tsx
+import { Drawer } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-drawer--primary', label: 'Default' },
+    { id: 'themed-drawer--right-position', label: 'Right Position' },
+  ]}
+/>
+
+## When To Use
+
+- **Detail panels:** Show additional details about a selected item without leaving the page.
+- **Navigation (mobile):** Off-canvas navigation menus on small screens.
+- **Forms in context:** Editing a record while keeping the list visible behind the overlay.
+- **Filters and settings:** Side panels for search filters or configuration options.
+
+**Don't use for:** Critical confirmations (use Modal), brief messages (use a Banner or Toast), or persistent sidebars that are always visible (use Sidebar component).
+
+## Anatomy
+
+- **Overlay** — Semi-transparent backdrop that blocks interaction with the page.
+- **Panel** — The sliding container that appears from an edge (left, right, top, or bottom).
+- **Header** — Title and close button. Always include a title for context.
+- **Body** — Scrollable content area.
+- **Footer** — Optional action buttons (Save, Cancel).
+
+## Examples
+
+### Basic drawer
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Drawer } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+
+function Demo() {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      <Button onClick={open}>Open drawer</Button>
+      <Drawer opened={opened} onClose={close} title="User Details">
+        <p>Drawer content goes here.</p>
+      </Drawer>
+    </>
+  );
+}
+```
+
+### Right-side drawer
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Drawer } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+
+function Demo() {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      <Button onClick={open}>Open filters</Button>
+      <Drawer opened={opened} onClose={close} position="right" title="Filters">
+        <p>Filter controls here.</p>
+      </Drawer>
+    </>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Always include a title.** Users need immediate context about the drawer's purpose.
+- **Use from the right for detail panels.** Left drawers are for navigation; right drawers for content.
+- **Keep it focused.** One task per drawer — don't pack too much in.
+- **Allow closing via overlay click and Escape.** Users expect multiple exit paths.
+
+### Don'ts
+- **Don't use for critical confirmations.** Drawers feel dismissible — use a Modal for important decisions.
+- **Don't open drawers from drawers.** Stacked drawers create navigation confusion.
+- **Don't make them full-width.** The partially-visible page behind provides context and orientation.
+- **Don't auto-open on page load.** Drawers should respond to user actions.
+
+## Accessibility
+
+- Focus is trapped inside the drawer while open.
+- `Escape` closes the drawer.
+- Uses `role="dialog"` with `aria-labelledby` linked to the title.
+- Focus returns to the triggering element on close.
+- Background content receives `aria-hidden="true"`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    opened: {
+      description: 'Controls whether the drawer is visible.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onClose: {
+      description: 'Callback fired when the drawer should close.',
+      type: '() => void',
+      default: '-',
+    },
+    title: {
+      description: 'Drawer title in the header.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    position: {
+      description: 'Edge from which the drawer slides in.',
+      type: "'left' | 'right' | 'top' | 'bottom'",
+      default: "'left'",
+    },
+    size: {
+      description: 'Width (or height for top/bottom) of the drawer.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number | string",
+      default: "'md'",
+    },
+    closeOnClickOutside: {
+      description: 'Close when clicking the overlay.',
+      type: 'boolean',
+      default: 'true',
+    },
+    closeOnEscape: {
+      description: 'Close when pressing Escape.',
+      type: 'boolean',
+      default: 'true',
+    },
+    children: {
+      description: 'Drawer body content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

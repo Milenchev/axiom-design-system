@@ -1,0 +1,127 @@
+---
+title: ExpandablePanel
+description: Collapsible content panel that expands and collapses to reveal or hide additional information.
+links:
+  figma: true
+  storybook: components-expandablepanel--overview
+  source: 'ExpandablePanel/ExpandablePanel.tsx'
+---
+
+## Import
+
+```tsx
+import { ExpandablePanel } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-expandablepanel--primary', label: 'Collapsed' },
+    { id: 'components-expandablepanel--primary-expanded', label: 'Expanded' },
+  ]}
+/>
+
+## When To Use
+
+- **Secondary content:** Details that most users don't need immediately but some will want.
+- **Progressive disclosure:** Reduce visual noise by hiding less critical information.
+- **Settings panels:** Collapsible sections for advanced or rarely-used configuration.
+- **Sidebars:** Collapsible panels to give users more workspace.
+
+**Don't use for:** Primary content that all users need, navigation menus (use Sidebar), or accordions with multiple mutually exclusive sections (use Accordion).
+
+## Anatomy
+
+- **Header** — Always-visible trigger area with a title and expand/collapse indicator.
+- **Content** — The collapsible body shown when the panel is expanded.
+- **Toggle icon** — Arrow or chevron indicating the current state (open/closed).
+
+## Examples
+
+### Basic expandable panel
+
+```tsx
+import { ExpandablePanel } from 'axiom-ui';
+
+<ExpandablePanel title="Advanced Settings">
+  <p>Configure advanced options for your workspace.</p>
+</ExpandablePanel>
+```
+
+### Controlled (external state)
+
+```tsx
+import { useState } from 'react';
+import { ExpandablePanel } from 'axiom-ui';
+
+function ControlledPanel() {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <ExpandablePanel
+      title="Details"
+      expanded={expanded}
+      onToggle={() => setExpanded(!expanded)}
+    >
+      <p>Panel content here.</p>
+    </ExpandablePanel>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use descriptive titles.** The header should tell users what they'll find inside.
+- **Default to collapsed for secondary content.** Keep the page scannable.
+- **Animate the transition.** Smooth expand/collapse helps users track state changes.
+- **Preserve state on re-render.** Don't collapse panels unexpectedly.
+
+### Don'ts
+- **Don't hide required content.** Anything users must interact with should always be visible.
+- **Don't nest expandable panels deeply.** One level of nesting max.
+- **Don't use for very small content.** If the content is just one line, display it inline.
+- **Don't auto-collapse when other panels open.** That's an Accordion pattern.
+
+## Accessibility
+
+- Header is a `<button>` with `aria-expanded` indicating state.
+- Content region has `aria-labelledby` pointing to the header.
+- Uses `role="region"` for the collapsible content.
+- Keyboard: Enter/Space on the header toggles the panel.
+- Animation respects `prefers-reduced-motion`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    title: {
+      description: 'Header text shown in the always-visible trigger.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    expanded: {
+      description: 'Controlled expanded state.',
+      type: 'boolean',
+      default: '-',
+    },
+    defaultExpanded: {
+      description: 'Initial expanded state (uncontrolled).',
+      type: 'boolean',
+      default: 'false',
+    },
+    onToggle: {
+      description: 'Callback when the panel is toggled.',
+      type: '() => void',
+      default: '-',
+    },
+    children: {
+      description: 'Collapsible content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

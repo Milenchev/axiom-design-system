@@ -1,0 +1,113 @@
+---
+title: CopyField
+description: A read-only field with a one-click copy button, ideal for IDs, tokens, and connection strings.
+links:
+  storybook: components-copyfield--default
+  source: 'CopyField/CopyField.tsx'
+---
+
+## Import
+
+```tsx
+import { CopyField } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-copyfield--default', label: 'Default' },
+    { id: 'components-copyfield--masked-secret', label: 'Masked secret' },
+    { id: 'components-copyfield--multiple', label: 'Multiple' },
+  ]}
+/>
+
+## When To Use
+
+- **Identifiers:** Let users copy project IDs, resource IDs, or reference codes without selecting text.
+- **Secrets:** Present API keys and webhook secrets behind a reveal toggle, with a copy action.
+- **Connection details:** Surface endpoints and tokens that users paste elsewhere.
+
+**Don't use for:** Editable input (use a `TextInput`), long-form content (use a `Textarea`), or values users never copy (use `Text` or `KeyValueList`).
+
+## Anatomy
+
+- **Field** — A read-only, monospaced input showing the value.
+- **Reveal toggle** — An optional eye button to show or hide a masked value.
+- **Copy button** — Copies the value and confirms with a check icon.
+
+## Examples
+
+### Basic copy field
+
+```tsx
+import { CopyField } from 'axiom-ui';
+
+<CopyField label="Project ID" value="prj_8f2a91c4e7d0" />
+```
+
+### Masked secret
+
+```tsx
+<CopyField
+  label="API key"
+  description="Keep this secret. Rotate it if it leaks."
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Mask sensitive values.** Use `masked` for keys and secrets so they stay hidden by default.
+- **Use a clear label.** Tell users exactly what they are copying.
+- **Confirm the copy.** The built-in check feedback reassures users it worked.
+
+### Don'ts
+- **Don't make it editable.** The value is meant to be copied, not changed.
+- **Don't reveal secrets by default.** Keep `masked` values hidden until the user opts in.
+- **Don't truncate silently.** Let long values scroll within the field rather than cutting them off.
+
+## Accessibility
+
+- The copy and reveal controls are focusable buttons with accessible labels.
+- Copy feedback is conveyed via a tooltip and an icon change.
+- The field is `readOnly`, so its content cannot be edited by keyboard or pointer.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    value: {
+      description: 'The value shown in the field and copied to the clipboard.',
+      type: 'string',
+      default: '-',
+    },
+    label: {
+      description: 'Optional field label.',
+      type: 'string',
+      default: '-',
+    },
+    description: {
+      description: 'Optional helper text below the field.',
+      type: 'string',
+      default: '-',
+    },
+    masked: {
+      description: 'Hide the value behind a reveal toggle (for secrets).',
+      type: 'boolean',
+      default: 'false',
+    },
+    width: {
+      description: 'Field width.',
+      type: 'number | string',
+      default: '320',
+    },
+    onCopy: {
+      description: 'Called after the value is copied.',
+      type: '() => void',
+      default: '-',
+    },
+  }}
+/>

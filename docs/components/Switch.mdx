@@ -1,0 +1,154 @@
+---
+title: Switch
+description: Toggle control for turning a setting or feature on or off, similar to a physical light switch.
+links:
+  figma: true
+  storybook: themed-switch--overview
+  mantine: https://mantine.dev/core/switch/
+  source: 'switch/switch.tsx'
+---
+
+## Import
+
+```tsx
+import { Switch } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-switch--primary', label: 'Default' },
+    { id: 'themed-switch--checked', label: 'Checked' },
+    { id: 'themed-switch--states', label: 'States' },
+  ]}
+/>
+
+## When To Use
+
+- **Instant toggles:** Settings that take effect immediately without a "Save" button (e.g., dark mode, notifications on/off).
+- **Binary preferences:** Anything that has exactly two states — enabled or disabled.
+- **Feature flags:** Turning optional features on or off in a settings panel.
+- **Visibility controls:** Show/hide elements in a UI (e.g., "Show advanced options").
+
+**Don't use for:** Form fields that require submission (use `Checkbox`), choosing between multiple options (use `Radio`), or triggering actions (use `Button`).
+
+## Anatomy
+
+- **Track** — The pill-shaped container that slides between on/off states.
+- **Thumb** — The circular indicator that moves left (off) or right (on).
+- **Label** — Text describing what the switch controls. Clicking it toggles the state.
+- **Description** — Optional helper text providing more context about the setting.
+
+## Examples
+
+### Basic switch
+
+```tsx
+import { Switch } from '@mantine/core';
+
+<Switch label="Enable notifications" />
+```
+
+### With description
+
+```tsx
+import { Switch } from '@mantine/core';
+
+<Switch
+  label="Dark mode"
+  description="Switch between light and dark color themes"
+/>
+```
+
+### Controlled
+
+```tsx
+import { Switch } from '@mantine/core';
+import { useState } from 'react';
+
+function Demo() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Switch
+      label="Auto-save"
+      checked={checked}
+      onChange={(event) => setChecked(event.currentTarget.checked)}
+    />
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use for immediate effect.** A switch should apply changes instantly — no submit button needed.
+- **Label clearly.** Describe the "on" state: "Enable notifications" not "Notification settings."
+- **Show current state visually.** The filled/colored track means "on." Make it obvious.
+- **Place consistently.** Put the switch to the right of its label in settings lists.
+
+### Don'ts
+- **Don't use in forms that require submission.** If there's a "Save" button, use a Checkbox instead.
+- **Don't use for multiple selections.** A group of related on/off choices should be checkboxes.
+- **Don't add confirmation dialogs.** Switches imply instant action — adding a confirmation modal defeats the purpose.
+- **Don't use negative labels.** "Disable emails" is confusing when the switch is "on." Use "Email notifications" instead.
+
+## Accessibility
+
+- Renders as `<input type="checkbox" role="switch">` for proper semantics.
+- Toggled with `Space` key when focused.
+- Label is associated via `htmlFor` — clicking the label toggles the switch.
+- State is communicated via `aria-checked`.
+- Disabled state prevents interaction and is announced to screen readers.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Switch label displayed beside the control.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    description: {
+      description: 'Helper text shown below the label.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    checked: {
+      description: 'Controlled checked state.',
+      type: 'boolean',
+      default: '-',
+    },
+    defaultChecked: {
+      description: 'Default checked state (uncontrolled).',
+      type: 'boolean',
+      default: 'false',
+    },
+    onChange: {
+      description: 'Callback fired when the state changes.',
+      type: '(event: React.ChangeEvent<HTMLInputElement>) => void',
+      default: '-',
+    },
+    disabled: {
+      description: 'Disables the switch.',
+      type: 'boolean',
+      default: 'false',
+    },
+    size: {
+      description: 'Size of the switch.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+    error: {
+      description: 'Error message. Shows error styling when set.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>
+
+

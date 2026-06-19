@@ -1,0 +1,120 @@
+---
+title: FilterBar
+description: FilterBar arranges a row of filter controls with built-in Apply and Clear actions, giving data views a consistent filtering surface.
+links:
+  figma: true
+  storybook: components-filterbar--primary
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { FilterBar } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-filterbar--primary', label: 'Primary' },
+    { id: 'components-filterbar--with-filters', label: 'With Filters' }
+  ]}
+/>
+
+## When To Use
+
+- **Above data tables and grids:** Provide filters for a `Datagrid` or `Table` in a consistent, predictable place.
+- **Refining large result sets:** Let users narrow lists by status, date, owner or other dimensions.
+- **Dashboards:** Scope the data shown across multiple panels at once.
+
+## Anatomy
+
+- **Filters:** The filter controls (selects, inputs, date pickers) passed as `children`.
+- **Apply action:** A primary button shown when `onApply` is provided — commits the current filter selection.
+- **Clear action:** A subtle button shown when `onClear` is provided — resets all filters.
+
+## Examples
+
+### Basic Filter Bar
+Pass filter controls as children and wire up the actions.
+
+```tsx
+import { FilterBar } from 'axiom-ui';
+import { Select } from '@mantine/core';
+
+export default function App() {
+  return (
+    <FilterBar
+      onApply={() => applyFilters()}
+      onClear={() => resetFilters()}
+    >
+      <Select label="Status" data={['Active', 'Paused', 'Archived']} />
+      <Select label="Owner" data={['Me', 'My team', 'Everyone']} />
+    </FilterBar>
+  );
+}
+```
+
+### Filters Only
+Omit the action callbacks to render just the filter row (e.g. when filters apply instantly).
+
+```tsx
+import { FilterBar } from 'axiom-ui';
+import { TextInput, Select } from '@mantine/core';
+
+export default function App() {
+  return (
+    <FilterBar>
+      <TextInput placeholder="Search by name" />
+      <Select placeholder="Category" data={['All', 'A', 'B']} />
+    </FilterBar>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Keep it to one row:** Limit the number of filters so the bar stays scannable on a single line.
+- **Order by importance:** Place the most commonly used filters first (left to right).
+- **Pair with results:** Position the `FilterBar` directly above the data it filters.
+
+### Don'ts
+- **Don't hide critical filters:** Avoid burying frequently used filters behind menus.
+- **Don't mix unrelated actions:** Reserve the action area for Apply/Clear, not for page-level actions like "Export".
+- **Don't overload:** If you need many filters, consider a dedicated filter panel instead.
+
+## Accessibility
+
+- Each filter control should carry its own label so its purpose is clear to
+  screen-reader users.
+- The Apply and Clear buttons are native, keyboard-operable buttons.
+- Ensure the filter bar appears before the results in the DOM so the reading
+  order matches the visual order.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+`FilterBar` also accepts all native `<div>` attributes.
+
+<TypeTable
+  type={{
+    children: {
+      description: 'The filter controls rendered in the filter area.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    onApply: {
+      description: 'Callback fired when the Apply button is clicked. The button is only rendered when this is provided.',
+      type: '() => void',
+      default: '-',
+    },
+    onClear: {
+      description: 'Callback fired when the Clear button is clicked. The button is only rendered when this is provided.',
+      type: '() => void',
+      default: '-',
+    },
+  }}
+/>

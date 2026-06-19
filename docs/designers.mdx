@@ -1,0 +1,46 @@
+---
+title: For Designers
+description: How to use Axiom in Figma
+icon: IconPalette
+---
+
+Axiom provides a complete set of Figma libraries so every design you produce maps 1:1 to production components.
+
+## Getting access
+
+1. Request access to the **Axiom Design System** Figma workspace from your design team lead.
+2. Enable the Axiom libraries in your project (Assets panel → Team library → Toggle on).
+
+## Library structure
+
+| Library | Contains | When to use |
+|---------|----------|-------------|
+| **Foundations** | Color styles, typography styles, spacing tokens, icon set | Every file — these are the building blocks |
+| **Components** | Buttons, inputs, cards, modals, etc. | When composing interfaces |
+| **Patterns** | Pre-built layouts (forms, empty states, data tables) | Starting a new page or flow |
+
+## Working with components
+
+Each Figma component mirrors its coded counterpart:
+
+- **Variants** match the `variant` prop (filled, outline, subtle, etc.)
+- **Properties** match component props (size, disabled, loading, etc.)
+- **Slots** (icon, label, section) match `leftSection` / `rightSection` props
+
+When you design with Axiom Figma components, developers can implement your designs with zero guesswork.
+
+## Design tokens
+
+All colors, spacing, and type styles are defined as Figma variables. Use these instead of custom values:
+
+- **Colors**: Use semantic tokens (`surface/primary`, `text/secondary`, `border/default`)
+- **Spacing**: Use the spacing scale (`spacing/xs`, `spacing/sm`, `spacing/md`, etc.)
+- **Typography**: Use named text styles (`body/md`, `heading/lg`, `label/sm`)
+
+## Contributing a new component
+
+1. Check that the component doesn't already exist in the library.
+2. Design using existing tokens — no hardcoded colors or custom spacing.
+3. Create variants for all supported states (default, hover, active, disabled, focus).
+4. Submit for review via the team's design review process.
+5. Once approved, coordinate with engineering to build the coded version.

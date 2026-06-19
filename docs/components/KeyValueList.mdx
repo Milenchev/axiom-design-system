@@ -1,0 +1,126 @@
+---
+title: KeyValueList
+description: A structured list of label–value pairs for detail panels, summaries, and read-only metadata.
+links:
+  storybook: components-keyvaluelist--horizontal
+  source: 'KeyValueList/KeyValueList.tsx'
+---
+
+## Import
+
+```tsx
+import { KeyValueList } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-keyvaluelist--horizontal', label: 'Horizontal' },
+    { id: 'components-keyvaluelist--vertical', label: 'Vertical' },
+  ]}
+/>
+
+## When To Use
+
+- **Detail panels:** Present read-only attributes of a record (plan, status, dates).
+- **Summaries:** Recap a selection or configuration before a confirming action.
+- **Profile and settings:** Show account metadata in a tidy, scannable format.
+
+**Don't use for:** Editable forms (use `FormSection` with inputs), tabular data with many rows (use a `Table`), or a single value (use `Text`).
+
+## Anatomy
+
+- **List** — A definition list (`dl`) of pairs.
+- **Label** — The field name (`dt`), styled as secondary text.
+- **Value** — The field value (`dd`), emphasised for legibility.
+- **Layout** — `horizontal` aligns label and value on one row; `vertical` stacks them.
+
+## Examples
+
+### Horizontal pairs
+
+```tsx
+import { KeyValueList } from 'axiom-ui';
+
+<KeyValueList
+  items={[
+    { label: 'Plan', value: 'Enterprise' },
+    { label: 'Seats', value: '120' },
+    { label: 'Renews', value: 'Jan 1, 2027' },
+  ]}
+/>
+```
+
+### Vertical, two columns
+
+```tsx
+<KeyValueList
+  layout="vertical"
+  columns={2}
+  items={[
+    { label: 'First name', value: 'Jane' },
+    { label: 'Last name', value: 'Doe' },
+    { label: 'Email', value: 'jane@axiom.dev' },
+    { label: 'Role', value: 'Administrator' },
+  ]}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Keep labels short.** A few words read faster than full sentences.
+- **Use a consistent layout.** Pick `horizontal` or `vertical` per context and stick with it.
+- **Let values carry rich content.** Badges, links, and formatted numbers are welcome as values.
+
+### Don'ts
+- **Don't use it for editing.** This is a read-only presentation pattern.
+- **Don't pack unrelated fields together.** Group related attributes in one list.
+- **Don't overflow horizontally.** Switch to `vertical` when values are long.
+
+## Accessibility
+
+- Pairs use semantic `dl`, `dt`, and `dd` elements for assistive technologies.
+- Labels and values keep a clear visual hierarchy via colour and weight.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    items: {
+      description: 'Label–value pairs to display.',
+      type: 'KeyValueItem[]',
+      default: '-',
+    },
+    layout: {
+      description: 'Arrangement of each pair.',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+    },
+    columns: {
+      description: 'Number of columns in the list.',
+      type: 'number',
+      default: '1',
+    },
+  }}
+/>
+
+### KeyValueItem
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Field label.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    value: {
+      description: 'Field value.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

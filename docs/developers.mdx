@@ -1,0 +1,83 @@
+---
+title: For Developers
+description: How to install and use Axiom in your project
+icon: IconCode
+---
+
+## Installation
+
+```bash
+npm install axiom-ui
+# or
+pnpm add axiom-ui
+# or
+yarn add axiom-ui
+```
+
+Axiom requires **React 19** and ships both ESM and CJS builds.
+
+## Setup
+
+Wrap your application root with `ThemeProvider`. This injects the Axiom theme (colors, spacing, typography tokens) into all child components.
+
+```tsx
+import { ThemeProvider } from 'axiom-ui';
+
+export default function App({ children }) {
+  return (
+    <ThemeProvider>
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+No extra CSS import is needed — `axiom-ui` bundles its own styles.
+
+## Using components
+
+Every Axiom component is a direct import:
+
+```tsx
+import { Button, TextInput, Badge } from 'axiom-ui';
+
+function LoginForm() {
+  return (
+    <form>
+      <TextInput label="Email" placeholder="you@company.com" />
+      <Button type="submit">Sign in</Button>
+    </form>
+  );
+}
+```
+
+## Props & Mantine compatibility
+
+Axiom components extend Mantine props. Anything you can pass to a Mantine component works on its Axiom wrapper:
+
+```tsx
+// All valid — Axiom inherits the full Mantine API
+<Button variant="outline" size="lg" radius="md" />
+<TextInput leftSection={<IconSearch />} />
+<Badge color="axiom-green" variant="light" />
+```
+
+Axiom-specific props (like `Badge`'s `type` and `emphasis`) are documented on each component page.
+
+## TypeScript
+
+Axiom is fully typed. Interfaces are exported alongside components:
+
+```tsx
+import { Button, type ButtonProps } from 'axiom-ui';
+```
+
+## Project structure expectations
+
+Axiom works with any React setup — Vite, Next.js, Remix, CRA, etc. The only requirement is the `ThemeProvider` wrapper.
+
+## Next steps
+
+- Browse [Components](/docs/components) to see what's available
+- Read [Foundations](/docs/foundations) to understand tokens and design principles
+- Check [Patterns](/docs/patterns) for common UI recipes

@@ -1,0 +1,28 @@
+.root {
+  border: none;
+  border-bottom: 1px solid var(--axiom-border);
+  margin: 0;
+  padding: 0 0 var(--axiom-padding-md) 0;
+}
+
+.legend {
+  font-size: var(--axiom-font-size-md);
+  font-weight: var(--axiom-font-weight-semibold);
+  line-height: var(--axiom-line-height-tight);
+  color: var(--axiom-text);
+  padding: 0;
+}
+
+.description {
+  font-size: var(--axiom-font-size-sm);
+  color: var(--axiom-text-secondary);
+  margin: var(--axiom-spacing-3xs) 0 0 0;
+  line-height: var(--axiom-line-height-normal);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--axiom-spacing-sm);
+  margin-top: var(--axiom-spacing-sm);
+}

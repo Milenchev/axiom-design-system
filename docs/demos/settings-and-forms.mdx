@@ -1,0 +1,67 @@
+---
+title: Settings & Forms
+description: A comprehensive, tabbed settings experience showcasing every form control, grouped into clear sections.
+---
+
+A form-heavy settings screen — the kind of page every serious application needs.
+It demonstrates how Axiom's form controls, `FormSection` grouping and `Tabs`
+combine into a clear, scannable experience even when there are dozens of inputs.
+
+<StorybookEmbed id="demos-demo-3-settings-forms--default" height="700px" />
+
+## What's inside
+
+| Section | Component | Role |
+| --- | --- | --- |
+| Page title | `PageHeading` | Title and supporting subtitle |
+| Sections | `Tabs` | Profile, Notifications, Appearance, Security |
+| Grouping | `FormSection` | Title + description for each block of fields |
+| Text input | `TextInput`, `Textarea` | Names, email, bio |
+| Choice | `Select`, `Checkbox`, `Switch` | Role, timezone, preferences |
+| Range | `Slider`, `NumberInput` | Numeric and bounded values |
+| Disclosure | `ExpandablePanel` | Collapsible advanced options |
+| Feedback | `Badge`, `Banner` | Status indicators and inline messages |
+
+## Key patterns
+
+- **Group with `FormSection`.** Every related set of fields gets a title and a
+  one-line description. This breaks long forms into digestible units and gives
+  screen-reader users a clear structure.
+- **Tabs for breadth.** Rather than one endless scroll, settings are split into
+  four tabs. Each tab is independently navigable and keyboard accessible.
+- **Progressive disclosure.** Rarely used options live inside an
+  `ExpandablePanel`, keeping the default view calm while still exposing power.
+
+## Build it
+
+```tsx
+import { PageHeading, FormSection } from 'axiom-ui';
+import { Tabs, TextInput, Select, Switch } from 'axiom-ui';
+
+export default function Settings() {
+  return (
+    <>
+      <PageHeading title="Settings" subtitle="Manage your account" />
+      <Tabs defaultValue="profile">
+        <Tabs.List>
+          <Tabs.Tab value="profile">Profile</Tabs.Tab>
+          <Tabs.Tab value="notifications">Notifications</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="profile">
+          <FormSection title="Profile Information" description="Public details">
+            <TextInput label="First name" />
+            <Select label="Role" data={['Admin', 'Editor', 'Viewer']} />
+          </FormSection>
+        </Tabs.Panel>
+      </Tabs>
+    </>
+  );
+}
+```
+
+## When to reach for this
+
+Any account, workspace or admin settings area. The combination of `Tabs` and
+`FormSection` scales gracefully from a handful of options to a sprawling
+configuration surface without overwhelming the user.

@@ -1,0 +1,125 @@
+---
+title: Card
+description: Container component that groups related content and actions into a visually distinct, elevated surface.
+links:
+  figma: true
+  storybook: components-card--overview
+  mantine: https://mantine.dev/core/card/
+  source: 'Card/Card.tsx'
+---
+
+## Import
+
+```tsx
+import { Card } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-card--primary', label: 'Default' },
+    { id: 'components-card--with-shadow', label: 'With Shadow' },
+    { id: 'components-card--minimal', label: 'Minimal' },
+  ]}
+/>
+
+## When To Use
+
+- **Content grouping:** Wrapping related information (image + title + description + actions) into one unit.
+- **List items:** Representing individual items in a grid or list (products, users, projects).
+- **Dashboard widgets:** Containing metrics, charts, or summaries in a dashboard layout.
+- **Clickable surfaces:** Cards that link to detail pages.
+
+**Don't use for:** Full-page layouts (use layout components), inline content that doesn't need separation, or form containers (use a simple div or form section).
+
+## Anatomy
+
+- **Container** — The elevated surface with border/shadow. Provides padding and visual separation.
+- **Card.Section** — Full-bleed content area (images, maps) that extends to the card edges.
+- **Content area** — Padded area for text, buttons, and other elements.
+
+## Examples
+
+### Basic card
+
+```tsx
+import { Card, Text, Button } from 'axiom-ui';
+
+<Card shadow="sm" padding="lg" radius="md" withBorder>
+  <Text fw={500} size="lg">Card title</Text>
+  <Text size="sm" c="dimmed" mt="sm">
+    Some descriptive content about this item goes here.
+  </Text>
+  <Button fullWidth mt="md">View details</Button>
+</Card>
+```
+
+### With image section
+
+```tsx
+import { Card, Text } from 'axiom-ui';
+
+<Card shadow="sm" padding="lg" radius="md">
+  <Card.Section>
+    <img src="/placeholder.jpg" alt="Cover" style={{ width: '100%' }} />
+  </Card.Section>
+  <Text fw={500} mt="md">Project Alpha</Text>
+  <Text size="sm" c="dimmed">Last updated 2 hours ago</Text>
+</Card>
+```
+
+## Guidelines
+
+### Do's
+- **Use consistent card sizes in grids.** Same height and padding across a row for visual rhythm.
+- **Limit content density.** A card should be scannable in 2–3 seconds.
+- **Use Card.Section for full-bleed content.** Images and dividers should touch the card edges.
+- **Add hover states for clickable cards.** Visual feedback signals interactivity.
+
+### Don'ts
+- **Don't nest cards inside cards.** Layered elevation creates visual confusion.
+- **Don't overload with actions.** 1–2 actions max per card. More belongs on a detail page.
+- **Don't mix bordered and shadow cards in the same view.** Pick one elevation style.
+- **Don't use cards for single-line content.** A simple list item is more appropriate.
+
+## Accessibility
+
+- If the card is clickable, it should be a `<a>` or have `role="link"` with `tabIndex={0}`.
+- Card content should have proper heading hierarchy.
+- Images in Card.Section need `alt` attributes.
+- Interactive elements inside the card must be individually focusable.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    shadow: {
+      description: 'Box shadow level.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: '-',
+    },
+    padding: {
+      description: 'Inner padding.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number",
+      default: "'md'",
+    },
+    radius: {
+      description: 'Border radius.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+    withBorder: {
+      description: 'Add a subtle border.',
+      type: 'boolean',
+      default: 'false',
+    },
+    children: {
+      description: 'Card content (text, Card.Section, buttons, etc.).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

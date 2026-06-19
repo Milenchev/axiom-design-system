@@ -1,0 +1,127 @@
+---
+title: Sidebar
+description: Vertical panel for secondary navigation, filters, or tools that sits beside the main content area.
+links:
+  figma: true
+  storybook: components-sidebar--overview
+  source: 'Sidebar/Sidebar.tsx'
+---
+
+## Import
+
+```tsx
+import { Sidebar } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-sidebar--primary', label: 'Default' },
+    { id: 'components-sidebar--collapsed', label: 'Collapsed' },
+  ]}
+/>
+
+## When To Use
+
+- **Secondary navigation:** Subsection links within a larger section (settings, admin).
+- **Filters panel:** Filtering controls for data views (categories, date ranges, tags).
+- **Tool panels:** IDE-style panels with contextual tools or property editors.
+- **Collapsible layout:** Giving users control over workspace allocation.
+
+**Don't use for:** Primary app navigation (use NavigationBar), overlay panels (use Drawer), or content that changes with every page (put that in the main area).
+
+## Anatomy
+
+- **Container** — Fixed-width vertical panel, typically on the left.
+- **Header** — Optional title or collapse toggle.
+- **Content** — Navigation links, filter controls, or tool panels.
+- **Footer** — Optional bottom section for secondary actions.
+- **Collapse toggle** — Button to minimize the sidebar to icons-only.
+
+## Examples
+
+### Basic sidebar
+
+```tsx
+import { Sidebar } from 'axiom-ui';
+
+<Sidebar>
+  <Sidebar.Header title="Settings" />
+  <Sidebar.Content>
+    <Sidebar.Link href="/settings/general" active>General</Sidebar.Link>
+    <Sidebar.Link href="/settings/security">Security</Sidebar.Link>
+    <Sidebar.Link href="/settings/billing">Billing</Sidebar.Link>
+  </Sidebar.Content>
+</Sidebar>
+```
+
+### Collapsible sidebar
+
+```tsx
+import { useState } from 'react';
+import { Sidebar } from 'axiom-ui';
+
+function CollapsibleSidebar() {
+  const [collapsed, setCollapsed] = useState(false);
+
+  return (
+    <Sidebar collapsed={collapsed} onCollapse={setCollapsed}>
+      <Sidebar.Content>
+        {/* Links show icons only when collapsed */}
+      </Sidebar.Content>
+    </Sidebar>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Keep width consistent.** 240–280px expanded, 48–64px collapsed.
+- **Highlight the active item.** Users need to know where they are.
+- **Allow collapsing.** Gives users more horizontal space when needed.
+- **Group related links.** Use sections or dividers for logical grouping.
+
+### Don'ts
+- **Don't put primary content in the sidebar.** It's for navigation and tools, not the main payload.
+- **Don't auto-collapse on desktop.** Let users control their workspace.
+- **Don't overflow with too many items.** If you have 20+ links, use collapsible groups.
+- **Don't put the sidebar on the right for navigation.** Users expect nav on the left.
+
+## Accessibility
+
+- Uses `<aside>` landmark with `aria-label="Sidebar"`.
+- Active link has `aria-current="page"`.
+- Collapse toggle communicates state via `aria-expanded`.
+- All links are keyboard-navigable in DOM order.
+- When collapsed, icon-only links retain their accessible names.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    collapsed: {
+      description: 'Whether the sidebar is in collapsed (icon-only) state.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onCollapse: {
+      description: 'Callback when collapse state changes.',
+      type: '(collapsed: boolean) => void',
+      default: '-',
+    },
+    width: {
+      description: 'Width of the expanded sidebar.',
+      type: 'number | string',
+      default: '260',
+    },
+    children: {
+      description: 'Sidebar.Header, Sidebar.Content, Sidebar.Footer.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

@@ -1,0 +1,152 @@
+---
+title: Modal
+description: Centered overlay dialog that focuses user attention on a task while blocking interaction with the rest of the page.
+links:
+  figma: true
+  storybook: themed-modal--overview
+  mantine: https://mantine.dev/core/modal/
+  source: 'modal/modal.tsx'
+---
+
+## Import
+
+```tsx
+import { Modal } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'themed-modal--primary', label: 'Default Story' },
+  ]} 
+/>
+
+## When To Use
+
+- **Confirmations:** "Are you sure you want to delete?" — actions that need explicit user consent.
+- **Focused tasks:** Creating or editing a record without leaving the current page.
+- **Critical information:** Errors, warnings, or decisions that must be acknowledged before continuing.
+- **Multi-step flows:** Wizards or forms that operate independently from the background content.
+
+**Don't use for:** Non-blocking notifications (use `Banner`), contextual info (use `Tooltip` or `Popup`), or side-panel content (use `Drawer`).
+
+## Anatomy
+
+- **Overlay** — Semi-transparent backdrop that blocks interaction with the page beneath.
+- **Container** — Centered card that holds the modal content.
+- **Header** — Title and optional close button (×). Always provide a clear title.
+- **Body** — Main content area (forms, text, media).
+- **Footer** — Action buttons (confirm + cancel). Primary action on the right.
+
+## Examples
+
+### Basic modal
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Modal } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+
+function Demo() {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      <Button onClick={open}>Open modal</Button>
+      <Modal opened={opened} onClose={close} title="Confirm action">
+        <p>Are you sure you want to proceed?</p>
+        <Button onClick={close}>Confirm</Button>
+      </Modal>
+    </>
+  );
+}
+```
+
+### With form content
+
+```tsx
+import { Button } from 'axiom-ui';
+import { Modal, TextInput } from '@mantine/core';
+
+<Modal opened={opened} onClose={close} title="Create project">
+  <TextInput label="Project name" placeholder="My project" />
+  <TextInput label="Description" placeholder="What's this for?" />
+  <Button fullWidth mt="md" onClick={close}>Create</Button>
+</Modal>
+```
+
+## Guidelines
+
+### Do's
+- **Always include a title.** Users need immediate context about what they're looking at.
+- **Provide a clear exit.** Close button (×), overlay click, and Escape key should all dismiss.
+- **Keep it focused.** One task per modal — don't cram an entire workflow inside.
+- **Put primary action on the right.** Follow the natural reading direction for CTAs.
+
+### Don'ts
+- **Don't nest modals.** If you need more depth, reconsider the UX — use a page transition instead.
+- **Don't use for simple messages.** Notifications or banners are less disruptive.
+- **Don't auto-open on page load.** Modals that appear without user action feel like interruptions.
+- **Don't make modals too large.** They should be notably smaller than the viewport.
+
+## Accessibility
+
+- Focus is trapped inside the modal while open — Tab cycles through interactive elements.
+- Pressing `Escape` closes the modal (unless explicitly overridden for destructive actions).
+- The modal is announced via `role="dialog"` and `aria-labelledby` (linked to the title).
+- When the modal closes, focus returns to the element that triggered it.
+- Background content receives `aria-hidden="true"` while the modal is open.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `Modal` component extends Mantine's Modal props.
+
+<TypeTable
+  type={{
+    opened: {
+      description: 'Controls whether the modal is visible.',
+      type: 'boolean',
+      default: 'false',
+    },
+    onClose: {
+      description: 'Callback fired when the modal should close (close button, overlay click, Escape).',
+      type: '() => void',
+      default: '-',
+    },
+    title: {
+      description: 'Modal title displayed in the header.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    size: {
+      description: 'Width of the modal container.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number",
+      default: "'md'",
+    },
+    centered: {
+      description: 'Centers the modal vertically in the viewport.',
+      type: 'boolean',
+      default: 'false',
+    },
+    closeOnClickOutside: {
+      description: 'Whether clicking the overlay closes the modal.',
+      type: 'boolean',
+      default: 'true',
+    },
+    closeOnEscape: {
+      description: 'Whether pressing Escape closes the modal.',
+      type: 'boolean',
+      default: 'true',
+    },
+    children: {
+      description: 'Modal body content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>
+
+

@@ -1,0 +1,55 @@
+.trigger {
+  padding: var(--axiom-padding-2xs) var(--axiom-padding-xs);
+  border-radius: var(--mantine-radius-sm);
+  color: var(--axiom-text);
+  transition: background-color 150ms ease;
+}
+
+.trigger:hover {
+  background-color: var(--axiom-state-hover);
+}
+
+.triggerText {
+  min-width: 0;
+}
+
+.triggerName {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-medium);
+  line-height: var(--axiom-line-height-snug);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  color: var(--axiom-text-secondary);
+  flex-shrink: 0;
+}
+
+.header {
+  padding: var(--axiom-padding-xs) var(--axiom-padding-sm);
+}
+
+.headerText {
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-bold);
+  color: var(--axiom-text);
+  line-height: var(--axiom-line-height-snug);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email {
+  font-size: var(--axiom-font-size-xs);
+  color: var(--axiom-text-secondary);
+  line-height: var(--axiom-line-height-snug);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

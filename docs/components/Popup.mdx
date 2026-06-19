@@ -1,0 +1,144 @@
+---
+title: Popup
+description: Floating content panel that appears near a trigger element, used for contextual information or controls.
+links:
+  figma: true
+  storybook: themed-popover--overview
+  mantine: https://mantine.dev/core/popover/
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { Popover } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-popover--primary', label: 'Default' },
+  ]}
+/>
+
+## When To Use
+
+- **Contextual info:** Showing additional details about an element without navigating away.
+- **Mini forms:** Quick inline edits (rename, change status) without opening a full modal.
+- **Rich tooltips:** When a plain tooltip isn't enough and you need interactive content.
+
+**Don't use for:** Complex forms (use Modal or Drawer), navigation menus (use Menu), simple text hints (use Tooltip), or notifications (use Banner).
+
+## Anatomy
+
+- **Target** — The trigger element that opens the popover.
+- **Dropdown** — Floating panel containing the content.
+- **Arrow** — Optional pointer connecting the dropdown to the target.
+
+## Examples
+
+### Basic popover
+
+```tsx
+import { Button, Text } from 'axiom-ui';
+import { Popover } from '@mantine/core';
+
+<Popover width={200} position="bottom" withArrow shadow="md">
+  <Popover.Target>
+    <Button>Show details</Button>
+  </Popover.Target>
+  <Popover.Dropdown>
+    <Text size="sm">Additional information goes here.</Text>
+  </Popover.Dropdown>
+</Popover>
+```
+
+### Controlled popover
+
+```tsx
+import { useState } from 'react';
+import { Button, Text } from 'axiom-ui';
+import { Popover } from '@mantine/core';
+
+function ControlledPopover() {
+  const [opened, setOpened] = useState(false);
+
+  return (
+    <Popover opened={opened} onChange={setOpened}>
+      <Popover.Target>
+        <Button onClick={() => setOpened((o) => !o)}>Toggle</Button>
+      </Popover.Target>
+      <Popover.Dropdown>
+        <Text size="sm">Controlled content</Text>
+      </Popover.Dropdown>
+    </Popover>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Keep content concise.** Popovers should be quick reads or simple interactions.
+- **Position intelligently.** Avoid overlapping the trigger or going off-screen.
+- **Include an arrow.** Helps users connect the popover to its trigger.
+- **Close on outside click.** Standard behavior users expect.
+
+### Don'ts
+- **Don't put complex forms in popovers.** Use a Modal instead.
+- **Don't stack popovers.** One level only — no popover inside a popover.
+- **Don't use for critical actions.** Confirming destructive actions needs a Dialog.
+- **Don't auto-open popovers.** Let users trigger them intentionally.
+
+## Accessibility
+
+- Dropdown has `role="dialog"` with `aria-labelledby` pointing to a heading or trigger.
+- Focus is trapped inside the popover while open.
+- Escape key closes the popover and returns focus to the trigger.
+- Trigger has `aria-expanded` and `aria-haspopup`.
+- Screen readers announce the opening/closing of the popover.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    opened: {
+      description: 'Controlled open state.',
+      type: 'boolean',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback when open state changes.',
+      type: '(opened: boolean) => void',
+      default: '-',
+    },
+    position: {
+      description: 'Preferred position relative to the target.',
+      type: "'top' | 'bottom' | 'left' | 'right'",
+      default: "'bottom'",
+    },
+    width: {
+      description: 'Dropdown width. Use "target" to match trigger width.',
+      type: "number | 'target'",
+      default: '-',
+    },
+    withArrow: {
+      description: 'Show an arrow pointing to the target.',
+      type: 'boolean',
+      default: 'false',
+    },
+    shadow: {
+      description: 'Box shadow elevation.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'md'",
+    },
+    children: {
+      description: 'Popover.Target and Popover.Dropdown.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

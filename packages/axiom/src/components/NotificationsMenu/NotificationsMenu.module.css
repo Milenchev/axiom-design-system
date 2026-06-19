@@ -1,0 +1,106 @@
+.trigger {
+  display: inline-flex;
+}
+
+.dropdown {
+  border-radius: var(--mantine-radius-md);
+}
+
+.header {
+  padding: var(--axiom-padding-sm) var(--axiom-padding-sm)
+    var(--axiom-padding-xs);
+  border-bottom: 1px solid var(--axiom-border);
+}
+
+.title {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-bold);
+  color: var(--axiom-text);
+}
+
+.markAll {
+  font-size: var(--axiom-font-size-xs);
+  font-weight: var(--axiom-font-weight-medium);
+  color: var(--axiom-primary);
+  white-space: nowrap;
+}
+
+.markAll:hover {
+  text-decoration: underline;
+}
+
+.empty {
+  font-size: var(--axiom-font-size-sm);
+  color: var(--axiom-text-secondary);
+  text-align: center;
+  padding: var(--axiom-padding-lg) var(--axiom-padding-sm);
+}
+
+.list {
+  padding: var(--axiom-padding-2xs);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--axiom-spacing-xs);
+  width: 100%;
+  padding: var(--axiom-padding-xs);
+  border-radius: var(--mantine-radius-sm);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.item:hover {
+  background-color: var(--axiom-state-hover);
+}
+
+.item[data-unread] {
+  background-color: var(--axiom-state-selection);
+}
+
+.iconTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--axiom-surface-secondary);
+  color: var(--axiom-primary);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-medium);
+  color: var(--axiom-text);
+  line-height: var(--axiom-line-height-snug);
+}
+
+.description {
+  font-size: var(--axiom-font-size-xs);
+  color: var(--axiom-text-secondary);
+  line-height: var(--axiom-line-height-snug);
+  margin-top: 2px;
+}
+
+.time {
+  font-size: var(--axiom-font-size-xs);
+  color: var(--axiom-text-disabled);
+  margin-top: 4px;
+}
+
+.unreadDot {
+  width: var(--axiom-sizing-3xs);
+  height: var(--axiom-sizing-3xs);
+  border-radius: 50%;
+  background-color: var(--axiom-primary);
+  flex-shrink: 0;
+  margin-top: 6px;
+}

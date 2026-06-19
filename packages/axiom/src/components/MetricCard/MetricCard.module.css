@@ -1,0 +1,132 @@
+.root {
+  min-width: 16.25rem;
+  overflow: hidden;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+}
+
+/* Icon column (full height, left side) */
+.iconColumn {
+  display: flex;
+  align-items: flex-start;
+  padding-top: var(--axiom-spacing-sm);
+  padding-left: var(--axiom-spacing-xs);
+  flex-shrink: 0;
+}
+
+.iconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--axiom-sizing-2xl);
+  height: var(--axiom-sizing-2xl);
+  border-radius: 50%;
+  background-color: var(--axiom-surface-secondary);
+  color: var(--axiom-text);
+}
+
+/* Content (right side) */
+.content {
+  flex: 1;
+  padding: var(--axiom-spacing-sm);
+  padding-left: var(--axiom-spacing-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--axiom-spacing-xs);
+}
+
+/* Header row */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: var(--axiom-font-size-lg);
+  font-weight: var(--axiom-font-weight-regular);
+  color: var(--axiom-text-secondary);
+  line-height: var(--axiom-line-height-normal);
+}
+
+.action {
+  color: var(--axiom-text-secondary);
+}
+
+/* Value */
+.value {
+  display: block;
+  font-size: var(--axiom-font-size-3xl);
+  font-weight: var(--axiom-font-weight-bold);
+  color: var(--axiom-text);
+  line-height: var(--axiom-line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+/* Value row (inline trend variant) */
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--axiom-spacing-sm);
+}
+
+.valueRow .value {
+  margin-top: 0;
+}
+
+/* Trend (text style — below value) */
+.trendText {
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-2xs);
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-medium);
+}
+
+.trendText[data-direction="up"] {
+  color: var(--axiom-feedback-success);
+}
+
+.trendText[data-direction="down"] {
+  color: var(--axiom-feedback-error);
+}
+
+.trendValue {
+  font-weight: var(--axiom-font-weight-semibold);
+}
+
+.trendLabel {
+  color: var(--axiom-text-secondary);
+  font-weight: var(--axiom-font-weight-regular);
+}
+
+/* Trend (badge style — inline with value) */
+.trendBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--axiom-spacing-3xs);
+  padding: var(--axiom-spacing-3xs) var(--axiom-spacing-xs);
+  border-radius: var(--mantine-radius-sm);
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-semibold);
+}
+
+.trendBadge[data-direction="up"] {
+  color: var(--axiom-feedback-success);
+  background-color: var(--axiom-surface-success);
+}
+
+.trendBadge[data-direction="down"] {
+  color: var(--axiom-feedback-error);
+  background-color: var(--axiom-surface-error);
+}
+
+/* Description */
+.description {
+  margin-top: var(--axiom-spacing-xs);
+  font-size: var(--axiom-font-size-sm);
+  color: var(--axiom-text-secondary);
+}

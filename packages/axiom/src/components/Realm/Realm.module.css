@@ -1,0 +1,52 @@
+.root {
+  --realm-dot-size: 8px;
+
+  padding: var(--axiom-padding-2xs) var(--axiom-padding-xs);
+  border: 1px solid var(--axiom-header-input-border);
+  border-radius: var(--mantine-radius-sm);
+  color: var(--axiom-text-on-dark);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.root:hover {
+  background-color: var(--axiom-header-input-bg);
+}
+
+.dot {
+  width: var(--realm-dot-size);
+  height: var(--realm-dot-size);
+  border-radius: 50%;
+  margin-right: var(--axiom-spacing-2xs);
+  flex-shrink: 0;
+}
+
+.dot[data-environment="production"] {
+  background-color: var(--mantine-color-axiom-green-5);
+}
+
+.dot[data-environment="staging"] {
+  background-color: var(--mantine-color-axiom-yellow-5);
+}
+
+.dot[data-environment="dev"] {
+  background-color: var(--axiom-text-disabled);
+}
+
+.region {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-bold);
+  line-height: var(--axiom-line-height-snug);
+  margin-right: var(--axiom-spacing-2xs);
+}
+
+.environment {
+  font-size: var(--axiom-font-size-sm);
+  font-weight: var(--axiom-font-weight-regular);
+  line-height: var(--axiom-line-height-snug);
+}
+
+.chevron {
+  margin-left: var(--axiom-spacing-2xs);
+  opacity: 0.7;
+}

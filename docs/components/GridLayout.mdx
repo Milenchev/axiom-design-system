@@ -1,0 +1,118 @@
+---
+title: GridLayout
+description: Responsive grid system for creating multi-column layouts with configurable spans and breakpoints.
+links:
+  figma: true
+  storybook: components-gridlayout--overview
+  source: 'GridLayout/GridLayout.tsx'
+---
+
+## Import
+
+```tsx
+import { GridLayout } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-gridlayout--primary', label: 'Default' },
+    { id: 'components-gridlayout--complex-layout', label: 'Complex' },
+    { id: 'components-gridlayout--left-and-right-split', label: 'Split' },
+  ]}
+/>
+
+## When To Use
+
+- **Page layouts:** Structuring content areas (sidebar + main content, multi-column forms).
+- **Dashboard grids:** Placing widgets and cards in a responsive grid.
+- **Responsive design:** Layouts that reflow from multi-column to single-column on smaller screens.
+
+**Don't use for:** Single-column content (just use a container), flexbox-style alignment (use Stack/Group), or data tables (use Table or Datagrid).
+
+## Anatomy
+
+- **Grid** — Container defining the column count and gap.
+- **Grid.Col** — Individual cell that spans one or more columns.
+
+## Examples
+
+### Two-column layout
+
+```tsx
+import { GridLayout } from 'axiom-ui';
+
+<GridLayout>
+  <GridLayout.Col span={6}>Left column</GridLayout.Col>
+  <GridLayout.Col span={6}>Right column</GridLayout.Col>
+</GridLayout>
+```
+
+### Responsive columns
+
+```tsx
+import { GridLayout } from 'axiom-ui';
+
+<GridLayout>
+  <GridLayout.Col span={{ base: 12, sm: 6, md: 4 }}>
+    Card 1
+  </GridLayout.Col>
+  <GridLayout.Col span={{ base: 12, sm: 6, md: 4 }}>
+    Card 2
+  </GridLayout.Col>
+  <GridLayout.Col span={{ base: 12, sm: 12, md: 4 }}>
+    Card 3
+  </GridLayout.Col>
+</GridLayout>
+```
+
+## Guidelines
+
+### Do's
+- **Use a 12-column grid.** Standard and flexible for most layouts.
+- **Set responsive spans.** Ensure layouts adapt gracefully to smaller viewports.
+- **Keep gap consistent.** Use design tokens for spacing between cells.
+- **Nest grids sparingly.** One level of nesting is usually sufficient.
+
+### Don'ts
+- **Don't use grid for single elements.** A grid with one child is unnecessary.
+- **Don't exceed 12 total span per row.** Columns that overflow wrap to the next line.
+- **Don't mix grid with manual positioning.** Choose one layout strategy.
+- **Don't hide columns on mobile.** Reflow rather than remove content.
+
+## Accessibility
+
+- Grid layout is purely visual — no ARIA roles needed on the grid itself.
+- Content order in DOM should match reading order.
+- Avoid layouts that change reading order visually vs. DOM order.
+- Ensure sufficient contrast between adjacent grid cells.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    columns: {
+      description: 'Total number of columns in the grid.',
+      type: 'number',
+      default: '12',
+    },
+    gutter: {
+      description: 'Gap between grid cells.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number",
+      default: "'md'",
+    },
+    grow: {
+      description: 'Allow columns to grow to fill remaining space.',
+      type: 'boolean',
+      default: 'false',
+    },
+    children: {
+      description: 'GridLayout.Col elements.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

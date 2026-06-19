@@ -1,0 +1,118 @@
+---
+title: HeaderBar
+description: Application header bar containing branding, navigation controls, and user actions.
+links:
+  figma: true
+  storybook: components-headerbar--overview
+  source: 'HeaderBar/HeaderBar.tsx'
+---
+
+## Import
+
+```tsx
+import { HeaderBar } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-headerbar--primary', label: 'Default' },
+  ]}
+/>
+
+## When To Use
+
+- **Application shell:** Top-level header providing app identity and global controls.
+- **Branding area:** Logo, app name, and environment indicator.
+- **Global actions:** User menu, notifications, settings, and help links.
+
+**Don't use for:** Page-level headings (use PageHeading), section headers, or navigation bars (use NavigationBar).
+
+## Anatomy
+
+- **Logo / Brand** — Application identity (logo and/or name).
+- **Navigation area** — Optional links or tabs for top-level sections.
+- **Actions area** — Right-aligned utilities (search, notifications, user avatar/menu).
+
+## Examples
+
+### Basic header
+
+```tsx
+import { HeaderBar } from 'axiom-ui';
+
+<HeaderBar
+  logo={<img src="/logo.svg" alt="App" />}
+  title="My Application"
+/>
+```
+
+### With actions
+
+```tsx
+import { HeaderBar } from 'axiom-ui';
+import { IconBell, IconUser } from '@tabler/icons-react';
+
+<HeaderBar
+  logo={<img src="/logo.svg" alt="App" />}
+  title="My Application"
+  actions={
+    <>
+      <IconBell size={20} />
+      <IconUser size={20} />
+    </>
+  }
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Keep it slim.** The header should be compact — ~48–56px height max.
+- **Show the app name.** Users need to know which application they're in.
+- **Right-align utility actions.** Follow the standard pattern users expect.
+- **Make it sticky.** The header should remain visible on scroll.
+
+### Don'ts
+- **Don't overload with actions.** 3–4 icons max in the actions area.
+- **Don't use for page-level content.** The header is app-level, not page-level.
+- **Don't hide the header on scroll.** Users need persistent access to global controls.
+- **Don't duplicate navigation.** If you have a sidebar, don't repeat the same links in the header.
+
+## Accessibility
+
+- Uses `<header>` landmark element.
+- Logo link returns focus to the start of the page.
+- Actions are keyboard-navigable in a logical order.
+- User menu is accessible via `aria-haspopup` and `aria-expanded`.
+- Skip navigation link placed before the header for screen reader users.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    logo: {
+      description: 'Logo element (image or icon).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    title: {
+      description: 'Application name displayed beside the logo.',
+      type: 'string',
+      default: '-',
+    },
+    actions: {
+      description: 'Right-aligned action elements.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    children: {
+      description: 'Optional center content (navigation, search).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

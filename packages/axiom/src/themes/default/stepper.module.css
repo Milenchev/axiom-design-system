@@ -1,0 +1,62 @@
+.step:where([data-progress]) {
+  --step-color: var(--axiom-primary);
+}
+
+.step:where([data-completed]) {
+  --step-color: var(--axiom-feedback-success);
+}
+
+.stepIcon {
+  border-color: var(--axiom-border);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.step:where([data-progress]) .stepIcon,
+.step:where([data-completed]) .stepIcon {
+  border-color: var(--step-color);
+  background-color: var(--step-color);
+  color: var(--axiom-text-on-dark);
+}
+
+.separator {
+  background-color: var(--axiom-border);
+  transition: background-color 200ms ease;
+}
+
+.separator:where([data-active]) {
+  background-color: var(--axiom-feedback-success);
+}
+
+/* Match separator color to the preceding step's `color` prop. */
+.step[style*="--mantine-color-red"] + .separator:where([data-active]) {
+  background-color: var(--mantine-color-red-filled);
+}
+
+.step[style*="--mantine-color-yellow"] + .separator:where([data-active]) {
+  background-color: var(--mantine-color-yellow-filled);
+}
+
+.step[style*="--mantine-color-orange"] + .separator:where([data-active]) {
+  background-color: var(--mantine-color-orange-filled);
+}
+
+.step[style*="--mantine-color-blue"] + .separator:where([data-active]) {
+  background-color: var(--mantine-color-blue-filled);
+}
+
+/* Vertical orientation uses border-color and a separate class. */
+.verticalSeparator {
+  border-color: var(--axiom-border);
+  transition: border-color 200ms ease;
+}
+
+.step:where([data-completed]) .verticalSeparator:where([data-active]),
+.step:where([data-progress]) .verticalSeparator:where([data-active]) {
+  border-color: var(--step-color, var(--axiom-feedback-success));
+}
+
+.stepLoader {
+  --loader-color: var(--axiom-text-on-dark);
+}

@@ -1,0 +1,140 @@
+---
+title: Table
+description: Structured layout for displaying tabular data in rows and columns with optional sorting and selection.
+links:
+  figma: true
+  storybook: themed-table--overview
+  mantine: https://mantine.dev/core/table/
+  source: 'table/table.tsx'
+---
+
+## Import
+
+```tsx
+import { Table } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-table--primary', label: 'Default' },
+    { id: 'themed-table--minimal', label: 'Minimal' },
+  ]}
+/>
+
+## When To Use
+
+- **Structured data display:** When data has consistent columns (name, date, status, actions).
+- **Comparison:** Side-by-side comparison of items with the same attributes.
+- **Simple lists:** Small to medium datasets that don't need pagination or virtualization.
+
+**Don't use for:** Large datasets with sorting/filtering/pagination (use `Datagrid`), card-based layouts, or key-value pairs (use a description list).
+
+## Anatomy
+
+- **Table** — Root container with optional border and striping.
+- **Thead / Tr / Th** — Header row defining column names.
+- **Tbody / Tr / Td** — Body rows containing data cells.
+- **Tfoot** — Optional footer row for totals or summaries.
+
+## Examples
+
+### Basic table
+
+```tsx
+import { Table } from '@mantine/core';
+
+<Table>
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th>Name</Table.Th>
+      <Table.Th>Role</Table.Th>
+      <Table.Th>Status</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>Jane Cooper</Table.Td>
+      <Table.Td>Developer</Table.Td>
+      <Table.Td>Active</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>John Smith</Table.Td>
+      <Table.Td>Designer</Table.Td>
+      <Table.Td>Away</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+```
+
+### With striped rows
+
+```tsx
+import { Table } from '@mantine/core';
+
+<Table striped highlightOnHover>
+  {/* ...table content */}
+</Table>
+```
+
+## Guidelines
+
+### Do's
+- **Align numbers to the right.** Makes comparison easier (decimal points line up).
+- **Use striping for dense tables.** Alternating row colors help track across wide tables.
+- **Keep columns to 5–7 max.** More than that requires horizontal scrolling.
+- **Sort by the most useful column by default.** Usually alphabetical or most recent first.
+
+### Don'ts
+- **Don't wrap text in cells.** Keep content concise. Truncate with tooltips if needed.
+- **Don't hide important data in scroll.** Key columns (name, status) should be visible without scrolling.
+- **Don't use tables for layout.** Tables are for data, not for positioning elements on a page.
+- **Don't mix action density.** Either all rows have actions or none — inconsistency confuses users.
+
+## Accessibility
+
+- Uses semantic `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>` elements.
+- Column headers use `scope="col"` for screen reader context.
+- Row headers (if any) use `scope="row"`.
+- Sortable columns indicate current sort direction via `aria-sort`.
+- Interactive rows are focusable and activated with Enter.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    striped: {
+      description: 'Add alternating row background colors.',
+      type: 'boolean',
+      default: 'false',
+    },
+    highlightOnHover: {
+      description: 'Highlight rows on mouse hover.',
+      type: 'boolean',
+      default: 'false',
+    },
+    withTableBorder: {
+      description: 'Add a border around the entire table.',
+      type: 'boolean',
+      default: 'false',
+    },
+    withColumnBorders: {
+      description: 'Add borders between columns.',
+      type: 'boolean',
+      default: 'false',
+    },
+    withRowBorders: {
+      description: 'Add borders between rows.',
+      type: 'boolean',
+      default: 'true',
+    },
+    children: {
+      description: 'Table.Thead, Table.Tbody, Table.Tfoot elements.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

@@ -1,0 +1,18 @@
+.root {
+  padding: var(--mantine-spacing-md) 0;
+}
+
+.title {
+  font-size: var(--axiom-font-size-2xl);
+  font-weight: var(--axiom-font-weight-bold);
+  color: var(--axiom-text);
+  line-height: var(--axiom-line-height-tight);
+}
+
+.subtitle {
+  margin-top: var(--axiom-spacing-2xs);
+  font-size: var(--axiom-font-size-md);
+  font-weight: var(--axiom-font-weight-regular);
+  color: var(--axiom-text-secondary);
+  line-height: var(--axiom-line-height-normal);
+}

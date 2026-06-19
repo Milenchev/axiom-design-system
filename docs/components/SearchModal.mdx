@@ -1,0 +1,170 @@
+---
+title: SearchModal
+description: SearchModal is a command-palette style overlay for global search, surfacing recent items, live results and recommended apps with keyboard shortcuts.
+links:
+  figma: true
+  storybook: components-searchmodal--primary
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { SearchModal } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed id="components-searchmodal--primary" height="520px" />
+
+## When To Use
+
+- **Global search:** Provide a single, fast entry point to search across the whole product.
+- **Command palette:** Let power users jump to items, pages or apps via the keyboard.
+- **Quick navigation:** Surface recent items and recommended apps for one-click access.
+
+## Anatomy
+
+- **Search input:** An always-focused `SearchInput` at the top of the overlay.
+- **Recent:** Recently visited items, shown when the query is empty.
+- **Results:** Live results, shown when the user is typing and matches exist.
+- **Recommended apps:** A grid of suggested apps for quick navigation.
+- **Footer:** Keyboard shortcut hints (Search, Ask AI, Help).
+
+## Examples
+
+### Controlled Search Modal
+`SearchModal` is fully controlled — you own the open state, the query and the data.
+
+```tsx
+import { SearchModal } from 'axiom-ui';
+import { useState } from 'react';
+
+export default function App() {
+  const [opened, setOpened] = useState(false);
+  const [query, setQuery] = useState('');
+
+  return (
+    <SearchModal
+      opened={opened}
+      onClose={() => setOpened(false)}
+      query={query}
+      onQueryChange={setQuery}
+      recentItems={[
+        { id: '1', label: 'Dashboard' },
+        { id: '2', label: 'Campaigns' },
+      ]}
+      results={query ? searchResults(query) : []}
+      onSelectItem={(item) => navigateTo(item)}
+    />
+  );
+}
+```
+
+### Open With A Keyboard Shortcut
+Wire a global shortcut to toggle the modal for a true command-palette feel.
+
+```tsx
+import { SearchModal } from 'axiom-ui';
+import { useEffect, useState } from 'react';
+
+export default function App() {
+  const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setOpened((o) => !o);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  return (
+    <SearchModal
+      opened={opened}
+      onClose={() => setOpened(false)}
+    />
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Show recents when empty:** Give users something useful before they type.
+- **Keep results fast:** Debounce queries and return results quickly to preserve the command-palette feel.
+- **Expose a shortcut:** Bind `⌘K` / `Ctrl+K` so users can summon search from anywhere.
+
+### Don'ts
+- **Don't block typing:** Never disable the input while results load — show a loading state instead.
+- **Don't overfill:** Limit the number of items per section so the overlay stays scannable.
+- **Don't trap focus permanently:** Always allow `Esc` and the close action to dismiss the modal.
+
+## Accessibility
+
+- The modal autofocuses the search input on open so keyboard users can type immediately.
+- `Esc` and the overlay's close behaviour dismiss the modal.
+- Each result and app is a native, keyboard-operable button.
+- Keyboard shortcut hints are shown in the footer using `<kbd>` elements.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    opened: {
+      description: 'Whether the modal is open.',
+      type: 'boolean',
+      default: '-',
+    },
+    onClose: {
+      description: 'Called when the modal requests to close (Esc, overlay click).',
+      type: '() => void',
+      default: '-',
+    },
+    query: {
+      description: 'The current search query (controlled).',
+      type: 'string',
+      default: "''",
+    },
+    onQueryChange: {
+      description: 'Called when the query changes.',
+      type: '(query: string) => void',
+      default: '-',
+    },
+    recentItems: {
+      description: 'Recently visited items, shown when the query is empty.',
+      type: 'SearchModalItem[]',
+      default: '[]',
+    },
+    results: {
+      description: 'Live search results, shown while the user is typing.',
+      type: 'SearchModalItem[]',
+      default: '[]',
+    },
+    recommendedApps: {
+      description: 'Suggested apps rendered in a grid below the results.',
+      type: 'SearchModalApp[]',
+      default: '[]',
+    },
+    onSelectItem: {
+      description: 'Called when a recent item or result is selected.',
+      type: '(item: SearchModalItem) => void',
+      default: '-',
+    },
+    onSelectApp: {
+      description: 'Called when a recommended app is selected.',
+      type: '(app: SearchModalApp) => void',
+      default: '-',
+    },
+    placeholder: {
+      description: 'Placeholder text for the search input.',
+      type: 'string',
+      default: "'Search...'",
+    },
+  }}
+/>

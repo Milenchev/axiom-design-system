@@ -1,0 +1,97 @@
+---
+title: ThemeProvider
+description: Context provider that applies the Axiom design system theme to all descendant components.
+links:
+  storybook: components-themeprovider--overview
+  source: 'ThemeProvider/ThemeProvider.tsx'
+---
+
+## Import
+
+```tsx
+import { ThemeProvider } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-themeprovider--primary', label: 'Default' },
+  ]}
+/>
+
+## When To Use
+
+- **App root:** Wrap your entire application to apply Axiom theming globally.
+- **Micro-frontends:** Apply Axiom theme to a subtree within a larger application.
+- **Theme switching:** Toggle between light and dark mode.
+
+**Don't use for:** Styling individual components (use props), overriding one-off styles (use CSS modules), or non-Axiom contexts.
+
+## Anatomy
+
+- **MantineProvider** — Underlying Mantine context with the Axiom theme.
+- **CSS Variables** — Injects Axiom design tokens as CSS custom properties.
+- **Color scheme** — Manages light/dark mode preference.
+
+## Examples
+
+### App root setup
+
+```tsx
+import { ThemeProvider } from 'axiom-ui';
+
+function App() {
+  return (
+    <ThemeProvider>
+      {/* All Axiom components inherit the theme */}
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+### With color scheme
+
+```tsx
+import { ThemeProvider } from 'axiom-ui';
+
+<ThemeProvider defaultColorScheme="dark">
+  <YourApp />
+</ThemeProvider>
+```
+
+## Guidelines
+
+### Do's
+- **Place at the top of your component tree.** All Axiom components must be descendants.
+- **Use one ThemeProvider per app.** Nesting is only for special cases (e.g., embedded widgets).
+
+### Don'ts
+- **Don't nest ThemeProviders unnecessarily.** It resets context and can cause flicker.
+- **Don't mix with raw MantineProvider.** Use Axiom's ThemeProvider which extends it.
+
+## Accessibility
+
+- Respects system `prefers-color-scheme` by default.
+- Color scheme transitions are smooth (no flash of unstyled content).
+- All color tokens meet WCAG AA contrast requirements in both light and dark modes.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    defaultColorScheme: {
+      description: 'Initial color scheme.',
+      type: "'light' | 'dark' | 'auto'",
+      default: "'auto'",
+    },
+    children: {
+      description: 'Application content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

@@ -1,0 +1,129 @@
+---
+title: FormSection
+description: FormSection groups related form fields under a clear title and optional description, giving long forms a scannable, accessible structure.
+links:
+  figma: true
+  storybook: components-formsection--primary
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { FormSection } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-formsection--primary', label: 'Primary' },
+    { id: 'components-formsection--with-form-fields', label: 'With Form Fields' }
+  ]}
+/>
+
+## When To Use
+
+- **Grouping related fields:** Bundle inputs that belong together (e.g. "Profile Information", "Billing Address") under one heading.
+- **Long or multi-part forms:** Break a single long form into digestible, titled sections.
+- **Settings pages:** Organize preferences into clearly labelled blocks.
+
+## Anatomy
+
+- **Title:** Rendered as a `<legend>` inside a semantic `<fieldset>`. Should be a short noun phrase describing the group.
+- **Description (Optional):** A one-line explanation shown below the title to clarify the section's purpose.
+- **Content:** The fields themselves, passed as `children`. Use a layout primitive (e.g. `Stack`) to space them.
+
+## Examples
+
+### Basic Section
+A title and description wrapping a set of fields.
+
+```tsx
+import { FormSection } from 'axiom-ui';
+import { Stack, TextInput } from '@mantine/core';
+
+export default function App() {
+  return (
+    <FormSection
+      title="Profile Information"
+      description="Update your personal details and public profile."
+    >
+      <Stack gap="md">
+        <TextInput label="First name" />
+        <TextInput label="Last name" />
+        <TextInput label="Email" />
+      </Stack>
+    </FormSection>
+  );
+}
+```
+
+### Multiple Sections
+Stack several sections to structure a full settings form.
+
+```tsx
+import { FormSection } from 'axiom-ui';
+import { Stack, Switch, TextInput } from '@mantine/core';
+
+export default function App() {
+  return (
+    <Stack gap="xl">
+      <FormSection title="Account" description="Basic account details.">
+        <TextInput label="Username" />
+      </FormSection>
+
+      <FormSection title="Notifications" description="Choose what you receive.">
+        <Switch label="Email notifications" defaultChecked />
+        <Switch label="Push notifications" />
+      </FormSection>
+    </Stack>
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Concise titles:** Use short noun phrases like "Billing Address", not full sentences.
+- **One concern per section:** Keep each section focused on a single, related set of fields.
+- **Add descriptions for clarity:** Use the description when the section's purpose is not obvious from the title alone.
+
+### Don'ts
+- **Don't over-fragment:** Avoid wrapping a single field in its own section.
+- **Don't nest sections:** A `FormSection` should not contain another `FormSection`.
+- **No punctuation in titles:** Titles are labels, not sentences — skip trailing periods.
+
+## Accessibility
+
+`FormSection` renders a native `<fieldset>` with a `<legend>`, which is the
+semantically correct way to group related form controls:
+
+- Screen readers announce the legend when entering the group, giving users
+  context for the fields inside.
+- The grouping is conveyed without relying on visual styling alone.
+- Keep the legend text meaningful, since it is the accessible name for the group.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    title: {
+      description: 'The section heading, rendered as the fieldset legend.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    description: {
+      description: 'Optional supporting text shown below the title.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    children: {
+      description: 'The form fields contained within the section.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

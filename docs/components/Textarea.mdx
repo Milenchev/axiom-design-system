@@ -1,0 +1,164 @@
+---
+title: Textarea
+description: Multi-line text field for collecting longer-form user input such as comments or descriptions.
+links:
+  figma: true
+  storybook: themed-textarea--overview
+  mantine: https://mantine.dev/core/textarea/
+  source: 'textarea/textarea.tsx'
+---
+
+## Import
+
+```tsx
+import { Textarea } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-textarea--primary', label: 'Default' },
+    { id: 'themed-textarea--states', label: 'States' },
+    { id: 'themed-textarea--with-error', label: 'With Error' },
+  ]}
+/>
+
+## When To Use
+
+- **Comments and notes:** Multi-line input for feedback, descriptions, or freeform text.
+- **Message composition:** Email bodies, chat messages, support tickets.
+- **Code or data entry:** Pasting JSON, SQL, or other multi-line content (consider a code editor for syntax highlighting).
+- **Bio or description fields:** Profile descriptions, project summaries.
+
+**Don't use for:** Single-line inputs like names or emails (use `TextInput`), rich text with formatting (use a rich text editor), or structured data (use specific form controls).
+
+## Anatomy
+
+- **Label** — Describes the expected content. Always visible.
+- **Input area** — Multi-line text field. Resizable by default.
+- **Placeholder** — Hint text shown when the field is empty.
+- **Description** — Helper text below explaining expectations or limits.
+- **Error** — Validation message shown when content is invalid.
+- **Character count** — Optional indicator of remaining characters.
+
+## Examples
+
+### Basic textarea
+
+```tsx
+import { Textarea } from '@mantine/core';
+
+<Textarea label="Description" placeholder="Tell us about your project..." />
+```
+
+### With character limit guidance
+
+```tsx
+import { Textarea } from '@mantine/core';
+
+<Textarea
+  label="Feedback"
+  placeholder="What could we improve?"
+  description="Maximum 500 characters"
+  minRows={3}
+  maxRows={6}
+/>
+```
+
+### Auto-sizing
+
+```tsx
+import { Textarea } from '@mantine/core';
+
+<Textarea
+  label="Notes"
+  placeholder="Start typing..."
+  autosize
+  minRows={2}
+  maxRows={8}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Set appropriate min/max rows.** Show enough rows to hint at expected length — 3 rows for a comment, 6+ for a message body.
+- **Use `autosize` for variable content.** Grows with the content so users don't manually resize.
+- **Provide placeholder examples.** Show the expected tone or format (e.g., "Describe the issue in detail...").
+- **Show character limits when relevant.** If there's a backend limit, surface it proactively.
+
+### Don'ts
+- **Don't use for single-line input.** If users typically enter one line, use `TextInput`.
+- **Don't disable resize without good reason.** Users expect to adjust height for comfort.
+- **Don't set a tiny height for long-form content.** A 1-row textarea for a "description" field signals the wrong expected length.
+- **Don't validate while typing.** Wait until blur to show errors.
+
+## Accessibility
+
+- Renders as native `<textarea>` — full keyboard support built-in.
+- Label is associated via `htmlFor` / `id`.
+- Error and description linked via `aria-describedby`.
+- `required` prop adds `aria-required`.
+- Resizable via drag handle (browser native) or `autosize` prop.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Field label displayed above the textarea.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    description: {
+      description: 'Helper text shown below the textarea.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    error: {
+      description: 'Error message. Shows error styling when set.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    placeholder: {
+      description: 'Placeholder text when the field is empty.',
+      type: 'string',
+      default: '-',
+    },
+    autosize: {
+      description: 'Textarea height grows automatically with content.',
+      type: 'boolean',
+      default: 'false',
+    },
+    minRows: {
+      description: 'Minimum number of visible rows.',
+      type: 'number',
+      default: '-',
+    },
+    maxRows: {
+      description: 'Maximum number of visible rows (with autosize).',
+      type: 'number',
+      default: '-',
+    },
+    size: {
+      description: 'Controls font size and padding.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'sm'",
+    },
+    disabled: {
+      description: 'Disables the textarea.',
+      type: 'boolean',
+      default: 'false',
+    },
+    required: {
+      description: 'Adds required attribute and indicator.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+

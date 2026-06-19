@@ -1,0 +1,189 @@
+.root {
+  --header-logo-width: 110px;
+
+  width: 100%;
+  background-color: var(--axiom-categorical-1);
+  color: var(--axiom-text-on-dark);
+  overflow: visible;
+}
+
+.inner {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-md);
+  padding: 0 var(--axiom-padding-sm);
+}
+
+.left {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+.right {
+  flex: 0 0 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.appSwitcherButton {
+  width: var(--axiom-sizing-md);
+  height: var(--axiom-sizing-md);
+}
+
+.logoText {
+  font-size: var(--axiom-font-size-lg);
+  line-height: var(--axiom-line-height-tight);
+}
+
+.logoSeparator {
+  padding: 0 var(--axiom-padding-2xs);
+}
+
+.applicationInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding-left: var(--axiom-padding-2xs);
+}
+
+.logoName {
+  color: var(--axiom-text-on-dark);
+  font-weight: var(--axiom-font-weight-medium);
+  line-height: var(--axiom-line-height-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logoSubtitle {
+  color: var(--axiom-text-disabled);
+  line-height: var(--axiom-line-height-tight);
+}
+
+.appTab {
+  display: flex;
+  align-items: center;
+  gap: var(--axiom-spacing-2xs);
+  padding: var(--axiom-padding-2xs) var(--axiom-padding-sm);
+  border-radius: var(--mantine-radius-sm) var(--mantine-radius-sm) 0 0;
+  color: var(--axiom-text-on-dark);
+  background-color: var(--axiom-state-highlight);
+  white-space: nowrap;
+  align-self: flex-end;
+  height: calc(100% - var(--axiom-spacing-xs));
+  transition: background-color 150ms ease;
+  outline: none;
+  min-width: 0;
+  flex: 1 1 auto;
+  max-width: 200px;
+}
+
+.appTab:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-top: 2px solid var(--mantine-color-axiom-blue-5);
+  border-left: 2px solid var(--mantine-color-axiom-blue-5);
+  border-right: 2px solid var(--mantine-color-axiom-blue-5);
+}
+
+.appTab:hover {
+  background-color: var(--axiom-state-overlay);
+}
+
+.appTab[data-active] {
+  background-color: var(--axiom-surface-primary);
+  color: var(--axiom-text);
+}
+
+.appTabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--axiom-sizing-md);
+  height: var(--axiom-sizing-md);
+  border-radius: var(--axiom-radius-2xs);
+  overflow: hidden;
+  transition: opacity 150ms ease;
+  flex-shrink: 0;
+}
+
+.appTab:not([data-active]) .appTabIcon {
+  opacity: 0.3;
+}
+
+.appTabLabel {
+  color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.appTabClose {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.aiIcon {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--axiom-padding-xs);
+  cursor: pointer;
+}
+
+.appTabClose:hover {
+  opacity: 1;
+}
+
+.userMenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: var(--axiom-sizing-xl);
+  width: var(--axiom-sizing-xl);
+}
+
+.userAvatar {
+  --avatar-bg: var(--mantine-color-axiom-blue-6);
+  --avatar-color: var(--axiom-text-on-dark);
+  --avatar-radius: var(--axiom-radius-2xs);
+
+  font-size: var(--axiom-font-size-xs);
+  font-weight: var(--axiom-font-weight-semibold);
+}
+
+.search {
+  width: var(--axiom-header-search-width);
+  margin-right: var(--axiom-spacing-md);
+}
+
+.search :global(.mantine-TextInput-wrapper) input {
+  height: var(--axiom-sizing-md);
+  min-height: var(--axiom-sizing-md);
+  border-color: var(--axiom-header-input-border);
+}
+
+.search :global(.mantine-TextInput-wrapper) input:focus {
+  border: 1px solid var(--axiom-header-input-border-focus);
+}
+
+.search :global(.mantine-TextInput-wrapper) input::placeholder {
+  color: var(--axiom-header-input-placeholder);
+}
+
+.search :global(.mantine-TextInput-section) span {
+  background-color: transparent;
+  border-color: var(--axiom-header-input-border);
+  color: var(--axiom-header-input-placeholder);
+}
+
+.headerRealm {
+  margin-right: var(--axiom-spacing-xs);
+}

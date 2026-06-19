@@ -1,0 +1,63 @@
+---
+title: Spacing
+description: Spacing system, layout, and grid
+---
+
+Axiom uses a **base-4 spacing scale**. Every margin, padding, and gap value is a multiple of 4px — creating consistent rhythm across all interfaces.
+
+## Spacing scale
+
+| Token | Value | Common usage |
+|-------|-------|--------------|
+| `--axiom-spacing-3xs` | 2px | Inline icon nudges |
+| `--axiom-spacing-2xs` | 4px | Tight inline gaps, badge padding |
+| `--axiom-spacing-xs` | 8px | Between related items (icon + label) |
+| `--axiom-spacing-sm` | 12px | Compact component padding |
+| `--axiom-spacing-md` | 16px | Standard component padding, form field gaps |
+| `--axiom-spacing-lg` | 24px | Between content groups |
+| `--axiom-spacing-xl` | 32px | Section separation |
+| `--axiom-spacing-2xl` | 48px | Major page regions |
+| `--axiom-spacing-3xl` | 64px | Page-level vertical spacing |
+
+## Using spacing in code
+
+```css
+/* In CSS modules — always use tokens */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--axiom-spacing-md);
+}
+
+.card {
+  padding: var(--axiom-padding-md);
+}
+```
+
+```tsx
+/* With Mantine's spacing prop */
+import { Stack, Group } from 'axiom-ui';
+
+<Stack gap="md">   {/* 16px vertical gap */}
+  <Group gap="xs"> {/* 8px horizontal gap */}
+    <Icon />
+    <Text>Label</Text>
+  </Group>
+</Stack>
+```
+
+## Decision guide
+
+| Relationship | Spacing | Example |
+|-------------|---------|---------|
+| Elements that form a single unit | `xs` (8px) | Icon next to button label |
+| Elements in the same group | `sm`–`md` (12–16px) | Form fields in a section |
+| Groups within a section | `lg` (24px) | Card header vs. card body |
+| Sections on a page | `xl`–`2xl` (32–48px) | Navigation vs. content area |
+
+## Rules
+
+- Never use raw pixel values for spacing — use tokens.
+- Group related items with smaller spacing; separate unrelated items with larger spacing.
+- When in doubt, use `md` (16px) — it works for most component-level spacing.
+- Consistency beats precision: pick a token and stick with it for similar relationships.

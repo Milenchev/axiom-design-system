@@ -1,0 +1,164 @@
+---
+title: SplitButton
+description: A primary action paired with a dropdown of related secondary actions in a single, compact control.
+links:
+  storybook: components-splitbutton--default
+  source: 'SplitButton/SplitButton.tsx'
+---
+
+## Import
+
+```tsx
+import { SplitButton } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-splitbutton--default', label: 'Default' },
+    { id: 'components-splitbutton--variants', label: 'Variants' },
+    { id: 'components-splitbutton--disabled', label: 'Disabled' },
+  ]}
+/>
+
+## When To Use
+
+- **One main, several related:** Offer a clear default action while keeping related variants one click away (Save / Save and continue / Duplicate).
+- **Toolbars and forms:** Save space when several actions share a context but one is dominant.
+- **Export or share flows:** A primary "Export" with format options behind the toggle.
+
+**Don't use for:** Unrelated actions (use separate buttons), a single action (use a `Button`), or navigation (use a `Menu` or links).
+
+## Anatomy
+
+- **Primary button** — Performs the default action via `onClick`.
+- **Toggle** — A chevron button that opens the menu of secondary actions.
+- **Menu** — A list of related actions, each with an optional icon. A destructive action can be styled as `danger`.
+
+## Examples
+
+### Basic split button
+
+```tsx
+import { SplitButton } from 'axiom-ui';
+import { IconDeviceFloppy, IconCopy, IconTrash } from '@tabler/icons-react';
+
+<SplitButton
+  onClick={() => save()}
+  actions={[
+    { label: 'Save and continue', icon: <IconDeviceFloppy size={16} /> },
+    { label: 'Duplicate', icon: <IconCopy size={16} /> },
+    { label: 'Delete', icon: <IconTrash size={16} />, danger: true },
+  ]}
+>
+  Save
+</SplitButton>
+```
+
+### Variants
+
+```tsx
+<SplitButton variant="light" actions={actions}>Save</SplitButton>
+<SplitButton variant="default" actions={actions}>Save</SplitButton>
+```
+
+## Guidelines
+
+### Do's
+- **Make the default obvious.** The primary button should be the action users want most of the time.
+- **Group related actions.** Everything in the menu should be a variant of the main action.
+- **Order by frequency.** Put the most useful secondary actions first.
+
+### Don'ts
+- **Don't hide critical actions only here.** If an action is essential, surface it directly.
+- **Don't mix destructive and routine actions carelessly.** Separate and mark destructive items as `danger`.
+- **Don't overfill the menu.** A short list keeps the control quick to use.
+
+## Accessibility
+
+- The primary button and the toggle are independent, focusable buttons.
+- The toggle exposes an accessible label and opens the menu on click.
+- Menu items are keyboard navigable; `Esc` closes the menu.
+- `disabled` and `loading` states apply to both the primary button and the toggle.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    children: {
+      description: 'Label of the primary action.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    onClick: {
+      description: 'Handler for the primary action.',
+      type: '() => void',
+      default: '-',
+    },
+    actions: {
+      description: 'Secondary actions shown in the dropdown.',
+      type: 'SplitButtonAction[]',
+      default: '-',
+    },
+    color: {
+      description: 'Mantine colour of the control.',
+      type: 'string',
+      default: "'axiom-blue'",
+    },
+    variant: {
+      description: 'Visual variant of the buttons.',
+      type: "'filled' | 'light' | 'default' | 'outline' | 'subtle'",
+      default: "'filled'",
+    },
+    size: {
+      description: 'Control size.',
+      type: 'MantineSize',
+      default: "'sm'",
+    },
+    leftSection: {
+      description: 'Optional icon before the primary label.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    disabled: {
+      description: 'Disable both buttons.',
+      type: 'boolean',
+      default: 'false',
+    },
+    loading: {
+      description: 'Show a loading state on the primary button.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+### SplitButtonAction
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Text shown for the action.',
+      type: 'string',
+      default: '-',
+    },
+    icon: {
+      description: 'Optional leading icon.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    onClick: {
+      description: 'Click handler for the action.',
+      type: '() => void',
+      default: '-',
+    },
+    danger: {
+      description: 'Render the action as destructive.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

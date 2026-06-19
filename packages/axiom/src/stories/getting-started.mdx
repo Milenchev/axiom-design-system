@@ -1,0 +1,182 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Banner } from "../components/Banner/Banner";
+import { MantineProvider } from "@mantine/core";
+
+<Meta title="Getting Started" />
+
+# Axiom Design System
+
+Axiom is built on top of Mantine and provides a set of reusable UI components tailored for our applications.
+
+<MantineProvider>
+  <Banner color="yellow" title="Under active development." mb="xl">
+    <span>Several legacy components are pending migration as we evaluate the most effective integration strategies with Mantine's architecture. Specifically, we are currently analyzing native Mantine patterns for handling modals, notifications, and form state management to ensure optimal performance and DX before standardizing these components.</span>
+  </Banner>
+  <Banner color="blue" title="Note" mb="xl">
+    <em>Component APIs, names, and structural patterns are subject to change without notice during this transitional phase.</em>
+  </Banner>
+</MantineProvider>
+
+## Current State
+
+Below is an overview of the core dependencies and component status.
+
+### Core Libraries
+
+<table style={{ width: '100%', textAlign: 'left' }}>
+  <thead>
+    <tr>
+      <th>Library</th>
+      <th>License</th>
+      <th>Version</th>
+      <th>Description & Architecture Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Mantine</strong><br/><code>@mantine/core</code><br/><code>@mantine/dates</code><br/><code>@mantine/hooks</code></td>
+      <td>MIT</td>
+      <td><code>v9.x</code></td>
+      <td>Core UI framework. Provides the foundational components, hooks, styling engine, and accessibility primitives. Most Axiom components wrap or extend Mantine.</td>
+    </tr>
+    <tr>
+      <td><strong>ECharts</strong> (<code>echarts</code>)</td>
+      <td>Apache 2.0</td>
+      <td><code>v6.x</code></td>
+      <td>High-performance charting library. Used for all data visualization components (Bar, Line, Pie, Scatter, etc.).</td>
+    </tr>
+
+    <tr>
+      <td><strong>Hello Pangea DnD</strong> (<code>@hello-pangea/dnd</code>)</td>
+      <td>Apache 2.0</td>
+      <td><code>v18.x</code></td>
+      <td>Accessible drag-and-drop library for React. Used for reorderable list and panel components.</td>
+    </tr>
+    <tr>
+      <td><strong>Tabler Icons</strong> (<code>@tabler/icons-react</code>)</td>
+      <td>MIT</td>
+      <td><code>v3.x</code></td>
+      <td>Icon library providing a comprehensive set of scalable SVG icons.</td>
+    </tr>
+    <tr>
+      <td><strong>Day.js</strong> (<code>dayjs</code>)</td>
+      <td>MIT</td>
+      <td><code>v1.x</code></td>
+      <td>Lightweight date library used for parsing, validating, and formatting dates (e.g., in <code>DatePicker</code>).</td>
+    </tr>
+    <tr>
+      <td><strong>React Split Pane</strong> (<code>react-split-pane</code>)</td>
+      <td>MIT</td>
+      <td><code>v3.x</code></td>
+      <td>Used for resizable layout panels (e.g., <code>SplitContainer</code>).</td>
+    </tr>
+  </tbody>
+</table>
+
+### Components Status Directory
+
+**Status Legend:**
+- 🟢 **Ready**: Fully implemented and stable.
+- 🟡 **In Progress**: Component is being actively developed or relies on complex external library integration.
+- ⚪ **Mock**: Currently a placeholder component pending implementation.
+
+<table style={{ width: '100%', textAlign: 'left' }}>
+  <thead>
+    <tr>
+      <th>Axiom Component</th>
+      
+      <th>Status</th>
+      <th>Important Dependencies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>ActionIcon</td><td>🟢 Ready</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>AppLayout</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>AreaChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>BarChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>BoxPlot</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>BubbleChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>Button</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Card</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>ChartBase</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>ColumnChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>ComboBox</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Datagrid</td><td>🟡 In Progress</td><td><code>@mantine/core</code> (custom)</td></tr>
+    <tr><td>DimensionSelector</td><td>⚪ Mock</td><td>-</td></tr>
+    <tr><td>EnhancedTabs</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>ExpandablePanel</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>FilterBar</td><td>⚪ Mock</td><td>-</td></tr>
+    <tr><td>GridLayout</td><td>🟡 In Progress</td><td>-</td></tr>
+    <tr><td>GuidanceStripPlot</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>HeaderBar</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>HeatMap</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>Icon</td><td>🟡 In Progress</td><td><code>@tabler/icons-react</code></td></tr>
+    <tr><td>LineChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>NavigationBar</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>NumberInput</td><td>🟢 Ready</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>ParetoChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>PieChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>PivotTable</td><td>⚪ Mock</td><td>-</td></tr>
+    <tr><td>PowerBiReport</td><td>⚪ Mock</td><td>-</td></tr>
+    <tr><td>ScatterChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>Sidebar</td><td>🟡 In Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>SplineChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>SplitContainer</td><td>🟡 In Progress</td><td><code>react-split-pane</code></td></tr>
+    <tr><td>StripPlot</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>ThemeProvider</td><td>🟢 Ready</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>WaterfallChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+    <tr><td>XRangeChart</td><td>🟡 In Progress</td><td><code>echarts</code></td></tr>
+  </tbody>
+</table>
+
+### Mantine Wrappers
+
+These components are thin, direct wrappers over Mantine primitives. They expose the full Mantine API and are considered stable.
+
+**Status:** 🟢 **Ready** for all entries.
+
+<table style={{ width: '100%', textAlign: 'left' }}>
+  <thead>
+    <tr>
+      <th>Axiom Component</th>
+      
+      <th>Important Dependencies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Accordion</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Badge</td><td><code>statusLights</code> / <code>tags</code></td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Banner</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>BreadCrumbs</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>ButtonGroup</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Checkbox</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>DatePicker</td><td><code>@mantine/dates</code>, <code>dayjs</code></td></tr>
+    <tr><td>Dialog</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Drawer</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Dropdown</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>FilePicker</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>IconButton</td><td><code>@mantine/core</code>, <code>@tabler/icons-react</code></td></tr>
+    <tr><td>Menu</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Modal</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Popup</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Progress</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>ScrollArea</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Slider</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Switch</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Table</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Tabs</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Text</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>TextInput</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Textarea</td><td><code>@mantine/core</code></td></tr>
+    <tr><td>Tooltip</td><td><code>@mantine/core</code></td></tr>
+  </tbody>
+</table>
+
+
+## Installation
+
+...
+
+## Usage
+
+...

@@ -1,0 +1,66 @@
+---
+title: Campaign Management
+description: A focused data-management workspace with breadcrumbs, a content header, resizable tool panels and a sortable data grid.
+---
+
+A task-focused workspace for managing a single domain — here, advertising
+campaigns. Compared to the [Application Shell](/docs/demos/application-shell),
+this demo trades breadth for depth: a flat sidebar, breadcrumbs for context, and
+a right-hand strip of **tool panels** (Help and Settings) that expand into
+resizable side panels without leaving the page.
+
+<StorybookEmbed id="demos-demo-2--default" height="640px" />
+
+## What's inside
+
+| Region | Component | Role |
+| --- | --- | --- |
+| Left rail | `Sidebar` | Flat and nested navigation, `Campaigns` active |
+| Context | `Breadcrumbs` | Shows the path back to the parent menu |
+| Title row | `AppLayout.ContentHeader` | Page title, subtitle and a primary action |
+| Alerts | `AppLayout.Alerts` | Inline `Banner` messages above the content |
+| Data | `Datagrid` | Sortable, selectable tabular data |
+| Tool strip | `AppLayout.ToolItems` | Help & Settings panels, resizable on demand |
+
+## Key patterns
+
+- **Tool panels over modals.** `AppLayout.ToolItems` renders an icon strip on
+  the right edge. Clicking an icon opens a resizable panel beside the content —
+  ideal for help, settings or detail inspectors that should stay open while the
+  user works.
+- **Breadcrumbs for orientation.** A lightweight `Breadcrumbs` row keeps users
+  oriented inside deep navigation without consuming vertical space.
+- **Resizable everything.** Both the sidebar (`sidebarResizable`) and the tool
+  panels (`panelResizable`) honour min/max width constraints, so power users can
+  tailor the layout.
+
+## Build it
+
+```tsx
+import { AppLayout, Sidebar, Datagrid } from 'axiom-ui';
+
+export default function Campaigns() {
+  return (
+    <AppLayout
+      header={<HeaderBar />}
+      sidebar={<Sidebar items={items} activeItemId="campaigns" />}
+      breadcrumbs={<Breadcrumbs />}
+      sidebarResizable
+      sidebarMinWidth={220}
+      sidebarMaxWidth={360}
+    >
+      <AppLayout.Alerts>{/* Banner alerts */}</AppLayout.Alerts>
+      <AppLayout.ContentHeader>{/* Title + action */}</AppLayout.ContentHeader>
+      <AppLayout.ToolItems items={toolItems} panelResizable />
+      <Datagrid /* columns, rows */ />
+    </AppLayout>
+  );
+}
+```
+
+## When to reach for this
+
+Choose this pattern for the "working surface" of a product — the screen where a
+user spends most of their time managing records. The persistent tool panels make
+it perfect for workflows that need contextual help or settings always within
+reach.

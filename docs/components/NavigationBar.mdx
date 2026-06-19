@@ -1,0 +1,143 @@
+---
+title: NavigationBar
+description: Secondary horizontal tab-style navigation bar for switching between views or contextual sections within a page.
+links:
+  figma: true
+  storybook: components-navigationbar--overview
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { NavigationBar } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'components-navigationbar--primary', label: 'Default' },
+  ]} 
+/>
+
+## When To Use
+
+- **Contextual navigation:** Switch between related views within a page (e.g., Dashboard, Charts, Forms).
+- **Secondary navigation:** Provide page-level navigation below the main header bar.
+- **Action and link tabs:** Mix navigational tabs with action items and external links in the same bar.
+
+## Anatomy
+
+- **Tab Items:** Individual navigation items rendered horizontally. The active tab is visually highlighted with a bottom border and bold text.
+- **Left/Right Sections (Optional):** Each tab can have optional left or right icon sections.
+- **Item Types:**
+  - **Default:** Standard tab behavior — clicking selects the tab.
+  - **Action:** Fires `onChange` but does not update tab selection state.
+  - **Link:** Renders as an `<a>` element with `href` and optional `target`.
+
+## Examples
+
+### Basic Navigation
+
+```tsx
+import { NavigationBar } from 'axiom-ui';
+
+export default function App() {
+  return (
+    <NavigationBar
+      items={[
+        { value: 'dashboard', label: 'Dashboard' },
+        { value: 'analytics', label: 'Analytics' },
+        { value: 'settings', label: 'Settings' },
+      ]}
+      defaultValue="dashboard"
+    />
+  );
+}
+```
+
+### With Action and Link Items
+
+Mix regular tabs with action items and external links.
+
+```tsx
+import { NavigationBar } from 'axiom-ui';
+import { IconExternalLink } from '@tabler/icons-react';
+
+export default function App() {
+  return (
+    <NavigationBar
+      items={[
+        { value: 'overview', label: 'Overview' },
+        { value: 'details', label: 'Details' },
+        { value: 'export', label: 'Export', type: 'action' },
+        {
+          value: 'docs',
+          label: 'Documentation',
+          type: 'link',
+          href: 'https://docs.example.com',
+          rightSection: <IconExternalLink size={14} />,
+        },
+      ]}
+      defaultValue="overview"
+      onChange={(value) => console.log('Tab changed:', value)}
+    />
+  );
+}
+```
+
+## Guidelines
+
+### Do's
+- **Use for page-level sections:** NavigationBar works best for switching between related views on the same page.
+- **Keep labels short:** Use single words or short phrases for tab labels.
+- **Use uppercase sparingly:** The component applies uppercase styling automatically.
+
+### Don'ts
+- **Don't use for primary navigation:** Use `Sidebar` or the main header for application-level navigation.
+- **Don't add too many tabs:** If you have more than 7–8 items, consider a different navigation pattern.
+- **Don't disable all tabs:** At least one tab should always be selectable.
+
+## Accessibility
+
+- Built on Mantine's `Tabs` component with proper `role="tablist"` and `role="tab"` semantics.
+- Keyboard navigation between tabs is fully supported (arrow keys, Home, End).
+- Link-type items render as proper `<a>` elements for screen reader identification.
+- Disabled tabs are excluded from the tab sequence.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    items: {
+      description: 'Array of navigation items to render as tabs.',
+      type: 'NavItem[]',
+      default: '-',
+    },
+    height: {
+      description: 'Height of the navigation bar in pixels.',
+      type: 'number',
+      default: '40',
+    },
+    value: {
+      description: 'Controlled active tab value.',
+      type: 'string',
+      default: '-',
+    },
+    defaultValue: {
+      description: 'Default active tab for uncontrolled usage.',
+      type: 'string',
+      default: '-',
+    },
+    onChange: {
+      description: 'Called when a tab is selected or an action item is clicked.',
+      type: '(value: string | null) => void',
+      default: '-',
+    },
+  }}
+/>
+
+

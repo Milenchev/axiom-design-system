@@ -1,0 +1,59 @@
+---
+title: Iconography
+description: Rules and guidelines for using icons
+---
+
+Axiom uses **Tabler Icons** (`@tabler/icons-react`) — a consistent, open-source icon set with 5,000+ symbols in a unified stroke style.
+
+## Using icons
+
+```tsx
+import { IconSearch, IconPlus, IconTrash } from '@tabler/icons-react';
+import { Button } from 'axiom-ui';
+
+<Button leftSection={<IconPlus size={16} />}>Add item</Button>
+```
+
+## Sizing
+
+| Size | Pixels | Use case |
+|------|--------|----------|
+| Small | 16px | Inline text, badges, dense UI |
+| Medium | 20px | Buttons, form inputs, navigation items |
+| Large | 24px | Page headings, empty states, prominent actions |
+
+Always set size explicitly — never rely on the default.
+
+## Guidelines
+
+| Do | Don't |
+|----|-------|
+| Pair icons with text labels | Use icons alone unless universally understood (×, +, search) |
+| Use consistent stroke width (1.5px default) | Mix filled and outlined icons in the same context |
+| Match icon color to its parent text color | Hardcode icon colors — use `currentColor` |
+| Use `aria-label` on icon-only buttons | Leave icon-only buttons without accessible labels |
+
+## Icon + component patterns
+
+```tsx
+/* Icon button — always provide aria-label */
+<ActionIcon aria-label="Delete item">
+  <IconTrash size={16} />
+</ActionIcon>
+
+/* Input with icon */
+<TextInput leftSection={<IconSearch size={16} />} placeholder="Search..." />
+
+/* Badge with icon */
+<Badge leftSection={<IconCheck size={12} />} type="success">Done</Badge>
+```
+
+## Adding custom icons
+
+If Tabler doesn't have what you need:
+
+1. Export from Figma as SVG at 24×24 with 1.5px stroke.
+2. Wrap in a React component following the same `size` prop pattern.
+3. Place in `packages/axiom/src/components/Icons/`.
+
+Do not mix icon libraries — keep everything visually consistent.

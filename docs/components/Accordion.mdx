@@ -1,0 +1,150 @@
+---
+title: Accordion
+description: Vertically stacked set of collapsible sections that allow users to toggle the visibility of content panels.
+links:
+  figma: true
+  storybook: themed-accordion--overview
+  mantine: https://mantine.dev/core/accordion/
+  source: 'accordion/accordion.tsx'
+---
+
+## Import
+
+```tsx
+import { Accordion } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-accordion--primary', label: 'Default' },
+    { id: 'themed-accordion--multiple', label: 'Multiple' },
+    { id: 'themed-accordion--separated', label: 'Separated' },
+  ]}
+/>
+
+## When To Use
+
+- **FAQs and help content:** Questions with expandable answers — users only need one at a time.
+- **Settings groups:** Collapsible sections that keep a long settings page scannable.
+- **Detail disclosure:** Show a summary first, let users expand for more detail (e.g., order history).
+- **Navigation menus:** Collapsible sub-sections in a sidebar navigation.
+
+**Don't use for:** Content users need to compare across sections (use Tabs or a flat layout), single show/hide toggles (use a Disclosure or `details`/`summary`), or step-by-step workflows (use a Stepper).
+
+## Anatomy
+
+- **Item** — A single collapsible section containing a control and a panel.
+- **Control** — The clickable header row (label + chevron icon). Triggers expand/collapse.
+- **Panel** — The content area that becomes visible when the item is expanded.
+- **Chevron** — Visual indicator of expanded/collapsed state (rotates on open).
+
+## Examples
+
+### Basic accordion
+
+```tsx
+import { Accordion } from '@mantine/core';
+
+<Accordion defaultValue="item-1">
+  <Accordion.Item value="item-1">
+    <Accordion.Control>What is Axiom?</Accordion.Control>
+    <Accordion.Panel>
+      Axiom is a React component library built on Mantine v9.
+    </Accordion.Panel>
+  </Accordion.Item>
+  <Accordion.Item value="item-2">
+    <Accordion.Control>How do I install it?</Accordion.Control>
+    <Accordion.Panel>
+      Run npm install axiom-ui and wrap your app with ThemeProvider.
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+### Multiple items open
+
+```tsx
+import { Accordion } from '@mantine/core';
+
+<Accordion multiple defaultValue={['item-1', 'item-2']}>
+  <Accordion.Item value="item-1">
+    <Accordion.Control>Section A</Accordion.Control>
+    <Accordion.Panel>Content A</Accordion.Panel>
+  </Accordion.Item>
+  <Accordion.Item value="item-2">
+    <Accordion.Control>Section B</Accordion.Control>
+    <Accordion.Panel>Content B</Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+## Guidelines
+
+### Do's
+- **Use descriptive labels.** The control text should tell users what they'll find inside.
+- **Default-open the most important item.** Don't make users guess which section has the key info.
+- **Keep panel content focused.** Each section should cover one topic.
+- **Use `multiple` when sections are independent.** Let users keep multiple open if the content doesn't conflict.
+
+### Don'ts
+- **Don't nest accordions inside accordions.** It creates confusing navigation depth.
+- **Don't hide critical actions inside panels.** Primary CTAs should always be visible.
+- **Don't use for very short content.** If each panel only has one sentence, just show them all.
+- **Don't use when users need to compare content.** Side-by-side layout or tabs work better.
+
+## Accessibility
+
+- Each control has `role="button"` with `aria-expanded` indicating state.
+- Panels have `role="region"` linked to their control via `aria-labelledby`.
+- `Enter` and `Space` toggle the focused control.
+- Arrow keys navigate between controls within the accordion.
+- Focus management follows WAI-ARIA Accordion pattern.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `Accordion` uses a compound pattern: `Accordion`, `Accordion.Item`, `Accordion.Control`, `Accordion.Panel`.
+
+<TypeTable
+  type={{
+    defaultValue: {
+      description: 'Value of items expanded by default (uncontrolled).',
+      type: 'string | string[]',
+      default: '-',
+    },
+    value: {
+      description: 'Controlled expanded items.',
+      type: 'string | string[] | null',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback fired when expanded items change.',
+      type: '(value: string | string[] | null) => void',
+      default: '-',
+    },
+    multiple: {
+      description: 'Allow multiple items to be expanded at once.',
+      type: 'boolean',
+      default: 'false',
+    },
+    variant: {
+      description: 'Visual variant.',
+      type: "'default' | 'contained' | 'filled' | 'separated'",
+      default: "'default'",
+    },
+    chevronPosition: {
+      description: 'Position of the chevron icon.',
+      type: "'left' | 'right'",
+      default: "'right'",
+    },
+    children: {
+      description: 'Accordion.Item elements.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>
+

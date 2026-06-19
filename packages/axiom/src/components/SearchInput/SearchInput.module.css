@@ -1,0 +1,27 @@
+.root {
+  position: relative;
+}
+
+.clearButton {
+  cursor: pointer;
+  color: var(--axiom-text-secondary);
+}
+
+.clearButton:hover {
+  color: currentColor;
+}
+
+.searchIcon {
+  color: currentColor;
+}
+
+.shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--mantine-radius-sm);
+  font-size: var(--axiom-font-size-xs);
+  line-height: var(--axiom-line-height-tight);
+  pointer-events: none;
+  user-select: none;
+}

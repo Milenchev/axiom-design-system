@@ -1,0 +1,169 @@
+---
+title: Dropdown
+description: Select input that lets users pick one option from a collapsible list of choices.
+links:
+  figma: true
+  storybook: themed-select--overview
+  mantine: https://mantine.dev/core/select/
+  source: 'dropdown/dropdown.tsx'
+---
+
+## Import
+
+```tsx
+import { Select } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-select--primary', label: 'Default' },
+    { id: 'themed-select--searchable', label: 'Searchable' },
+    { id: 'themed-select--clearable', label: 'Clearable' },
+  ]}
+/>
+
+## When To Use
+
+- **Single selection from a list:** When users must pick exactly one option from 5+ predefined choices.
+- **Space-constrained forms:** Dropdowns collapse their options, saving vertical space compared to radio buttons.
+- **Consistent data entry:** Country, state, currency, or category pickers where the options are fixed.
+- **Searchable lists:** When the list is long (20+), enable the `searchable` prop to let users type-to-filter.
+
+**Don't use for:** 2–4 options (use Radio buttons — they're faster), multi-selection (use MultiSelect or Checkboxes), or actions (use a Menu).
+
+## Anatomy
+
+- **Label** — Describes what the user is selecting. Always visible.
+- **Trigger** — The button/input that opens the dropdown list. Shows current selection or placeholder.
+- **Dropdown list** — The floating panel containing all available options.
+- **Option** — A single selectable item in the list.
+- **Clear button** — Optional × icon to reset the selection (when `clearable` is enabled).
+- **Search input** — Optional type-ahead filter (when `searchable` is enabled).
+
+## Examples
+
+### Basic select
+
+```tsx
+import { Select } from '@mantine/core';
+
+<Select
+  label="Country"
+  placeholder="Select a country"
+  data={['United States', 'Canada', 'United Kingdom', 'Germany', 'France']}
+/>
+```
+
+### Searchable with clearable
+
+```tsx
+import { Select } from '@mantine/core';
+
+<Select
+  label="Timezone"
+  placeholder="Search timezones..."
+  searchable
+  clearable
+  data={['UTC-8 Pacific', 'UTC-5 Eastern', 'UTC+0 London', 'UTC+1 Berlin']}
+/>
+```
+
+### With structured data
+
+```tsx
+import { Select } from '@mantine/core';
+
+<Select
+  label="Priority"
+  data={[
+    { value: 'critical', label: 'Critical' },
+    { value: 'high', label: 'High' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'low', label: 'Low' },
+  ]}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Use for 5+ options.** Below that, radio buttons are faster and show all options at once.
+- **Provide a meaningful placeholder.** "Select a country" is better than "Select..."
+- **Enable `searchable` for long lists.** If there are 15+ options, type-ahead filtering saves time.
+- **Sort options logically.** Alphabetical, by frequency, or by priority — not random.
+
+### Don'ts
+- **Don't use for navigation.** Dropdowns are form controls, not navigation menus.
+- **Don't hide the label.** "Placeholder-only" dropdowns lose context after selection.
+- **Don't disable options without explanation.** If an option is unavailable, explain why via a tooltip.
+- **Don't mix unrelated items.** Each dropdown should represent a single dimension (e.g., all countries OR all cities, not both).
+
+## Accessibility
+
+- Uses `role="combobox"` with `aria-expanded` indicating open/closed state.
+- Options are `role="option"` within a `role="listbox"`.
+- Arrow keys navigate options, Enter selects, Escape closes.
+- Typing characters jumps to matching options.
+- Selected option is communicated via `aria-selected`.
+- Label linked via `aria-labelledby`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    data: {
+      description: 'Array of options. Can be strings or objects with value/label.',
+      type: "string[] | { value: string; label: string; disabled?: boolean }[]",
+      default: '[]',
+    },
+    value: {
+      description: 'Controlled selected value.',
+      type: 'string | null',
+      default: '-',
+    },
+    defaultValue: {
+      description: 'Default value (uncontrolled).',
+      type: 'string | null',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback fired when selection changes.',
+      type: '(value: string | null) => void',
+      default: '-',
+    },
+    label: {
+      description: 'Field label.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    placeholder: {
+      description: 'Placeholder text when nothing is selected.',
+      type: 'string',
+      default: '-',
+    },
+    searchable: {
+      description: 'Enables type-ahead filtering of options.',
+      type: 'boolean',
+      default: 'false',
+    },
+    clearable: {
+      description: 'Shows a clear button when a value is selected.',
+      type: 'boolean',
+      default: 'false',
+    },
+    disabled: {
+      description: 'Disables the select.',
+      type: 'boolean',
+      default: 'false',
+    },
+    error: {
+      description: 'Error message. Shows error styling when set.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

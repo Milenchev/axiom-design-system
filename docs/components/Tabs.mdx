@@ -1,0 +1,137 @@
+---
+title: Tabs
+description: Organizes content into multiple panels where only one is visible at a time, switched via tab navigation.
+links:
+  figma: true
+  storybook: themed-tabs--overview
+  mantine: https://mantine.dev/core/tabs/
+  source: 'tabs/tabs.tsx'
+---
+
+## Import
+
+```tsx
+import { Tabs } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed 
+  stories={[
+    { id: 'themed-tabs--primary', label: 'Default Story' },
+  ]} 
+/>
+
+## When To Use
+
+- **Related content sections:** Grouping information that shares context but doesn't need to be visible simultaneously (e.g., "Overview", "Settings", "Activity").
+- **Reducing page length:** When a single page would be too long, tabs let users focus on one section at a time.
+- **Configuration panels:** Settings organized by category (General, Appearance, Notifications).
+
+**Don't use for:** Sequential steps (use a Stepper), navigation between unrelated pages (use a NavigationBar), or content that users need to compare side-by-side.
+
+## Anatomy
+
+- **Tab list** — Horizontal row of tab triggers. Only one is active at a time.
+- **Tab trigger** — Clickable label (text and optional icon). Shows active state.
+- **Tab panel** — Content area that corresponds to the active tab.
+
+## Examples
+
+### Basic tabs
+
+```tsx
+import { Tabs } from '@mantine/core';
+
+<Tabs defaultValue="overview">
+  <Tabs.List>
+    <Tabs.Tab value="overview">Overview</Tabs.Tab>
+    <Tabs.Tab value="settings">Settings</Tabs.Tab>
+    <Tabs.Tab value="activity">Activity</Tabs.Tab>
+  </Tabs.List>
+
+  <Tabs.Panel value="overview">Overview content here</Tabs.Panel>
+  <Tabs.Panel value="settings">Settings content here</Tabs.Panel>
+  <Tabs.Panel value="activity">Activity content here</Tabs.Panel>
+</Tabs>
+```
+
+### With icons
+
+```tsx
+import { Tabs } from '@mantine/core';
+import { IconSettings, IconActivity, IconHome } from '@tabler/icons-react';
+
+<Tabs defaultValue="home">
+  <Tabs.List>
+    <Tabs.Tab value="home" leftSection={<IconHome size={14} />}>Home</Tabs.Tab>
+    <Tabs.Tab value="settings" leftSection={<IconSettings size={14} />}>Settings</Tabs.Tab>
+    <Tabs.Tab value="activity" leftSection={<IconActivity size={14} />}>Activity</Tabs.Tab>
+  </Tabs.List>
+</Tabs>
+```
+
+## Guidelines
+
+### Do's
+- **Use clear, short labels.** One or two words per tab. Users scan, they don't read.
+- **Order by importance.** Most-used tab first. Default to the first tab being selected.
+- **Keep tab count reasonable.** 2–6 tabs works best. More than 7 becomes hard to navigate.
+- **Persist tab state when possible.** If a user switches tabs and comes back, preserve their scroll position and form state.
+
+### Don'ts
+- **Don't use tabs for sequential steps.** Tabs are random-access — users can click any tab in any order.
+- **Don't hide critical content in secondary tabs.** Important information should be in the default (first) tab.
+- **Don't use tabs within tabs.** Nested tabs create confusing navigation.
+- **Don't change tab labels dynamically.** It confuses users about where they are.
+
+## Accessibility
+
+- Tab list uses `role="tablist"`, each tab has `role="tab"`, panels have `role="tabpanel"`.
+- **Arrow keys** navigate between tabs. **Enter/Space** activates a tab.
+- Active tab has `aria-selected="true"`. Inactive tabs have `tabindex="-1"`.
+- Each panel is linked to its tab via `aria-labelledby`.
+- Only the active panel is visible; inactive panels have `hidden` or `aria-hidden`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+The `Tabs` component uses a compound pattern: `Tabs`, `Tabs.List`, `Tabs.Tab`, and `Tabs.Panel`.
+
+<TypeTable
+  type={{
+    defaultValue: {
+      description: 'Value of the tab that is selected by default (uncontrolled).',
+      type: 'string',
+      default: '-',
+    },
+    value: {
+      description: 'Controlled active tab value.',
+      type: 'string',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback fired when the active tab changes.',
+      type: '(value: string | null) => void',
+      default: '-',
+    },
+    orientation: {
+      description: 'Tab list orientation.',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+    },
+    variant: {
+      description: 'Visual variant of the tabs.',
+      type: "'default' | 'outline' | 'pills'",
+      default: "'default'",
+    },
+    children: {
+      description: 'Tabs.List and Tabs.Panel elements.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>
+
+

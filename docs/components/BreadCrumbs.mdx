@@ -1,0 +1,110 @@
+---
+title: BreadCrumbs
+description: Navigation aid showing the user's current location within a hierarchical page structure.
+links:
+  figma: true
+  storybook: themed-breadcrumbs--overview
+  mantine: https://mantine.dev/core/breadcrumbs/
+  source: 'breadcrumbs/breadcrumbs.tsx'
+---
+
+## Import
+
+```tsx
+import { Breadcrumbs } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-breadcrumbs--primary', label: 'Default' },
+    { id: 'themed-breadcrumbs--custom-separator', label: 'Custom Separator' },
+  ]}
+/>
+
+## When To Use
+
+- **Deep navigation hierarchies:** When pages are nested 3+ levels deep and users need orientation.
+- **Multi-step flows:** Showing where the user is in a wizard or checkout process.
+- **Content management:** File browsers, category trees, or admin panels with nested sections.
+
+**Don't use for:** Flat sites with 1–2 levels, replacing primary navigation, or showing browser history.
+
+## Anatomy
+
+- **Items** — Individual links representing each level in the hierarchy.
+- **Separator** — Character or icon between items (default: `/`).
+- **Current item** — The last item, representing the current page (not a link).
+
+## Examples
+
+### Basic breadcrumbs
+
+```tsx
+import { Breadcrumbs, Anchor } from '@mantine/core';
+
+<Breadcrumbs>
+  <Anchor href="/">Home</Anchor>
+  <Anchor href="/products">Products</Anchor>
+  <span>Widget Pro</span>
+</Breadcrumbs>
+```
+
+### Custom separator
+
+```tsx
+import { Breadcrumbs, Anchor } from '@mantine/core';
+import { IconChevronRight } from '@tabler/icons-react';
+
+<Breadcrumbs separator={<IconChevronRight size={14} />}>
+  <Anchor href="/">Home</Anchor>
+  <Anchor href="/settings">Settings</Anchor>
+  <span>Profile</span>
+</Breadcrumbs>
+```
+
+## Guidelines
+
+### Do's
+- **Start with "Home" or the app root.** Give users a clear escape hatch to the top.
+- **Make all items except the last clickable.** The current page doesn't need a link.
+- **Keep labels short.** Use concise page names, not full titles.
+- **Truncate long paths.** For 5+ levels, collapse middle items with "..." and a dropdown.
+
+### Don'ts
+- **Don't use as the only navigation.** Breadcrumbs supplement — they don't replace — primary nav.
+- **Don't show breadcrumbs on the homepage.** There's nowhere to go "up" from the root.
+- **Don't include the current page as a link.** It's confusing to link to where you already are.
+- **Don't show breadcrumbs for flat sites.** If the hierarchy is only 1–2 levels, they add clutter.
+
+## Accessibility
+
+- Wrapped in a `<nav aria-label="Breadcrumb">` landmark.
+- Uses an `<ol>` list for semantic structure.
+- Current page has `aria-current="page"`.
+- Separator is decorative (`aria-hidden="true"`).
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    separator: {
+      description: 'Separator element between items.',
+      type: 'React.ReactNode',
+      default: "'/'",
+    },
+    separatorMargin: {
+      description: 'Spacing around the separator.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | number",
+      default: "'xs'",
+    },
+    children: {
+      description: 'Breadcrumb items (Anchor elements and a final text span).',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

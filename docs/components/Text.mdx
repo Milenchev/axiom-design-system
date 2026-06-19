@@ -1,0 +1,162 @@
+---
+title: Text
+description: Versatile typography component for rendering text with configurable size, weight, color, and truncation.
+links:
+  figma: true
+  storybook: components-text--overview
+  mantine: https://mantine.dev/core/text/
+  source: 'Text/Text.tsx'
+---
+
+## Import
+
+```tsx
+import { Text } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-text--primary', label: 'Default' },
+    { id: 'components-text--sizes', label: 'Sizes' },
+    { id: 'components-text--weights', label: 'Weights' },
+    { id: 'components-text--colors', label: 'Colors' },
+    { id: 'components-text--truncated', label: 'Truncated' },
+    { id: 'components-text--line-clamp', label: 'Line Clamp' },
+    { id: 'components-text--as-link', label: 'As Link' },
+  ]}
+/>
+
+## When To Use
+
+- **Body text:** Paragraphs, descriptions, helper text, and inline content.
+- **Labels:** Standalone text labels that aren't part of a form field.
+- **Dynamic styling:** When you need programmatic control over typography (size, weight, color).
+- **Truncation:** Long text that should be cut off with an ellipsis.
+
+**Don't use for:** Page headings (use Title), code snippets (use Code), or rich text editing.
+
+## Anatomy
+
+- **Text element** — Renders as `<p>` by default, configurable via `component` prop.
+- **Content** — The text string or inline React nodes.
+
+## Examples
+
+### Sizes and weights
+
+```tsx
+import { Text } from 'axiom-ui';
+
+<Text size="xs">Extra small</Text>
+<Text size="sm">Small</Text>
+<Text size="md" fw={500}>Medium bold</Text>
+<Text size="lg" fw={700}>Large bold</Text>
+```
+
+### Truncation
+
+```tsx
+import { Text } from 'axiom-ui';
+
+<Text truncate w={200}>
+  This very long text will be cut off with an ellipsis when it overflows.
+</Text>
+
+<Text lineClamp={2}>
+  This text will show at most two lines and then display
+  an ellipsis if it overflows beyond that limit.
+</Text>
+```
+
+### As a link
+
+```tsx
+import { Text } from 'axiom-ui';
+
+<Text component="a" href="/docs" c="blue" td="underline">
+  View documentation
+</Text>
+```
+
+### Color variants
+
+```tsx
+import { Text } from 'axiom-ui';
+
+<Text c="dimmed">Secondary text</Text>
+<Text c="red">Error message</Text>
+<Text c="green">Success message</Text>
+```
+
+## Guidelines
+
+### Do's
+- **Use semantic sizes.** `sm` for helper text, `md` for body, `lg` for emphasis.
+- **Use `dimmed` for secondary text.** It's accessible and theme-aware.
+- **Use `lineClamp` for previews.** Truncate long descriptions in cards or lists.
+- **Set `component` for semantics.** Use `"span"` for inline, `"p"` for paragraphs.
+
+### Don'ts
+- **Don't use Text for headings.** Use Title (h1–h6) for proper document structure.
+- **Don't hardcode colors.** Use theme color names, not hex values.
+- **Don't nest Text inside Text unnecessarily.** Flatten structure when possible.
+- **Don't override font-family.** Stick with the theme's font stack.
+
+## Accessibility
+
+- Renders semantic HTML elements (`<p>`, `<span>`, `<a>`).
+- Color contrast meets WCAG AA for all theme color variants.
+- `dimmed` color maintains 4.5:1 contrast ratio.
+- Links rendered via `component="a"` get proper focus indicators.
+- Truncated text should have a title attribute or tooltip for full content.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    size: {
+      description: 'Font size.',
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      default: "'md'",
+    },
+    fw: {
+      description: 'Font weight.',
+      type: 'number | string',
+      default: '-',
+    },
+    c: {
+      description: 'Text color (theme color name or CSS color).',
+      type: 'string',
+      default: '-',
+    },
+    truncate: {
+      description: 'Truncate text with ellipsis on overflow.',
+      type: "boolean | 'start' | 'end'",
+      default: 'false',
+    },
+    lineClamp: {
+      description: 'Maximum number of lines before truncation.',
+      type: 'number',
+      default: '-',
+    },
+    td: {
+      description: 'Text decoration (underline, line-through).',
+      type: 'string',
+      default: '-',
+    },
+    component: {
+      description: 'HTML element to render as.',
+      type: "'p' | 'span' | 'a' | 'div' | string",
+      default: "'p'",
+    },
+    children: {
+      description: 'Text content.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>

@@ -1,0 +1,125 @@
+---
+title: Voice & Tone
+description: Brand personality, error messages, and copywriting rules
+---
+
+The way Axiom products **sound** matters as much as how they look. Consistent, human, and helpful copy turns a confusing screen into an obvious next step. This page sets out the voice, tone, and writing rules every Axiom surface should follow.
+
+## Voice vs. tone
+
+- **Voice** is *who* we are. It never changes: confident, clear, and human.
+- **Tone** is *how we adapt that voice* depending on the situation. The tone in an error message is calmer than the tone in a feature announcement.
+
+Think of voice as your personality and tone as your mood.
+
+## Our voice
+
+Axiom products are used by procurement specialists, pricing analysts, sales teams, and developers — often under time pressure. Our voice is:
+
+| We are | We are not |
+|---|---|
+| Clear | Curt |
+| Confident | Boastful |
+| Helpful | Patronising |
+| Direct | Cold |
+| Human | Casual |
+
+### Concretely, that means
+
+- Use plain English. Prefer "send" to "transmit", "fix" to "rectify".
+- Write in the **active voice**: "We saved your changes" beats "Your changes have been saved".
+- Address the user as **"you"** and the product as **"Axiom"** — never "we" mid-sentence unless representing the team.
+- Cut filler. "Please note that you must…" → "You must…".
+- Use contractions ("you're", "we'll") to sound natural. Avoid them in legal or compliance copy.
+
+## Tone, by situation
+
+| Situation | Tone | Example |
+|---|---|---|
+| Onboarding / empty state | Welcoming, instructive | "Build your first dashboard to see live KPIs from your data." |
+| Success | Brief, positive | "Invoice sent." |
+| Confirmation / destructive | Direct, factual | "Delete this contract? You can't undo this." |
+| Error | Calm, helpful | "We couldn't connect to the server. Check your network and try again." |
+| Loading | Reassuring | "Indexing 12,432 records…" |
+| Marketing / release notes | Energetic, but never hype-y | "Faster bulk imports — now 3× quicker on large CSVs." |
+
+Never use sarcasm, apologies for trivial things, or exclamation marks outside of celebratory success states.
+
+## Writing rules
+
+### Capitalisation
+
+- **Sentence case** for everything: page titles, buttons, menu items, labels.
+- Exceptions: proper nouns and product names ("Axiom").
+- Don't capitalise common nouns ("dashboard", not "Dashboard").
+
+### Punctuation
+
+- End full sentences with a full stop, including in tooltips and helper text.
+- No full stop on **labels**, **buttons**, **menu items**, or single-line strings.
+- Use the Oxford comma.
+- One space after a full stop.
+
+### Numbers and dates
+
+- Use numerals for everything ("3 items", not "three items"), except at the start of a sentence.
+- Use the ISO short form where space is tight (`2026-05-27`); use the long form where there's room (`27 May 2026`).
+- Localise units. Don't assume USD, °F, or imperial.
+
+### Buttons and actions
+
+- Start with a **verb**: "Save", "Create project", "Send invoice".
+- Be specific about the outcome: "Delete contract" beats "OK".
+- Cancel and dismiss should always be labelled "Cancel" — never "No" or "Back" when the action is "abandon this change".
+
+## Error messages
+
+A good error message tells the user three things:
+
+1. **What happened** ("We couldn't save your draft.")
+2. **Why** ("The server didn't respond.")
+3. **What to do next** ("Wait a moment and try again, or contact support if this keeps happening.")
+
+Don't:
+
+- Don't blame the user ("You entered an invalid value").
+- Don't expose internal error codes or stack traces in user-facing copy.
+- Don't apologise ("Sorry!") more than once per error.
+
+Do:
+
+- Be specific about the field or action that failed.
+- Suggest a next step the user can actually take.
+- Use the same wording for the same error across the product.
+
+## Microcopy patterns
+
+| Pattern | Pattern wording | Example |
+|---|---|---|
+| Required field | Asterisk + footnote | "Fields marked * are required" |
+| Optional field | Word "(optional)" after label | "Notes (optional)" |
+| Empty state | Noun-first title | "No invoices" |
+| Confirmation | Verb-first question | "Delete this contract?" |
+| Loading | Verb in present participle + object | "Indexing records…" |
+| Success | Past tense, no exclamation | "Invoice sent" |
+
+## Inclusive language
+
+- Use gender-neutral language by default. Prefer "they / them", "team members", "users".
+- Avoid idioms and metaphors that don't translate well across cultures or languages.
+- Don't use ableist phrases ("crazy", "insane", "dumb"). Choose plain alternatives.
+- Avoid violent or war metaphors ("kill the process", "deploy attack").
+
+## Don'ts
+
+- Don't pile adjectives onto headings: "Powerful new advanced reporting features" → "New reporting features".
+- Don't use jargon without defining it the first time.
+- Don't write emojis into product copy. They survive better in release notes and changelogs.
+- Don't tell the user something is "easy" or "simple" — let them decide.
+
+## Related
+
+- [Accessibility](../guidelines/accessibility) — clear copy is part of an accessible product.
+- [Empty States](../patterns/empty-states) — copy patterns for zero-data screens.
+- [Forms](../patterns/forms) — labels, helper text, and validation messages.
+

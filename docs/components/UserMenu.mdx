@@ -1,0 +1,153 @@
+---
+title: UserMenu
+description: An account dropdown that surfaces the signed-in user, their details, and common account actions.
+links:
+  storybook: components-usermenu--default
+  source: 'UserMenu/UserMenu.tsx'
+---
+
+## Import
+
+```tsx
+import { UserMenu } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-usermenu--default', label: 'Default' },
+    { id: 'components-usermenu--with-avatar', label: 'With avatar' },
+    { id: 'components-usermenu--name-only', label: 'Name only' },
+  ]}
+/>
+
+## When To Use
+
+- **Account access:** Give the signed-in user a single, predictable place to reach profile, settings, and sign-out.
+- **Global header:** Place it at the far end of the `HeaderBar` as the canonical account entry point.
+- **Identity confirmation:** Show who is signed in via avatar, name, and email.
+
+**Don't use for:** Primary navigation (use `NavigationBar` or `Sidebar`), product switching (use `ProductMenu`), or notifications (use `NotificationsMenu`).
+
+## Anatomy
+
+- **Trigger** — An avatar with the user's name. Shows initials when no image is provided.
+- **Header** — The user's avatar, full name, and email at the top of the dropdown.
+- **Items** — Account actions, each with an optional icon. A destructive action (sign-out) can be styled as `danger`.
+- **Divider** — Optional separator before an item via `withDividerBefore`.
+
+## Examples
+
+### Basic account menu
+
+```tsx
+import { UserMenu } from 'axiom-ui';
+import { IconUser, IconSettings, IconLogout } from '@tabler/icons-react';
+
+<UserMenu
+  name="Jane Doe"
+  email="jane@axiom.dev"
+  items={[
+    { label: 'Profile', icon: <IconUser size={16} /> },
+    { label: 'Settings', icon: <IconSettings size={16} /> },
+    { label: 'Sign out', icon: <IconLogout size={16} />, danger: true, withDividerBefore: true },
+  ]}
+/>
+```
+
+### With an avatar image
+
+```tsx
+<UserMenu
+  name="Jane Doe"
+  email="jane@axiom.dev"
+  avatar="/avatars/jane.png"
+  items={[{ label: 'Sign out', danger: true }]}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Show identity clearly.** Include name and email so users can confirm the active account.
+- **Group account actions.** Keep this menu focused on the user (profile, settings, sign-out).
+- **Mark sign-out as destructive.** Use `danger` so it reads as a terminal action.
+
+### Don'ts
+- **Don't mix app navigation here.** Use the `Sidebar` or `NavigationBar` for moving around the app.
+- **Don't overload the list.** A handful of account actions keeps the menu scannable.
+- **Don't hide critical settings exclusively here.** Provide a dedicated settings area too.
+
+## Accessibility
+
+- The trigger is a focusable button that opens the menu on click.
+- Menu items are keyboard navigable with arrow keys; `Esc` closes the menu.
+- The avatar falls back to the user's initials when no image is available.
+- Focus returns to the trigger when the menu closes.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    name: {
+      description: 'Full name of the signed-in user.',
+      type: 'string',
+      default: '-',
+    },
+    email: {
+      description: 'Email shown in the dropdown header.',
+      type: 'string',
+      default: '-',
+    },
+    avatar: {
+      description: 'Avatar image URL. Falls back to initials when omitted.',
+      type: 'string',
+      default: '-',
+    },
+    items: {
+      description: 'Account actions shown in the menu.',
+      type: 'UserMenuItem[]',
+      default: '-',
+    },
+    children: {
+      description: 'Custom trigger element. Defaults to the avatar and name.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+  }}
+/>
+
+### UserMenuItem
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Text shown for the menu item.',
+      type: 'string',
+      default: '-',
+    },
+    icon: {
+      description: 'Optional leading icon.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    onClick: {
+      description: 'Click handler for the item.',
+      type: '() => void',
+      default: '-',
+    },
+    danger: {
+      description: 'Render the item as a destructive action.',
+      type: 'boolean',
+      default: 'false',
+    },
+    withDividerBefore: {
+      description: 'Render a divider above this item.',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>

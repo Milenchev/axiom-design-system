@@ -1,0 +1,113 @@
+---
+title: Loading States
+description: Skeletons, spinners, and loading strategies
+---
+
+A loading state is a promise: *"something is coming, hold on."* The shape of that promise — its size, position, and duration — sets the user's expectations for what happens next. Choosing the right indicator is more important than choosing a pretty one.
+
+## Picking an indicator
+
+| Duration | Context | Indicator |
+|---|---|---|
+| < 100 ms | Anywhere | **Nothing** — feels instant |
+| 100 ms – 1 s | A button or single field | **Spinner inside the trigger** |
+| 1 s – 10 s | Page, panel, or list | **Skeleton screen** |
+| > 10 s | Page or background job | **Progress bar with % or step count** |
+| Unknown / very long | Background job | **Indeterminate progress + status text** |
+
+If you don't know the duration, prefer skeletons. They feel faster than spinners because they suggest the eventual structure.
+
+## Skeletons
+
+Skeleton screens are placeholder shapes that match the eventual layout. They reduce *perceived* wait time and prevent the page from "jumping" when content arrives.
+
+```tsx
+import { Skeleton, Stack } from '@mantine/core';
+
+<Stack gap="sm">
+  <Skeleton height={20} width="40%" />
+  <Skeleton height={12} />
+  <Skeleton height={12} />
+  <Skeleton height={12} width="80%" />
+</Stack>
+```
+
+Guidelines:
+
+- Mirror the **final layout** — same number of rows, same approximate widths.
+- Use **neutral grey**, not the brand colour. Skeletons shouldn't compete with real content.
+- Avoid skeletons for content above the fold that only appears once (e.g. a logged-in user's avatar) — render it from cache instead.
+- Animate the shimmer slowly (~1.5 s loop). Fast shimmers feel aggressive.
+
+## Spinners
+
+Use spinners for **short, contained actions** where the user knows exactly what they triggered.
+
+- Inside a [Button](../components/Button) (`loading` prop) while a request is in flight.
+- Beside a single field that's validating server-side (e.g. "checking username availability").
+- At the center of a small panel that loads after the user expands it.
+
+Avoid:
+
+- A spinner over the entire page — skeletons are almost always better.
+- A spinner without a label when it lasts more than 2 seconds.
+
+```tsx
+import { Button } from 'axiom-ui';
+
+<Button loading={isSubmitting}>Save changes</Button>
+```
+
+## Progress indicators
+
+Use [Progress](../components/Progress) when you can tell the user **how much is done** and **how much remains**.
+
+- **Determinate progress** for uploads, exports, and multi-step calculations.
+- **Indeterminate progress** for unknown durations longer than 10 s — pair with status text ("Connecting to server…", "Indexing 12,432 records…").
+- Always show a way to **cancel** long-running operations.
+
+```tsx
+import { Text } from 'axiom-ui';
+import { Progress, Stack } from '@mantine/core';
+
+<Stack gap="xs">
+  <Text size="sm">Uploading invoice.pdf… 64%</Text>
+  <Progress value={64} />
+</Stack>
+```
+
+## Optimistic UI
+
+When the action is likely to succeed (e.g. toggling a switch, liking an item), update the UI **immediately** and reconcile if the server rejects it.
+
+- Show the new state without a spinner.
+- Roll back gracefully on failure, and surface the error inline.
+- Reserve optimistic UI for **reversible**, **low-risk** actions. Never for payments, deletes, or anything destructive.
+
+## Layout stability
+
+Loading should never cause the page to jump.
+
+- Reserve the **final size** of containers using `min-height` while loading.
+- Render skeletons with the same dimensions as the eventual content.
+- Avoid swapping a tall spinner for a short text block — the surrounding chrome shouldn't move.
+
+## Accessibility
+
+- Add `role="status"` and `aria-live="polite"` to regions whose content updates after load.
+- For spinners, include a visually hidden label: `<span className="sr-only">Loading</span>`.
+- For progress, set `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
+- Don't auto-focus loaded content unless the user requested it — focus jumps disorient screen reader users.
+
+## Don'ts
+
+- Don't show *both* a skeleton and a spinner in the same view — pick one.
+- Don't hide already-rendered content behind a spinner when the user triggers a refresh. Keep the stale data visible and overlay a subtle indicator.
+- Don't use a generic "Loading…" string when you can describe the work: "Fetching invoices…" tells the user what's happening.
+
+## Related
+
+- [Empty States](../patterns/empty-states) — what to show when loading finishes with no data.
+- [Progress](../components/Progress)
+- [Button](../components/Button) — for the `loading` prop.
+

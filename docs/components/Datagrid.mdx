@@ -1,0 +1,162 @@
+---
+title: Datagrid
+description: Feature-rich data table with sorting, pagination, row selection, and column resizing for large datasets.
+links:
+  figma: true
+  storybook: components-datagrid--overview
+  mantine: https://icflorescu.github.io/mantine-datatable/
+  source: 'Datagrid/Datagrid.tsx'
+---
+
+## Import
+
+```tsx
+import { Datagrid } from 'axiom-ui';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'components-datagrid--primary', label: 'Default' },
+  ]}
+/>
+
+## When To Use
+
+- **Large datasets:** Hundreds or thousands of rows that need pagination and sorting.
+- **CRUD interfaces:** Admin panels where users browse, select, and act on records.
+- **Data exploration:** When users need to sort, filter, and compare across many columns.
+- **Bulk operations:** Selecting multiple rows for batch actions (delete, export, assign).
+
+**Don't use for:** Simple lists under 10 items (use `Table`), card-based layouts, or read-only summaries.
+
+## Anatomy
+
+- **Header row** — Column names with sort indicators and optional resize handles.
+- **Body rows** — Data cells, optionally selectable with checkboxes.
+- **Pagination** — Navigation controls for paging through large datasets.
+- **Empty state** — Message shown when no data matches filters.
+- **Loading state** — Skeleton or spinner overlay while data loads.
+
+## Examples
+
+### Basic datagrid
+
+```tsx
+import { Datagrid } from 'axiom-ui';
+
+const records = [
+  { id: '1', name: 'Alice', role: 'Engineer', status: 'Active' },
+  { id: '2', name: 'Bob', role: 'Designer', status: 'Away' },
+  { id: '3', name: 'Carol', role: 'Manager', status: 'Active' },
+];
+
+<Datagrid
+  columns={[
+    { accessor: 'name', title: 'Name', sortable: true },
+    { accessor: 'role', title: 'Role' },
+    { accessor: 'status', title: 'Status' },
+  ]}
+  records={records}
+/>
+```
+
+### With pagination and selection
+
+```tsx
+import { Datagrid } from 'axiom-ui';
+
+<Datagrid
+  columns={columns}
+  records={records}
+  page={page}
+  onPageChange={setPage}
+  recordsPerPage={10}
+  totalRecords={200}
+  selectedRecords={selected}
+  onSelectedRecordsChange={setSelected}
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Define a unique `idAccessor`.** Every row needs a stable key for selection and rendering.
+- **Make sortable columns obvious.** Users should know which columns support sorting.
+- **Show loading and empty states.** Never leave the grid blank without explanation.
+- **Pin action columns.** If rows have action buttons, pin that column so it's always visible.
+
+### Don'ts
+- **Don't show too many columns.** More than 8–10 requires horizontal scroll. Prioritize.
+- **Don't paginate tiny datasets.** If everything fits on one page, skip pagination.
+- **Don't auto-refresh without warning.** Changing data under the user disrupts their context.
+- **Don't hide the row count.** Users need to know how much data they're working with.
+
+## Accessibility
+
+- Uses semantic `<table>` markup under the hood.
+- Column headers are announced with sort state (`aria-sort`).
+- Row selection checkboxes have accessible labels.
+- Pagination controls are keyboard-navigable.
+- Focus management returns to the grid after page changes.
+- Loading state announces via `aria-live="polite"`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    columns: {
+      description: 'Column definitions (accessor, title, sortable, width, etc.).',
+      type: 'DataTableColumn[]',
+      default: '-',
+    },
+    records: {
+      description: 'Array of data objects to display.',
+      type: 'Record<string, unknown>[]',
+      default: '-',
+    },
+    page: {
+      description: 'Current page number (1-indexed).',
+      type: 'number',
+      default: '-',
+    },
+    onPageChange: {
+      description: 'Callback when the page changes.',
+      type: '(page: number) => void',
+      default: '-',
+    },
+    recordsPerPage: {
+      description: 'Number of records shown per page.',
+      type: 'number',
+      default: '-',
+    },
+    totalRecords: {
+      description: 'Total number of records across all pages.',
+      type: 'number',
+      default: '-',
+    },
+    selectedRecords: {
+      description: 'Currently selected records.',
+      type: 'Record[]',
+      default: '-',
+    },
+    onSelectedRecordsChange: {
+      description: 'Callback when selection changes.',
+      type: '(records: Record[]) => void',
+      default: '-',
+    },
+    fetching: {
+      description: 'Show loading overlay.',
+      type: 'boolean',
+      default: 'false',
+    },
+    noRecordsText: {
+      description: 'Message displayed when there are no records.',
+      type: 'string',
+      default: "'No records'",
+    },
+  }}
+/>

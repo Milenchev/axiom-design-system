@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "pages": [
+    "--- Welcome ---",
+    "index",
+    "--- Getting started ---",
+    "designers",
+    "developers",
+    "--- Conceptual ---",
+    "foundations",
+    "patterns",
+    "guidelines",
+    "--- Components---",
+    "components",
+    "[IconArrowRight][Explore all components](/docs/components)",
+    "--- Demos ---",
+    "[IconLayoutDashboard][View demos](/docs/demos)"
+  ]
+}

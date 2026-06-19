@@ -1,0 +1,153 @@
+---
+title: FilePicker
+description: File upload input that allows users to select one or more files from their device.
+links:
+  figma: true
+  storybook: themed-filepicker--overview
+  mantine: https://mantine.dev/core/file-input/
+  source: '#'
+---
+
+## Import
+
+```tsx
+import { FileInput } from '@mantine/core';
+```
+
+## Usage
+
+<StorybookEmbed
+  stories={[
+    { id: 'themed-filepicker--primary', label: 'Default' },
+    { id: 'themed-filepicker--multiple', label: 'Multiple' },
+    { id: 'themed-filepicker--with-error', label: 'With Error' },
+  ]}
+/>
+
+## When To Use
+
+- **Document upload:** Uploading PDFs, spreadsheets, or text files.
+- **Image selection:** Picking profile photos, thumbnails, or attachments.
+- **Bulk import:** Uploading CSV or JSON data files for processing.
+- **Form attachments:** Adding supporting documents to a form submission.
+
+**Don't use for:** Drag-and-drop zones (use a Dropzone component), selecting folders, or picking from cloud storage.
+
+## Anatomy
+
+- **Label** — Describes what file to upload.
+- **Input field** — Shows selected filename(s) or placeholder text.
+- **Browse trigger** — Clickable area that opens the file picker dialog.
+- **Clear button** — Removes the selected file(s).
+- **Error message** — Validation feedback (wrong type, too large).
+
+## Examples
+
+### Single file
+
+```tsx
+import { FileInput } from '@mantine/core';
+
+<FileInput
+  label="Resume"
+  placeholder="Choose a PDF file"
+  accept=".pdf"
+/>
+```
+
+### Multiple files
+
+```tsx
+import { FileInput } from '@mantine/core';
+
+<FileInput
+  label="Attachments"
+  placeholder="Select files"
+  multiple
+  accept="image/*,.pdf"
+/>
+```
+
+### With validation error
+
+```tsx
+import { FileInput } from '@mantine/core';
+
+<FileInput
+  label="Avatar"
+  placeholder="Upload image"
+  accept="image/*"
+  error="File must be smaller than 5MB"
+/>
+```
+
+## Guidelines
+
+### Do's
+- **Specify accepted file types.** Use the `accept` prop so users can't pick invalid formats.
+- **Show file size limits.** Include max size in the description or helper text.
+- **Display the selected filename.** Confirmation that the right file was chosen.
+- **Validate immediately.** Check type and size on selection, not just on submit.
+
+### Don'ts
+- **Don't allow unlimited file sizes.** Always enforce a maximum.
+- **Don't accept all file types when only specific ones are needed.** Constrain with `accept`.
+- **Don't clear the selection on error.** Let users see what they picked and fix it.
+- **Don't rely solely on file extension.** Validate MIME type server-side too.
+
+## Accessibility
+
+- Label is associated with the input via `htmlFor`/`id`.
+- Error messages use `aria-describedby` to connect to the input.
+- The input is keyboard-operable (Enter/Space opens the file dialog).
+- Selected file name is announced to screen readers.
+- Required state indicated with `aria-required`.
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+## API Reference
+
+<TypeTable
+  type={{
+    label: {
+      description: 'Input label text.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    placeholder: {
+      description: 'Placeholder text when no file is selected.',
+      type: 'string',
+      default: '-',
+    },
+    accept: {
+      description: 'Accepted file types (MIME types or extensions).',
+      type: 'string',
+      default: '-',
+    },
+    multiple: {
+      description: 'Allow selecting multiple files.',
+      type: 'boolean',
+      default: 'false',
+    },
+    error: {
+      description: 'Error message displayed below the input.',
+      type: 'React.ReactNode',
+      default: '-',
+    },
+    clearable: {
+      description: 'Show a clear button when a file is selected.',
+      type: 'boolean',
+      default: 'false',
+    },
+    value: {
+      description: 'Controlled selected file(s).',
+      type: 'File | File[] | null',
+      default: '-',
+    },
+    onChange: {
+      description: 'Callback when file selection changes.',
+      type: '(value: File | File[] | null) => void',
+      default: '-',
+    },
+  }}
+/>

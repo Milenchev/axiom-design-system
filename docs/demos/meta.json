@@ -1,0 +1,11 @@
+{
+  "title": "Demos",
+  "root": true,
+  "pages": [
+    "index",
+    "application-shell",
+    "campaign-management",
+    "settings-and-forms",
+    "analytics-dashboard"
+  ]
+}
