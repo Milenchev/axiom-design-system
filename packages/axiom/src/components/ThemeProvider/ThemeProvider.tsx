@@ -1,4 +1,4 @@
-import { MantineProvider, type MantineProviderProps } from "@mantine/core";
+import { MantineProvider, mergeThemeOverrides, type MantineProviderProps } from "@mantine/core";
 import { cssVariablesResolver, theme } from "@/themes";
 
 export interface ThemeProviderProps extends MantineProviderProps {}
@@ -9,7 +9,9 @@ export function ThemeProvider({
   cssVariablesResolver: customCssVariablesResolver,
   ...props
 }: ThemeProviderProps) {
-  const finalTheme = customTheme ? customTheme : theme;
+  const finalTheme = customTheme 
+    ? mergeThemeOverrides(theme, customTheme) 
+    : theme;
 
   return (
     <MantineProvider

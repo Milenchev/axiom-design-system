@@ -65,13 +65,17 @@ export interface DatagridColumn<T> {
   wrap?: boolean;
 }
 
+type RowKeyOf<T> = {
+  [K in keyof T]: T[K] extends string | number ? K : never;
+}[keyof T];
+
 export interface DatagridProps<T> {
   /** Column definitions */
   columns: DatagridColumn<T>[];
   /** Row data array */
   data: T[];
   /** Unique key for each row (property name on T) */
-  rowKey: keyof T;
+  rowKey: RowKeyOf<T>;
   /** Enable row selection checkboxes (default: false) */
   selectable?: boolean;
   /** Callback when selection changes */
